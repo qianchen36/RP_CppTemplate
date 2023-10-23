@@ -1,0 +1,626 @@
+{
+  "name": "RP_CppTemplate",
+  "type": "ARM",
+  "dependenceList": [],
+  "srcDirs": [
+    ".eide/deps"
+  ],
+  "virtualFolder": {
+    "name": "<virtual_root>",
+    "files": [],
+    "folders": [
+      {
+        "name": "Application",
+        "files": [],
+        "folders": [
+          {
+            "name": "Algo",
+            "files": [],
+            "folders": []
+          },
+          {
+            "name": "Comm",
+            "files": [
+              {
+                "path": "Applications/Comm/comm_can.cpp"
+              },
+              {
+                "path": "Applications/Comm/comm_spi.cpp"
+              },
+              {
+                "path": "Applications/Comm/comm.cpp"
+              }
+            ],
+            "folders": []
+          },
+          {
+            "name": "Config",
+            "files": [
+              {
+                "path": "Applications/Config/config.cpp"
+              }
+            ],
+            "folders": []
+          },
+          {
+            "name": "Device",
+            "files": [
+              {
+                "path": "Applications/Device/device.cpp"
+              }
+            ],
+            "folders": [
+              {
+                "name": "IMU",
+                "files": [],
+                "folders": []
+              },
+              {
+                "name": "Motor",
+                "files": [
+                  {
+                    "path": "Applications/Device/Motor/motor.cpp"
+                  }
+                ],
+                "folders": []
+              }
+            ]
+          },
+          {
+            "name": "Module",
+            "files": [
+              {
+                "path": "Applications/Module/module.cpp"
+              }
+            ],
+            "folders": []
+          },
+          {
+            "name": "UserTask",
+            "files": [
+              {
+                "path": "Applications/UserTask/user_task.cpp"
+              }
+            ],
+            "folders": []
+          }
+        ]
+      },
+      {
+        "name": "Board",
+        "files": [
+          {
+            "path": "Boards/board.cpp"
+          }
+        ],
+        "folders": [
+          {
+            "name": "GimbalController",
+            "files": [],
+            "folders": [
+              {
+                "name": "Core",
+                "files": [
+                  {
+                    "path": "Boards/GimbalController/Core/Src/adc.c"
+                  },
+                  {
+                    "path": "Boards/GimbalController/Core/Src/can.c"
+                  },
+                  {
+                    "path": "Boards/GimbalController/Core/Src/crc.c"
+                  },
+                  {
+                    "path": "Boards/GimbalController/Core/Src/dma.c"
+                  },
+                  {
+                    "path": "Boards/GimbalController/Core/Src/freertos.c"
+                  },
+                  {
+                    "path": "Boards/GimbalController/Core/Src/gpio.c"
+                  },
+                  {
+                    "path": "Boards/GimbalController/Core/Src/i2c.c"
+                  },
+                  {
+                    "path": "Boards/GimbalController/Core/Src/iwdg.c"
+                  },
+                  {
+                    "path": "Boards/GimbalController/Core/Src/main.c"
+                  },
+                  {
+                    "path": "Boards/GimbalController/Core/Src/rng.c"
+                  },
+                  {
+                    "path": "Boards/GimbalController/Core/Src/sdio.c"
+                  },
+                  {
+                    "path": "Boards/GimbalController/Core/Src/spi.c"
+                  },
+                  {
+                    "path": "Boards/GimbalController/Core/Src/stm32f4xx_hal_msp.c"
+                  },
+                  {
+                    "path": "Boards/GimbalController/Core/Src/stm32f4xx_hal_timebase_tim.c"
+                  },
+                  {
+                    "path": "Boards/GimbalController/Core/Src/stm32f4xx_it.c"
+                  },
+                  {
+                    "path": "Boards/GimbalController/Core/Src/tim.c"
+                  },
+                  {
+                    "path": "Boards/GimbalController/Core/Src/usart.c"
+                  }
+                ],
+                "folders": []
+              },
+              {
+                "name": "FATFS",
+                "files": [],
+                "folders": [
+                  {
+                    "name": "Target",
+                    "files": [
+                      {
+                        "path": "Boards/GimbalController/FATFS/Target/bsp_driver_sd.c"
+                      },
+                      {
+                        "path": "Boards/GimbalController/FATFS/Target/sd_diskio.c"
+                      },
+                      {
+                        "path": "Boards/GimbalController/FATFS/Target/fatfs_platform.c"
+                      }
+                    ],
+                    "folders": []
+                  },
+                  {
+                    "name": "App",
+                    "files": [
+                      {
+                        "path": "Boards/GimbalController/FATFS/App/fatfs.c"
+                      }
+                    ],
+                    "folders": []
+                  }
+                ]
+              },
+              {
+                "name": "MDK-ARM",
+                "files": [
+                  {
+                    "path": "Boards/GimbalController/MDK-ARM/startup_stm32f407xx.s"
+                  }
+                ],
+                "folders": []
+              },
+              {
+                "name": "USB_DEVICE",
+                "files": [],
+                "folders": [
+                  {
+                    "name": "App",
+                    "files": [
+                      {
+                        "path": "Boards/GimbalController/USB_DEVICE/App/usb_device.c"
+                      },
+                      {
+                        "path": "Boards/GimbalController/USB_DEVICE/App/usbd_desc.c"
+                      },
+                      {
+                        "path": "Boards/GimbalController/USB_DEVICE/App/usbd_cdc_if.c"
+                      }
+                    ],
+                    "folders": []
+                  },
+                  {
+                    "name": "Target",
+                    "files": [
+                      {
+                        "path": "Boards/GimbalController/USB_DEVICE/Target/usbd_conf.c"
+                      }
+                    ],
+                    "folders": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Drivers",
+        "files": [],
+        "folders": [
+          {
+            "name": "CMSIS",
+            "files": [
+              {
+                "path": "Boards/GimbalController/Core/Src/system_stm32f4xx.c"
+              }
+            ],
+            "folders": []
+          },
+          {
+            "name": "STM32F4xx_HAL_Driver",
+            "files": [
+              {
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd.c"
+              },
+              {
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c"
+              },
+              {
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c"
+              },
+              {
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c"
+              },
+              {
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c"
+              },
+              {
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c"
+              },
+              {
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c"
+              },
+              {
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c"
+              },
+              {
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c"
+              },
+              {
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c"
+              },
+              {
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c"
+              },
+              {
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c"
+              },
+              {
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c"
+              },
+              {
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c"
+              },
+              {
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c"
+              },
+              {
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c"
+              },
+              {
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c"
+              },
+              {
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c"
+              },
+              {
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_adc.c"
+              },
+              {
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_can.c"
+              },
+              {
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_crc.c"
+              },
+              {
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c"
+              },
+              {
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.c"
+              },
+              {
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_iwdg.c"
+              },
+              {
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rng.c"
+              },
+              {
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_sdmmc.c"
+              },
+              {
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sd.c"
+              },
+              {
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.c"
+              },
+              {
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c"
+              },
+              {
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c"
+              },
+              {
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c"
+              }
+            ],
+            "folders": []
+          }
+        ]
+      },
+      {
+        "name": "Middlewares",
+        "files": [],
+        "folders": [
+          {
+            "name": "FatFs",
+            "files": [
+              {
+                "path": "Middlewares/FatFs/src/diskio.c"
+              },
+              {
+                "path": "Middlewares/FatFs/src/ff_gen_drv.c"
+              },
+              {
+                "path": "Middlewares/FatFs/src/ff.c"
+              },
+              {
+                "path": "Middlewares/FatFs/src/option/ccsbcs.c"
+              },
+              {
+                "path": "Middlewares/FatFs/src/option/syscall.c"
+              }
+            ],
+            "folders": []
+          },
+          {
+            "name": "FreeRTOS",
+            "files": [
+              {
+                "path": "Middlewares/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.c"
+              },
+              {
+                "path": "Middlewares/FreeRTOS/Source/croutine.c"
+              },
+              {
+                "path": "Middlewares/FreeRTOS/Source/event_groups.c"
+              },
+              {
+                "path": "Middlewares/FreeRTOS/Source/list.c"
+              },
+              {
+                "path": "Middlewares/FreeRTOS/Source/portable/GCC/ARM_CM4F/port.c"
+              },
+              {
+                "path": "Middlewares/FreeRTOS/Source/portable/MemMang/heap_4.c"
+              },
+              {
+                "path": "Middlewares/FreeRTOS/Source/queue.c"
+              },
+              {
+                "path": "Middlewares/FreeRTOS/Source/stream_buffer.c"
+              },
+              {
+                "path": "Middlewares/FreeRTOS/Source/tasks.c"
+              },
+              {
+                "path": "Middlewares/FreeRTOS/Source/timers.c"
+              }
+            ],
+            "folders": []
+          },
+          {
+            "name": "USB_Device_Library",
+            "files": [
+              {
+                "path": "Middlewares/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.c"
+              },
+              {
+                "path": "Middlewares/STM32_USB_Device_Library/Core/Src/usbd_core.c"
+              },
+              {
+                "path": "Middlewares/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c"
+              },
+              {
+                "path": "Middlewares/STM32_USB_Device_Library/Core/Src/usbd_ioreq.c"
+              }
+            ],
+            "folders": []
+          }
+        ]
+      }
+    ]
+  },
+  "outDir": "build",
+  "deviceName": "STM32F407VETx",
+  "packDir": ".pack/Keil/STM32F4xx_DFP.2.14.0",
+  "miscInfo": {
+    "uid": "d74a1b643e434fe5b632d8d57f93c5bc"
+  },
+  "targets": {
+    "debug": {
+      "excludeList": [],
+      "toolchain": "AC6",
+      "compileConfig": {
+        "cpuType": "Cortex-M4",
+        "floatingPointHardware": "single",
+        "useCustomScatterFile": false,
+        "scatterFilePath": "<YOUR_SCATTER_FILE>.sct",
+        "storageLayout": {
+          "RAM": [
+            {
+              "tag": "IRAM",
+              "id": 1,
+              "mem": {
+                "startAddr": "0x20000000",
+                "size": "0x00020000"
+              },
+              "isChecked": true,
+              "noInit": false
+            },
+            {
+              "tag": "IRAM",
+              "id": 2,
+              "mem": {
+                "startAddr": "0x10000000",
+                "size": "0x00010000"
+              },
+              "isChecked": true,
+              "noInit": false
+            }
+          ],
+          "ROM": [
+            {
+              "tag": "IROM",
+              "id": 1,
+              "mem": {
+                "startAddr": "0x08000000",
+                "size": "0x00080000"
+              },
+              "isChecked": true,
+              "isStartup": true
+            }
+          ]
+        },
+        "options": "null"
+      },
+      "uploader": "JLink",
+      "uploadConfig": {
+        "bin": "",
+        "baseAddr": "",
+        "cpuInfo": {
+          "vendor": "ST",
+          "cpuName": "STM32F407VE"
+        },
+        "proType": 1,
+        "speed": 8000,
+        "otherCmds": ""
+      },
+      "uploadConfigMap": {},
+      "custom_dep": {
+        "name": "default",
+        "incList": [
+          ".eide/deps",
+          "Applications/Algo/Inc",
+          "Applications/Comm/Inc",
+          "Applications/Config/Inc",
+          "Applications/Device/Inc",
+          "Applications/Module/Inc",
+          "Applications/UserTask/Inc",
+          "Boards/GimbalController/Core/Inc",
+          "Boards/GimbalController/FATFS/Target",
+          "Boards/GimbalController/FATFS/App",
+          "Boards/GimbalController/USB_DEVICE/App",
+          "Boards/GimbalController/USB_DEVICE/Target",
+          "Boards/GimbalController/MDK-ARM/RTE/_GimbalController",
+          "Drivers/CMSIS/Include",
+          "Drivers/CMSIS/Device/ST/STM32F4xx/Include",
+          "Drivers/STM32F4xx_HAL_Driver/Inc",
+          "Drivers/STM32F4xx_HAL_Driver/Inc/Legacy",
+          "Middlewares/FatFs/src",
+          "Middlewares/FreeRTOS/Source/include",
+          "Middlewares/FreeRTOS/Source/CMSIS_RTOS_V2",
+          "Middlewares/FreeRTOS/Source/portable/GCC/ARM_CM4F",
+          "Middlewares/STM32_USB_Device_Library/Core/Inc",
+          "Middlewares/STM32_USB_Device_Library/Class/CDC/Inc",
+          "Applications/Device/Motor/Inc"
+        ],
+        "libList": [],
+        "sourceDirList": [],
+        "defineList": [
+          "USE_HAL_DRIVER",
+          "STM32F407xx"
+        ]
+      }
+    },
+    "release": {
+      "excludeList": [],
+      "toolchain": "AC6",
+      "compileConfig": {
+        "cpuType": "Cortex-M4",
+        "floatingPointHardware": "single",
+        "useCustomScatterFile": false,
+        "scatterFilePath": "<YOUR_SCATTER_FILE>.sct",
+        "storageLayout": {
+          "RAM": [
+            {
+              "tag": "IRAM",
+              "id": 1,
+              "mem": {
+                "startAddr": "0x20000000",
+                "size": "0x00020000"
+              },
+              "isChecked": true,
+              "noInit": false
+            },
+            {
+              "tag": "IRAM",
+              "id": 2,
+              "mem": {
+                "startAddr": "0x10000000",
+                "size": "0x00010000"
+              },
+              "isChecked": true,
+              "noInit": false
+            }
+          ],
+          "ROM": [
+            {
+              "tag": "IROM",
+              "id": 1,
+              "mem": {
+                "startAddr": "0x08000000",
+                "size": "0x00080000"
+              },
+              "isChecked": true,
+              "isStartup": true
+            }
+          ]
+        },
+        "options": "null"
+      },
+      "uploader": "JLink",
+      "uploadConfig": {
+        "bin": "",
+        "baseAddr": "",
+        "cpuInfo": {
+          "vendor": "ST",
+          "cpuName": "STM32F407VE"
+        },
+        "proType": 1,
+        "speed": 8000,
+        "otherCmds": ""
+      },
+      "uploadConfigMap": {},
+      "custom_dep": {
+        "name": "default",
+        "incList": [
+          ".eide/deps",
+          "Applications/Algo/Inc",
+          "Applications/Comm/Inc",
+          "Applications/Config/Inc",
+          "Applications/Device/Inc",
+          "Applications/Module/Inc",
+          "Applications/UserTask/Inc",
+          "Boards/GimbalController/Core/Inc",
+          "Boards/GimbalController/FATFS/Target",
+          "Boards/GimbalController/FATFS/App",
+          "Boards/GimbalController/USB_DEVICE/App",
+          "Boards/GimbalController/USB_DEVICE/Target",
+          "Boards/GimbalController/MDK-ARM/RTE/_GimbalController",
+          "Drivers/CMSIS/Include",
+          "Drivers/CMSIS/Device/ST/STM32F4xx/Include",
+          "Drivers/STM32F4xx_HAL_Driver/Inc",
+          "Drivers/STM32F4xx_HAL_Driver/Inc/Legacy",
+          "Middlewares/FatFs/src",
+          "Middlewares/FreeRTOS/Source/include",
+          "Middlewares/FreeRTOS/Source/CMSIS_RTOS_V2",
+          "Middlewares/FreeRTOS/Source/portable/GCC/ARM_CM4F",
+          "Middlewares/STM32_USB_Device_Library/Core/Inc",
+          "Middlewares/STM32_USB_Device_Library/Class/CDC/Inc"
+        ],
+        "libList": [],
+        "sourceDirList": [],
+        "defineList": [
+          "USE_HAL_DRIVER",
+          "STM32F407xx"
+        ]
+      }
+    }
+  },
+  "version": "3.3"
+}
