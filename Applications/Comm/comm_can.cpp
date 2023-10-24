@@ -20,7 +20,7 @@ namespace comm {
  * 
  * @retval None
  */
-COMM_CAN_c::COMM_CAN_c(void)
+COMM_CAN_c::COMM_CAN_c()
 {
   comType = COMM_CAN;
 }
@@ -226,9 +226,7 @@ extern "C" {
  */
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 {
-  std::map<uint8_t, comm::COMM_c *>::iterator it;
-
-  for (it = comm::CommList.begin(); it != comm::CommList.end(); ++it)
+  for (auto it = comm::CommList.begin(); it != comm::CommList.end(); it++)
   {
     if (it->second->GetInterfaceHandler() == hcan)
     {
@@ -250,10 +248,8 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
  * @retval None
  */
 void HAL_CAN_RxFifo1MsgPendingCallback(CAN_HandleTypeDef *hcan)
-{
-  std::map<uint8_t, comm::COMM_c *>::iterator it;
-  
-  for (it = comm::CommList.begin(); it != comm::CommList.end(); ++it)
+{  
+  for (auto it = comm::CommList.begin(); it != comm::CommList.end(); it++)
   {
     if (it->second->GetInterfaceHandler() == hcan)
     {

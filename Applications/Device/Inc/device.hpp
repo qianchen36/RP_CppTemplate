@@ -14,6 +14,7 @@
 
 #include "main.h"
 #include "device_def.hpp"
+#include "comm.hpp"
 
 #include <map>
 
@@ -22,18 +23,29 @@ namespace device {
 class DEVICE_c
 {
 protected:
+  comm::COMM_c *hComm_;
+
   void AddDevice(DEVICE_c *dev);
   void DelDevice(DEVICE_c *dev);
 
 public:
-  uint8_t         devID;
-  DEVICE_Type_e   devType;
-  DEVICE_Status_e devState;
+  uint8_t           devID;
+  DEVICE_Type_e     devType;
+  comm::COMM_Type_e devComm;
+  DEVICE_Status_e   devState;
+
+  DEVICE_c();
+  ~DEVICE_c();
+
+  virtual void Init(uint8_t id, comm::COMM_c *hComm);
+  virtual void Heartbeat(void) = 0;
 
 };
 
 extern std::map<uint8_t, DEVICE_c *> DeviceList;
 
-}
+void DEVICE_Heartbeat(void);
+
+} // namespace device
 
 #endif // __DEVICE_HPP__

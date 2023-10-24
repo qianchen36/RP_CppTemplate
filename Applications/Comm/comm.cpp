@@ -26,6 +26,8 @@ COMM_c::COMM_c()
   comID = NULL;
   comState = COMM_RESET;
   comType = COMM_UNDEF;
+
+  hInterface_ = nullptr;
 }
 
 
@@ -56,6 +58,8 @@ void COMM_c::Init(uint8_t id, void *hInterface)
   hInterface_ = hInterface;
 
   AddCommPort(this);
+
+  comState = COMM_STOP;
 }
 
 

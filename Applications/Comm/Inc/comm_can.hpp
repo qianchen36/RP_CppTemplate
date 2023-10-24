@@ -40,7 +40,7 @@ private:
   std::map<uint32_t, COMM_CAN_Node_c *> canNodeList_;
 
 public:
-  COMM_CAN_c(void);
+  COMM_CAN_c();
 
   COMM_CAN_c &GetObjectHandler(void) override;
   void Receive(int interfaceType, ...) override;
