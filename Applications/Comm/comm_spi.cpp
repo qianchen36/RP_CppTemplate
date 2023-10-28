@@ -35,9 +35,9 @@ COMM_SPI_c::COMM_SPI_c()
  * 
  * @retval Reference of the SPI interface handler
  */
-COMM_SPI_c &COMM_SPI_c::GetObjectHandler(void)
+COMM_SPI_c *COMM_SPI_c::GetObjectHandler(void)
 {
-  return *this;
+  return this;
 }
 
 

@@ -31,6 +31,7 @@
 
 extern "C" {
 
+void RunTimeTick_Callback(void);
 void SystemClock_Config(void);
 void MX_FREERTOS_Init(void);
 

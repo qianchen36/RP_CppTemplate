@@ -35,8 +35,8 @@ public:
   COMM_c();
   ~COMM_c();
 
-  virtual void Init(uint8_t id, void *hInterface) final;
-  virtual COMM_c &GetObjectHandler(void);
+  virtual void InitComm(uint8_t id, void *hInterface) final;
+  virtual COMM_c *GetObjectHandler(void);
   virtual void *GetInterfaceHandler(void);
   virtual void Receive(int interfaceType, ...) = 0;
   virtual void Transmit(int interfaceType, ...) = 0;

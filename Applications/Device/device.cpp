@@ -55,7 +55,7 @@ DEVICE_c::~DEVICE_c()
  * @param hComm 
  * @retval None
  */
-void DEVICE_c::Init(uint8_t id, comm::COMM_c *hComm)
+void DEVICE_c::InitDevice(uint8_t id, comm::COMM_c *hComm)
 {
   devID = id;
   devComm = hComm->comType;
@@ -99,17 +99,5 @@ void DEVICE_c::DelDevice(DEVICE_c *dev)
   DeviceList.erase(dev->devID);
 }
 
-
-
-/**
- * @brief  Check status of all devices
- * 
- * @retval None
- */
-void DEVICE_Heartbeat(void)
-{
-  for (auto it = DeviceList.begin(); it != DeviceList.end(); it++)
-    it->second->Heartbeat();
-}
 
 } // namespace device

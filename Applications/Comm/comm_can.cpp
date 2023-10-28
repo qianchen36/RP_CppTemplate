@@ -32,9 +32,9 @@ COMM_CAN_c::COMM_CAN_c()
  * 
  * @retval Reference of the CAN interface handler
  */
-COMM_CAN_c &COMM_CAN_c::GetObjectHandler(void)
+COMM_CAN_c *COMM_CAN_c::GetObjectHandler(void)
 {
-  return *this;
+  return this;
 }
 
 
@@ -226,11 +226,11 @@ extern "C" {
  */
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 {
-  for (auto it = comm::CommList.begin(); it != comm::CommList.end(); it++)
+  for (auto it : comm::CommList)
   {
-    if (it->second->GetInterfaceHandler() == hcan)
+    if (it.second->GetInterfaceHandler() == hcan)
     {
-      it->second->Receive(comm::COMM_CAN, hcan, CAN_RX_FIFO0);
+      it.second->Receive(comm::COMM_CAN, hcan, CAN_RX_FIFO0);
 
       break;
     }
@@ -248,12 +248,12 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
  * @retval None
  */
 void HAL_CAN_RxFifo1MsgPendingCallback(CAN_HandleTypeDef *hcan)
-{  
-  for (auto it = comm::CommList.begin(); it != comm::CommList.end(); it++)
+{
+  for (auto it : comm::CommList)
   {
-    if (it->second->GetInterfaceHandler() == hcan)
+    if (it.second->GetInterfaceHandler() == hcan)
     {
-      it->second->Receive(comm::COMM_CAN, hcan, CAN_RX_FIFO1);
+      it.second->Receive(comm::COMM_CAN, hcan, CAN_RX_FIFO1);
 
       break;
     }

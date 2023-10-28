@@ -29,11 +29,12 @@ typedef enum
 {
   DEV_UNDEF,
 
+  DEV_RC,
   DEV_IMU,
   DEV_MTR,
 
 } DEVICE_Type_e;
 
-}
+} // namespace device
 
 #endif // __DEVICE_DEF_HPP__

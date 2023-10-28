@@ -42,7 +42,7 @@ private:
 public:
   COMM_CAN_c();
 
-  COMM_CAN_c &GetObjectHandler(void) override;
+  COMM_CAN_c *GetObjectHandler(void) override;
   void Receive(int interfaceType, ...) override;
   void Transmit(int interfaceType, ...) override;
 

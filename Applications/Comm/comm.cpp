@@ -52,8 +52,11 @@ COMM_c::~COMM_c()
  * @param  hInterface Set the handle of the communication interface
  * @return None
  */
-void COMM_c::Init(uint8_t id, void *hInterface)
+void COMM_c::InitComm(uint8_t id, void *hInterface)
 {
+  if (id == NULL || hInterface == nullptr)
+    return;
+
   comID = id;
   hInterface_ = hInterface;
 
@@ -69,9 +72,9 @@ void COMM_c::Init(uint8_t id, void *hInterface)
  * 
  * @retval Reference of the communicate object
  */
-COMM_c &COMM_c::GetObjectHandler(void)
+COMM_c *COMM_c::GetObjectHandler(void)
 {
-  return *this;
+  return this;
 }
 
 

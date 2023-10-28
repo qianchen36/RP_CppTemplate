@@ -33,7 +33,7 @@ private:
 public:
   COMM_SPI_c();
 
-  COMM_SPI_c &GetObjectHandler(void) override;
+  COMM_SPI_c *GetObjectHandler(void) override;
   void Receive(int interfaceType, ...) override;
   void Transmit(int interfaceType, ...) override;
 

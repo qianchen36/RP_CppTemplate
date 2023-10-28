@@ -52,8 +52,31 @@
             "folders": [
               {
                 "name": "IMU",
-                "files": [],
-                "folders": []
+                "files": [
+                  {
+                    "path": "Applications/Device/IMU/imu.cpp"
+                  }
+                ],
+                "folders": [
+                  {
+                    "name": "Driver",
+                    "files": [],
+                    "folders": [
+                      {
+                        "name": "bmi270",
+                        "files": [
+                          {
+                            "path": "Applications/Device/IMU/Driver/bmi270/bmi2.c"
+                          },
+                          {
+                            "path": "Applications/Device/IMU/Driver/bmi270/bmi270.c"
+                          }
+                        ],
+                        "folders": []
+                      }
+                    ]
+                  }
+                ]
               },
               {
                 "name": "Motor",
@@ -88,16 +111,21 @@
       },
       {
         "name": "Board",
-        "files": [
-          {
-            "path": "Boards/board.cpp"
-          }
-        ],
+        "files": [],
         "folders": [
           {
             "name": "GimbalController",
             "files": [],
             "folders": [
+              {
+                "name": "BSP",
+                "files": [
+                  {
+                    "path": "Boards/GimbalController/BSP/board.cpp"
+                  }
+                ],
+                "folders": []
+              },
               {
                 "name": "Core",
                 "files": [
@@ -347,6 +375,99 @@
         "files": [],
         "folders": [
           {
+            "name": "CMSIS_DSP",
+            "files": [
+              {
+                "path": "Middlewares/CMSIS_DSP/Source/BasicMathFunctions/BasicMathFunctions.c"
+              },
+              {
+                "path": "Middlewares/CMSIS_DSP/Source/BasicMathFunctions/BasicMathFunctionsF16.c"
+              },
+              {
+                "path": "Middlewares/CMSIS_DSP/Source/BayesFunctions/BayesFunctions.c"
+              },
+              {
+                "path": "Middlewares/CMSIS_DSP/Source/BayesFunctions/BayesFunctionsF16.c"
+              },
+              {
+                "path": "Middlewares/CMSIS_DSP/Source/CommonTables/CommonTables.c"
+              },
+              {
+                "path": "Middlewares/CMSIS_DSP/Source/CommonTables/CommonTablesF16.c"
+              },
+              {
+                "path": "Middlewares/CMSIS_DSP/Source/ComplexMathFunctions/ComplexMathFunctions.c"
+              },
+              {
+                "path": "Middlewares/CMSIS_DSP/Source/ComplexMathFunctions/ComplexMathFunctionsF16.c"
+              },
+              {
+                "path": "Middlewares/CMSIS_DSP/Source/ControllerFunctions/ControllerFunctions.c"
+              },
+              {
+                "path": "Middlewares/CMSIS_DSP/Source/DistanceFunctions/DistanceFunctions.c"
+              },
+              {
+                "path": "Middlewares/CMSIS_DSP/Source/DistanceFunctions/DistanceFunctionsF16.c"
+              },
+              {
+                "path": "Middlewares/CMSIS_DSP/Source/FastMathFunctions/FastMathFunctions.c"
+              },
+              {
+                "path": "Middlewares/CMSIS_DSP/Source/FastMathFunctions/FastMathFunctionsF16.c"
+              },
+              {
+                "path": "Middlewares/CMSIS_DSP/Source/FilteringFunctions/FilteringFunctions.c"
+              },
+              {
+                "path": "Middlewares/CMSIS_DSP/Source/FilteringFunctions/FilteringFunctionsF16.c"
+              },
+              {
+                "path": "Middlewares/CMSIS_DSP/Source/InterpolationFunctions/InterpolationFunctions.c"
+              },
+              {
+                "path": "Middlewares/CMSIS_DSP/Source/InterpolationFunctions/InterpolationFunctionsF16.c"
+              },
+              {
+                "path": "Middlewares/CMSIS_DSP/Source/MatrixFunctions/MatrixFunctions.c"
+              },
+              {
+                "path": "Middlewares/CMSIS_DSP/Source/MatrixFunctions/MatrixFunctionsF16.c"
+              },
+              {
+                "path": "Middlewares/CMSIS_DSP/Source/QuaternionMathFunctions/QuaternionMathFunctions.c"
+              },
+              {
+                "path": "Middlewares/CMSIS_DSP/Source/StatisticsFunctions/StatisticsFunctions.c"
+              },
+              {
+                "path": "Middlewares/CMSIS_DSP/Source/StatisticsFunctions/StatisticsFunctionsF16.c"
+              },
+              {
+                "path": "Middlewares/CMSIS_DSP/Source/SupportFunctions/SupportFunctions.c"
+              },
+              {
+                "path": "Middlewares/CMSIS_DSP/Source/SupportFunctions/SupportFunctionsF16.c"
+              },
+              {
+                "path": "Middlewares/CMSIS_DSP/Source/SVMFunctions/SVMFunctions.c"
+              },
+              {
+                "path": "Middlewares/CMSIS_DSP/Source/SVMFunctions/SVMFunctionsF16.c"
+              },
+              {
+                "path": "Middlewares/CMSIS_DSP/Source/TransformFunctions/TransformFunctions.c"
+              },
+              {
+                "path": "Middlewares/CMSIS_DSP/Source/TransformFunctions/TransformFunctionsF16.c"
+              },
+              {
+                "path": "Middlewares/CMSIS_DSP/Source/WindowFunctions/WindowFunctions.c"
+              }
+            ],
+            "folders": []
+          },
+          {
             "name": "FatFs",
             "files": [
               {
@@ -433,7 +554,10 @@
   },
   "targets": {
     "debug": {
-      "excludeList": [],
+      "excludeList": [
+        "<virtual_root>/Application/Device/IMU/Driver/bmi270/common.c",
+        "<virtual_root>/Board/board.cpp"
+      ],
       "toolchain": "AC6",
       "compileConfig": {
         "cpuType": "Cortex-M4",
@@ -517,7 +641,12 @@
           "Middlewares/FreeRTOS/Source/portable/GCC/ARM_CM4F",
           "Middlewares/STM32_USB_Device_Library/Core/Inc",
           "Middlewares/STM32_USB_Device_Library/Class/CDC/Inc",
-          "Applications/Device/Motor/Inc"
+          "Applications/Device/Motor/Inc",
+          "Applications/Device/IMU/Inc",
+          "Middlewares/CMSIS_DSP/Include",
+          "Middlewares/CMSIS_DSP/PrivateInclude",
+          "Applications/Device/IMU/Driver",
+          "Boards/GimbalController/BSP/Inc"
         ],
         "libList": [],
         "sourceDirList": [],
