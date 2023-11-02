@@ -21,23 +21,21 @@ namespace device {
 
 namespace imu {
 
-class DEVICE_IMU_c : public DEVICE_c
+class IMU_c : public DEVICE_c
 {
 protected:
   std::function<void(comm::COMM_c *, IMU_ImuRawData_s *)> GetImuRawData_;
-  // std::function<void(comm::COMM_c *, IMU_MemsRawData_s *)> GetMemsRawData_;
+  // std::function<void(comm::COMM_c *, IMU_CompRawData_s *)> GetCompRawData_;
 
 public:
   IMU_Type_e        imuType;
   IMU_ImuData_s     imuData;
   IMU_ImuRawData_s  imuRawData;
-  // IMU_MemsRawData_s memsRawData;
+  // IMU_CompRawData_s compRawData;
   IMU_FuncList_s    imuFuncList;
 
-  DEVICE_IMU_c();
-  ~DEVICE_IMU_c();
-
-  void Heartbeat(void) override;
+  IMU_c();
+  ~IMU_c();
 
   void InitImu(IMU_Type_e type, void *pImuFunc);
   // void InitMems(MEMS_Type_e type, void *pMemsFunc);

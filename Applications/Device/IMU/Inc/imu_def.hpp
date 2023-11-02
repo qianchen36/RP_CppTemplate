@@ -54,7 +54,7 @@ typedef struct
 //   int16_t magY;
 //   int16_t magZ;
 
-// } IMU_MemsRawData_s;
+// } IMU_CompRawData_s;
 
 typedef struct
 {
@@ -74,7 +74,7 @@ typedef struct
 
 typedef struct
 {
-  bool use_MEMS;          // TODO: MEMS support
+  bool use_Compass;       // TODO: Compass support
   bool use_RpySolver;     // TODO: RPY solver support
   bool use_OutputFilter;  // TODO: Output filter support
 

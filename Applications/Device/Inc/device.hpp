@@ -24,6 +24,7 @@ class DEVICE_c
 {
 protected:
   comm::COMM_c *hComm_;
+  uint32_t      lastHartbeatTime_;
 
   void AddDevice(DEVICE_c *dev);
   void DelDevice(DEVICE_c *dev);
@@ -38,7 +39,7 @@ public:
   ~DEVICE_c();
 
   virtual void InitDevice(uint8_t id, comm::COMM_c *hComm);
-  virtual void Heartbeat(void) = 0;
+  virtual void Heartbeat(void);
 
 };
 

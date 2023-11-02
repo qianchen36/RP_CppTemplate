@@ -31,6 +31,7 @@ DEVICE_c::DEVICE_c()
   devState = DEV_RESET;
 
   hComm_ = nullptr;
+  lastHartbeatTime_ = 0;
 }
 
 
@@ -70,6 +71,22 @@ void DEVICE_c::InitDevice(uint8_t id, comm::COMM_c *hComm)
 
 
 /**
+ * @brief  Check the heartbeat of the device
+ * 
+ * @retval None
+ */
+void DEVICE_c::Heartbeat(void)
+{
+  if (devState == DEV_OFFLINE)
+    return;
+
+  if (HAL_GetTick() - lastHartbeatTime_ > 50)   // 50ms
+    devState = DEV_OFFLINE;
+}
+
+
+
+/**
  * @brief  Add a new device to the DeviceList
  * 
  * @param  dev Pointer to the device object
@@ -99,5 +116,17 @@ void DEVICE_c::DelDevice(DEVICE_c *dev)
   DeviceList.erase(dev->devID);
 }
 
+
+
+/**
+ * @brief  Trigger heartbeat check of all devices
+ * 
+ * @retval None
+ */
+void DEVICE_Heartbeat(void)
+{
+  for (auto it : DeviceList)
+    it.second->Heartbeat();
+}
 
 } // namespace device

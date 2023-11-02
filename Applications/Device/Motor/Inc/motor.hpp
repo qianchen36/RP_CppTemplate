@@ -12,10 +12,37 @@
 #ifndef __MOTOR_HPP__
 #define __MOTOR_HPP__
 
+#include "main.h"
+#include "motor_def.hpp"
 #include "device.hpp"
 
-namespace device::motor {
+#include <map>
 
-} // namespace device::motor
+namespace device {
+
+namespace motor {
+
+class MOTOR_c : public device::DEVICE_c
+{
+protected:
+  void AddMotor(MOTOR_c *mtr);
+  void DelMotor(MOTOR_c *mtr);
+
+public:
+  MOTOR_Type_e motorType;
+  MOTOR_Data_s motorData;
+
+  MOTOR_c();
+  ~MOTOR_c();
+
+  virtual void InitMotor(uint8_t id, comm::COMM_c *hComm, MOTOR_Type_e type, ...);
+  virtual void AddMotorController();
+};
+
+extern std::map<uint8_t, MOTOR_c *> MotorList;
+
+} // namespace motor
+
+} // namespace device
 
 #endif // __MOTOR_HPP__

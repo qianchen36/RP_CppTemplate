@@ -16,7 +16,25 @@
           {
             "name": "Algo",
             "files": [],
-            "folders": []
+            "folders": [
+              {
+                "name": "Controller",
+                "files": [
+                  {
+                    "path": "Applications/Algo/Controller/controller.cpp"
+                  },
+                  {
+                    "path": "Applications/Algo/Controller/ctrl_pid.cpp"
+                  }
+                ],
+                "folders": []
+              },
+              {
+                "name": "Filter",
+                "files": [],
+                "folders": []
+              }
+            ]
           },
           {
             "name": "Comm",
@@ -83,6 +101,12 @@
                 "files": [
                   {
                     "path": "Applications/Device/Motor/motor.cpp"
+                  },
+                  {
+                    "path": "Applications/Device/Motor/mtr_gm6020.cpp"
+                  },
+                  {
+                    "path": "Applications/Device/Motor/mtr_m3508.cpp"
                   }
                 ],
                 "folders": []
@@ -619,7 +643,6 @@
         "name": "default",
         "incList": [
           ".eide/deps",
-          "Applications/Algo/Inc",
           "Applications/Comm/Inc",
           "Applications/Config/Inc",
           "Applications/Device/Inc",
@@ -646,7 +669,9 @@
           "Middlewares/CMSIS_DSP/Include",
           "Middlewares/CMSIS_DSP/PrivateInclude",
           "Applications/Device/IMU/Driver",
-          "Boards/GimbalController/BSP/Inc"
+          "Boards/GimbalController/BSP/Inc",
+          "Applications/Algo/Controller/Inc",
+          "Applications/Algo/Filter/Inc"
         ],
         "libList": [],
         "sourceDirList": [],
