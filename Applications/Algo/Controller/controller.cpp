@@ -30,9 +30,9 @@ CONTROLLER_c::~CONTROLLER_c()
 
 }
 
-void CONTROLLER_c::InitController(CTRL_Type_e type, float t, ...)
+void CONTROLLER_c::InitController(int type, double t, ...)
 {
-  ctrlType = type;
+  ctrlType = (CTRL_Type_e)type;
   deltaT_  = t;
 
   va_list args;
@@ -42,7 +42,7 @@ void CONTROLLER_c::InitController(CTRL_Type_e type, float t, ...)
   ctrlState = CTRL_IDLE;
 }
 
-void CONTROLLER_c::UpdateController(CTRL_Type_e type, ...)
+void CONTROLLER_c::UpdateController(int type, ...)
 {
   if (type != ctrlType)
     return;
@@ -56,6 +56,11 @@ void CONTROLLER_c::UpdateController(CTRL_Type_e type, ...)
 void CONTROLLER_c::ResetController(void)
 {
   return;
+}
+
+CONTROLLER_c *CONTROLLER_c::GetObjectHandler(void)
+{
+  return this;
 }
 
 } // namespace controller

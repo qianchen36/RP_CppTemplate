@@ -671,7 +671,8 @@
           "Applications/Device/IMU/Driver",
           "Boards/Dbldeck_MasterCtrl/BSP/Inc",
           "Applications/Algo/Controller/Inc",
-          "Applications/Algo/Filter/Inc"
+          "Applications/Algo/Filter/Inc",
+          "Applications/Algo/Inc"
         ],
         "libList": [],
         "sourceDirList": [],

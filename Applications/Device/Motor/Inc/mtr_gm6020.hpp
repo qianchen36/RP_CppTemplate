@@ -19,7 +19,7 @@ namespace device {
 
 namespace motor {
 
-class MTR_GM6020_c : public device::motor::MOTOR_c : public comm::COMM_CAN_Node_c
+class MTR_GM6020_c : public device::motor::MOTOR_c, public comm::COMM_CAN_Node_c
 {
 
 };

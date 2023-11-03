@@ -32,9 +32,10 @@ public:
   CONTROLLER_c();
   ~CONTROLLER_c();
 
-  virtual void InitController(CTRL_Type_e type, float t, ...);
-  virtual void UpdateController(CTRL_Type_e type, ...);
+  virtual void InitController(int type, double t, ...);
+  virtual void UpdateController(int type, ...);
   virtual void ResetController(void);
+  virtual CONTROLLER_c *GetObjectHandler(void);
 
 };
 

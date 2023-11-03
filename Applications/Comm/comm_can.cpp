@@ -30,7 +30,7 @@ COMM_CAN_c::COMM_CAN_c()
 /**
  * @brief  Get the handler object of CAN interface
  * 
- * @retval Reference of the CAN interface handler
+ * @retval Pointer of the CAN interface handler
  */
 COMM_CAN_c *COMM_CAN_c::GetObjectHandler(void)
 {

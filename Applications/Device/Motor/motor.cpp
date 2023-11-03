@@ -34,7 +34,7 @@ MOTOR_c::~MOTOR_c()
 void MOTOR_c::InitMotor(uint8_t id, comm::COMM_c *hComm, MOTOR_Type_e type, ...)
 {
   devID     = id;
-  devComm   = hComm->commType;
+  devComm   = hComm->comType;
   devState  = DEV_OFFLINE;
   motorType = type;
 
@@ -61,6 +61,7 @@ void MOTOR_c::DelMotor(MOTOR_c *mtr)
   MotorList.erase(mtr->devID);
 
   DelDevice(mtr);
+}
 
 } // namespace motor
 
