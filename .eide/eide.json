@@ -138,14 +138,14 @@
         "files": [],
         "folders": [
           {
-            "name": "GimbalController",
+            "name": "Dbldeck_MasterCtrl",
             "files": [],
             "folders": [
               {
                 "name": "BSP",
                 "files": [
                   {
-                    "path": "Boards/GimbalController/BSP/board.cpp"
+                    "path": "Boards/Dbldeck_MasterCtrl/BSP/board.cpp"
                   }
                 ],
                 "folders": []
@@ -154,55 +154,55 @@
                 "name": "Core",
                 "files": [
                   {
-                    "path": "Boards/GimbalController/Core/Src/adc.c"
+                    "path": "Boards/Dbldeck_MasterCtrl/Core/Src/adc.c"
                   },
                   {
-                    "path": "Boards/GimbalController/Core/Src/can.c"
+                    "path": "Boards/Dbldeck_MasterCtrl/Core/Src/can.c"
                   },
                   {
-                    "path": "Boards/GimbalController/Core/Src/crc.c"
+                    "path": "Boards/Dbldeck_MasterCtrl/Core/Src/crc.c"
                   },
                   {
-                    "path": "Boards/GimbalController/Core/Src/dma.c"
+                    "path": "Boards/Dbldeck_MasterCtrl/Core/Src/dma.c"
                   },
                   {
-                    "path": "Boards/GimbalController/Core/Src/freertos.c"
+                    "path": "Boards/Dbldeck_MasterCtrl/Core/Src/freertos.c"
                   },
                   {
-                    "path": "Boards/GimbalController/Core/Src/gpio.c"
+                    "path": "Boards/Dbldeck_MasterCtrl/Core/Src/gpio.c"
                   },
                   {
-                    "path": "Boards/GimbalController/Core/Src/i2c.c"
+                    "path": "Boards/Dbldeck_MasterCtrl/Core/Src/i2c.c"
                   },
                   {
-                    "path": "Boards/GimbalController/Core/Src/iwdg.c"
+                    "path": "Boards/Dbldeck_MasterCtrl/Core/Src/iwdg.c"
                   },
                   {
-                    "path": "Boards/GimbalController/Core/Src/main.c"
+                    "path": "Boards/Dbldeck_MasterCtrl/Core/Src/main.c"
                   },
                   {
-                    "path": "Boards/GimbalController/Core/Src/rng.c"
+                    "path": "Boards/Dbldeck_MasterCtrl/Core/Src/rng.c"
                   },
                   {
-                    "path": "Boards/GimbalController/Core/Src/sdio.c"
+                    "path": "Boards/Dbldeck_MasterCtrl/Core/Src/sdio.c"
                   },
                   {
-                    "path": "Boards/GimbalController/Core/Src/spi.c"
+                    "path": "Boards/Dbldeck_MasterCtrl/Core/Src/spi.c"
                   },
                   {
-                    "path": "Boards/GimbalController/Core/Src/stm32f4xx_hal_msp.c"
+                    "path": "Boards/Dbldeck_MasterCtrl/Core/Src/stm32f4xx_hal_msp.c"
                   },
                   {
-                    "path": "Boards/GimbalController/Core/Src/stm32f4xx_hal_timebase_tim.c"
+                    "path": "Boards/Dbldeck_MasterCtrl/Core/Src/stm32f4xx_hal_timebase_tim.c"
                   },
                   {
-                    "path": "Boards/GimbalController/Core/Src/stm32f4xx_it.c"
+                    "path": "Boards/Dbldeck_MasterCtrl/Core/Src/stm32f4xx_it.c"
                   },
                   {
-                    "path": "Boards/GimbalController/Core/Src/tim.c"
+                    "path": "Boards/Dbldeck_MasterCtrl/Core/Src/tim.c"
                   },
                   {
-                    "path": "Boards/GimbalController/Core/Src/usart.c"
+                    "path": "Boards/Dbldeck_MasterCtrl/Core/Src/usart.c"
                   }
                 ],
                 "folders": []
@@ -215,13 +215,13 @@
                     "name": "Target",
                     "files": [
                       {
-                        "path": "Boards/GimbalController/FATFS/Target/bsp_driver_sd.c"
+                        "path": "Boards/Dbldeck_MasterCtrl/FATFS/Target/bsp_driver_sd.c"
                       },
                       {
-                        "path": "Boards/GimbalController/FATFS/Target/sd_diskio.c"
+                        "path": "Boards/Dbldeck_MasterCtrl/FATFS/Target/sd_diskio.c"
                       },
                       {
-                        "path": "Boards/GimbalController/FATFS/Target/fatfs_platform.c"
+                        "path": "Boards/Dbldeck_MasterCtrl/FATFS/Target/fatfs_platform.c"
                       }
                     ],
                     "folders": []
@@ -230,7 +230,7 @@
                     "name": "App",
                     "files": [
                       {
-                        "path": "Boards/GimbalController/FATFS/App/fatfs.c"
+                        "path": "Boards/Dbldeck_MasterCtrl/FATFS/App/fatfs.c"
                       }
                     ],
                     "folders": []
@@ -241,7 +241,7 @@
                 "name": "MDK-ARM",
                 "files": [
                   {
-                    "path": "Boards/GimbalController/MDK-ARM/startup_stm32f407xx.s"
+                    "path": "Boards/Dbldeck_MasterCtrl/MDK-ARM/startup_stm32f407xx.s"
                   }
                 ],
                 "folders": []
@@ -254,13 +254,13 @@
                     "name": "App",
                     "files": [
                       {
-                        "path": "Boards/GimbalController/USB_DEVICE/App/usb_device.c"
+                        "path": "Boards/Dbldeck_MasterCtrl/USB_DEVICE/App/usb_device.c"
                       },
                       {
-                        "path": "Boards/GimbalController/USB_DEVICE/App/usbd_desc.c"
+                        "path": "Boards/Dbldeck_MasterCtrl/USB_DEVICE/App/usbd_desc.c"
                       },
                       {
-                        "path": "Boards/GimbalController/USB_DEVICE/App/usbd_cdc_if.c"
+                        "path": "Boards/Dbldeck_MasterCtrl/USB_DEVICE/App/usbd_cdc_if.c"
                       }
                     ],
                     "folders": []
@@ -269,7 +269,7 @@
                     "name": "Target",
                     "files": [
                       {
-                        "path": "Boards/GimbalController/USB_DEVICE/Target/usbd_conf.c"
+                        "path": "Boards/Dbldeck_MasterCtrl/USB_DEVICE/Target/usbd_conf.c"
                       }
                     ],
                     "folders": []
@@ -288,7 +288,7 @@
             "name": "CMSIS",
             "files": [
               {
-                "path": "Boards/GimbalController/Core/Src/system_stm32f4xx.c"
+                "path": "Boards/Dbldeck_MasterCtrl/Core/Src/system_stm32f4xx.c"
               }
             ],
             "folders": []
@@ -648,12 +648,12 @@
           "Applications/Device/Inc",
           "Applications/Module/Inc",
           "Applications/UserTask/Inc",
-          "Boards/GimbalController/Core/Inc",
-          "Boards/GimbalController/FATFS/Target",
-          "Boards/GimbalController/FATFS/App",
-          "Boards/GimbalController/USB_DEVICE/App",
-          "Boards/GimbalController/USB_DEVICE/Target",
-          "Boards/GimbalController/MDK-ARM/RTE/_GimbalController",
+          "Boards/Dbldeck_MasterCtrl/Core/Inc",
+          "Boards/Dbldeck_MasterCtrl/FATFS/Target",
+          "Boards/Dbldeck_MasterCtrl/FATFS/App",
+          "Boards/Dbldeck_MasterCtrl/USB_DEVICE/App",
+          "Boards/Dbldeck_MasterCtrl/USB_DEVICE/Target",
+          "Boards/Dbldeck_MasterCtrl/MDK-ARM/RTE/_Dbldeck_MasterCtrl",
           "Drivers/CMSIS/Include",
           "Drivers/CMSIS/Device/ST/STM32F4xx/Include",
           "Drivers/STM32F4xx_HAL_Driver/Inc",
@@ -669,7 +669,7 @@
           "Middlewares/CMSIS_DSP/Include",
           "Middlewares/CMSIS_DSP/PrivateInclude",
           "Applications/Device/IMU/Driver",
-          "Boards/GimbalController/BSP/Inc",
+          "Boards/Dbldeck_MasterCtrl/BSP/Inc",
           "Applications/Algo/Controller/Inc",
           "Applications/Algo/Filter/Inc"
         ],
@@ -750,12 +750,12 @@
           "Applications/Device/Inc",
           "Applications/Module/Inc",
           "Applications/UserTask/Inc",
-          "Boards/GimbalController/Core/Inc",
-          "Boards/GimbalController/FATFS/Target",
-          "Boards/GimbalController/FATFS/App",
-          "Boards/GimbalController/USB_DEVICE/App",
-          "Boards/GimbalController/USB_DEVICE/Target",
-          "Boards/GimbalController/MDK-ARM/RTE/_GimbalController",
+          "Boards/Dbldeck_MasterCtrl/Core/Inc",
+          "Boards/Dbldeck_MasterCtrl/FATFS/Target",
+          "Boards/Dbldeck_MasterCtrl/FATFS/App",
+          "Boards/Dbldeck_MasterCtrl/USB_DEVICE/App",
+          "Boards/Dbldeck_MasterCtrl/USB_DEVICE/Target",
+          "Boards/Dbldeck_MasterCtrl/MDK-ARM/RTE/_Dbldeck_MasterCtrl",
           "Drivers/CMSIS/Include",
           "Drivers/CMSIS/Device/ST/STM32F4xx/Include",
           "Drivers/STM32F4xx_HAL_Driver/Inc",

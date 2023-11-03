@@ -15,6 +15,18 @@ namespace algo {
 
 namespace controller {
 
+CTRL_PID_c::CTRL_PID_c()
+{
+  pidType = PID_UNDEF;
+
+  memset(&pidParm, 0, sizeof(pidParm));
+}
+
+CTRL_PID_c::~CTRL_PID_c()
+{
+
+}
+
 } // namespace controller
 
 } // namespace algo
