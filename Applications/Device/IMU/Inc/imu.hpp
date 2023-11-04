@@ -37,9 +37,10 @@ public:
   IMU_c();
   ~IMU_c();
 
+  void UpdateDevice(void) override;
+  
   void InitImu(IMU_Type_e type, void *pImuFunc);
   // void InitMems(MEMS_Type_e type, void *pMemsFunc);
-  void Update(void);
 };
 
 } // namespace imu

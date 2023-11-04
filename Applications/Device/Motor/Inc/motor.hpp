@@ -26,7 +26,8 @@ namespace motor {
 class MOTOR_c : public device::DEVICE_c
 {
 protected:
-  std::map<uint8_t, MOTOR_c *> motorList;
+  std::map<uint8_t, algo::controller::CONTROLLER_c *> controllerList_;
+
   void AddMotor(MOTOR_c *mtr);
   void DelMotor(MOTOR_c *mtr);
 

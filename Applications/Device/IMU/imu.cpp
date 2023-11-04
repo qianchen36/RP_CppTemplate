@@ -73,7 +73,7 @@ void IMU_c::InitImu(IMU_Type_e type, void *pFunc)
  * 
  * @retval None
  */
-void IMU_c::Update(void)
+void IMU_c::UpdateDevice(void)
 {
   GetImuRawData_(hComm_, &imuRawData);
 

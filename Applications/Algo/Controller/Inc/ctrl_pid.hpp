@@ -59,7 +59,8 @@ typedef struct
   uint16_t maxIntegral;
 
   CTRL_PID_ErrMode_e errMode;   // For PID_ANGLE only
-  uint16_t           errCnt;    // For PID_ANGLE in encoder mode only
+  uint16_t           errRange;  // For PID_ANGLE in encoder mode only
+  int16_t            errOffset; // For PID_ANGLE & PID_POSIT only
 
 } CTRL_PID_Params_t;
 
@@ -87,7 +88,7 @@ public:
   CTRL_PID_c();
   ~CTRL_PID_c();
 
-  void InitController(int type, double t, ...) override;
+  void InitController(int type, ...) override;
   void UpdateController(int type, ...) override;
   void ResetController(void) override;
   CTRL_PID_c *GetObjectHandler(void) override;

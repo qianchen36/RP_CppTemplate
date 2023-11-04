@@ -39,6 +39,7 @@ public:
   ~DEVICE_c();
 
   virtual void InitDevice(uint8_t id, comm::COMM_c *hComm);
+  virtual void UpdateDevice(void);
   virtual void Heartbeat(void);
 
 };

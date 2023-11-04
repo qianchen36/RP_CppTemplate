@@ -17,31 +17,58 @@ namespace algo {
 
 namespace controller {
 
+/**
+ * @brief  Construct a new algo::controller::CONTROLLER_c object
+ * 
+ * @return None
+ */
 CONTROLLER_c::CONTROLLER_c()
 {
   ctrlType  = CTRL_UNDEF;
   ctrlState = CTRL_RESET;
-
-  deltaT_ = 1.0f;   // 1ms
 }
 
+
+
+/**
+ * @brief  Destroy the algo::controller::CONTROLLER_c object
+ * 
+ * @return None
+ */
 CONTROLLER_c::~CONTROLLER_c()
 {
 
 }
 
-void CONTROLLER_c::InitController(int type, double t, ...)
+
+
+/**
+ * @brief  Initialize the controller
+ * 
+ * @param  type (CTRL_Type_e) Controller type
+ * @param  ... (va_list) Controller parameters
+ * 
+ * @return None
+ */
+void CONTROLLER_c::InitController(int type, ...)
 {
   ctrlType = (CTRL_Type_e)type;
-  deltaT_  = t;
 
   va_list args;
-  va_start(args, t);
+  va_start(args, type);
 
   va_end(args);
   ctrlState = CTRL_IDLE;
 }
 
+
+
+/**
+ * @brief  Update the controller
+ * 
+ * @param  type (CTRL_Type_e) Controller type
+ * @param  ... (va_list) Controller parameters
+ */
 void CONTROLLER_c::UpdateController(int type, ...)
 {
   if (type != ctrlType)
@@ -53,11 +80,25 @@ void CONTROLLER_c::UpdateController(int type, ...)
   va_end(args);
 }
 
+
+
+/**
+ * @brief  Reset the controller
+ * 
+ * @return None
+ */
 void CONTROLLER_c::ResetController(void)
 {
-  return;
+
 }
 
+
+
+/**
+ * @brief  Get the controller handler
+ * 
+ * @return Pointer of the controller object handler
+ */
 CONTROLLER_c *CONTROLLER_c::GetObjectHandler(void)
 {
   return this;

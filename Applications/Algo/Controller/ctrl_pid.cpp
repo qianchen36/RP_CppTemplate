@@ -50,12 +50,11 @@ CTRL_PID_c::~CTRL_PID_c()
  * @brief  Initialize the PID controller
  * 
  * @param  type (CTRL_Type_e) Controller type
- * @param  t (float) Sampling time
  * @param  sParm (CTRL_PID_Params_t *) PID controller parameters structure
  * 
  * @return None
  */
-void CTRL_PID_c::InitController(int type, double t, ...)
+void CTRL_PID_c::InitController(int type, ...)
 {
   /* Check type */
   if (type != CTRL_PID)
@@ -63,14 +62,13 @@ void CTRL_PID_c::InitController(int type, double t, ...)
 
   /* Get args */
   va_list args;
-  va_start(args, t);
+  va_start(args, type);
 
-  deltaT_ = t;
+  auto sParm = va_arg(args, CTRL_PID_Params_t *);
 
-  auto pParm = va_arg(args, CTRL_PID_Params_t *);
-
-  pidType = pParm->pidType;
-  memcpy(&pidParm, pParm, sizeof(pidParm));
+  pidType = sParm->pidType;
+  pidParm = *sParm;
+  // memcpy(&pidParm, sParm, sizeof(pidParm));
 
   /* Clean up */
   va_end(args);
@@ -153,7 +151,7 @@ float CTRL_PID_c::PID_Calculate(float get, float set)
 
   switch (pidType)
   {
-  case PID_SPEED:
+  case PID_SPEED: // PID in speed mode
     /* Get feedback & target value */
     pidData_.get[NOW] = get;
     pidData_.set[NOW] = set;
@@ -168,21 +166,78 @@ float CTRL_PID_c::PID_Calculate(float get, float set)
     pidData_.iOut += pidParm.Ki * pidData_.err[NOW];
     pidData_.dOut = pidParm.Kd * (pidData_.err[NOW] - pidData_.err[LAST]);
 
-    /* Limit integral */
+    /* Limit integral output */
     if (pidParm.maxIntegral != 0 && ABS(pidData_.iOut) > pidParm.maxIntegral)
       pidData_.iOut = (pidData_.iOut > 0) ? pidParm.maxIntegral : -pidParm.maxIntegral;
 
     break;
 
-  case PID_ANGLE:
-    // TODO: PID_ANGLE
+  case PID_ANGLE: // PID in angle mode
+    /* Get feedback & target value */
+    pidData_.get[NOW] = get - pidParm.errOffset;
+    pidData_.set[NOW] = set - pidParm.errOffset;
+
+    /* Get error value */
+    if (pidParm.errMode == PID_ERRMODE_UNDEF)
+      return 0.0f;
+
+    if (pidParm.errMode == PID_ERRMODE_ENCODE)
+    {
+      pidData_.err[NOW] = pidData_.set[NOW] - pidData_.get[NOW];
+      
+      if (pidData_.err[NOW] > pidParm.errRange / 2)
+        pidData_.err[NOW] -= pidParm.errRange;
+      else if (pidData_.err[NOW] < -pidParm.errRange / 2)
+        pidData_.err[NOW] += pidParm.errRange;
+    }
+
+    if (pidParm.errMode == PID_ERRMODE_DEGREE)
+    {
+      pidData_.err[NOW] = pidData_.set[NOW] - pidData_.get[NOW];
+      
+      if (pidData_.err[NOW] > 180)
+        pidData_.err[NOW] -= 360;
+      else if (pidData_.err[NOW] < -180)
+        pidData_.err[NOW] += 360;
+    }
+
+    /* Is in deadband */
+    if (pidParm.deadBand != 0 && ABS(pidData_.err[NOW]) < pidParm.deadBand)
+      return 0.0f;
+    
+    /* PID calculate */
+    pidData_.pOut = pidParm.Kp * pidData_.err[NOW];
+    pidData_.iOut += pidParm.Ki * pidData_.err[NOW];
+    pidData_.dOut = pidParm.Kd * (pidData_.err[NOW] - pidData_.err[LAST]);
+
+    /* Limit integral output */
+    if (pidParm.maxIntegral != 0 && ABS(pidData_.iOut) > pidParm.maxIntegral)
+      pidData_.iOut = (pidData_.iOut > 0) ? pidParm.maxIntegral : -pidParm.maxIntegral;
+
     break;
 
-  case PID_POSIT:
-    // TODO: PID_POSIT
+  case PID_POSIT: // PID in position mode
+    /* Get feedback & target value */
+    pidData_.get[NOW] = get - pidParm.errOffset;
+    pidData_.set[NOW] = set - pidParm.errOffset;
+    pidData_.err[NOW] = pidData_.set[NOW] - pidData_.get[NOW];
+
+    /* Is in deadband */
+    if (pidParm.deadBand != 0 && ABS(pidData_.err[NOW]) < pidParm.deadBand)
+      return 0.0f;
+
+    /* PID calculate */
+    pidData_.pOut = pidParm.Kp * pidData_.err[NOW];
+    pidData_.iOut += pidParm.Ki * pidData_.err[NOW];
+    pidData_.dOut = pidParm.Kd * (pidData_.err[NOW] - pidData_.err[LAST]);
+
+    /* Limit integral output */
+    if (pidParm.maxIntegral != 0 && ABS(pidData_.iOut) > pidParm.maxIntegral)
+      pidData_.iOut = (pidData_.iOut > 0) ? pidParm.maxIntegral : -pidParm.maxIntegral;
+    
     break;
 
-  case PID_DELTA:
+  case PID_DELTA: // PID in delta mode
     // TODO: PID_DELTA
     break;
   
@@ -190,7 +245,7 @@ float CTRL_PID_c::PID_Calculate(float get, float set)
     break;
   }
 
-  /* Get output */
+  /* Calculate output */
   pidData_.output = pidData_.pOut + pidData_.iOut + pidData_.dOut;
 
   /* Limit output */

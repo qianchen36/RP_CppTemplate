@@ -22,9 +22,6 @@ namespace controller {
 
 class CONTROLLER_c
 {
-protected:
-  float deltaT_;  // Unit: ms
-
 public:
   CTRL_Type_e   ctrlType;
   CTRL_Status_e ctrlState;
@@ -32,7 +29,7 @@ public:
   CONTROLLER_c();
   ~CONTROLLER_c();
 
-  virtual void InitController(int type, double t, ...);
+  virtual void InitController(int type, ...);
   virtual void UpdateController(int type, ...);
   virtual void ResetController(void);
   virtual CONTROLLER_c *GetObjectHandler(void);
