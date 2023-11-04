@@ -43,6 +43,19 @@ void MOTOR_c::InitMotor(uint8_t id, comm::COMM_c *hComm, MOTOR_Type_e type, ...)
   AddMotor(this);
 }
 
+void MOTOR_c::AddMotorController(uint8_t id, algo::controller::CONTROLLER_c *ctrl)
+{
+  if (id == NULL || ctrl == nullptr)
+    return;
+
+  controllerList_.insert(std::pair<uint8_t, algo::controller::CONTROLLER_c *>(id, ctrl));
+}
+
+void MOTOR_c::DelMotorController(uint8_t id)
+{
+  controllerList_.erase(id);
+}
+
 void MOTOR_c::AddMotor(MOTOR_c *mtr)
 {
   if (mtr == nullptr || mtr->devID == NULL)

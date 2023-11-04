@@ -39,7 +39,8 @@ public:
   ~MOTOR_c();
 
   virtual void InitMotor(uint8_t id, comm::COMM_c *hComm, MOTOR_Type_e type, ...);
-  virtual void AddMotorController();
+  virtual void AddMotorController(uint8_t id, algo::controller::CONTROLLER_c *ctrl);
+  virtual void DelMotorController(uint8_t id);
 };
 
 extern std::map<uint8_t, MOTOR_c *> MotorList;

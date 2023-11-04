@@ -21,7 +21,7 @@ std::map<uint8_t, DEVICE_c *> DeviceList;
 /**
  * @brief  Construct a new device::DEVICE_c object
  * 
- * @retval None
+ * @return None
  */
 DEVICE_c::DEVICE_c()
 {
@@ -39,7 +39,7 @@ DEVICE_c::DEVICE_c()
 /**
  * @brief Destroy the device::DEVICE_c object
  * 
- * @retval None
+ * @return None
  */
 DEVICE_c::~DEVICE_c()
 {
@@ -54,7 +54,8 @@ DEVICE_c::~DEVICE_c()
  * 
  * @param id 
  * @param hComm 
- * @retval None
+ * 
+ * @return None
  */
 void DEVICE_c::InitDevice(uint8_t id, comm::COMM_c *hComm)
 {
@@ -71,9 +72,23 @@ void DEVICE_c::InitDevice(uint8_t id, comm::COMM_c *hComm)
 
 
 /**
+ * @brief  Update the device
+ * 
+ * @return None
+ */
+void DEVICE_c::UpdateDevice(void)
+{
+  if (devState == DEV_OFFLINE)
+    return;
+
+}
+
+
+
+/**
  * @brief  Check the heartbeat of the device
  * 
- * @retval None
+ * @return None
  */
 void DEVICE_c::Heartbeat(void)
 {
@@ -90,7 +105,8 @@ void DEVICE_c::Heartbeat(void)
  * @brief  Add a new device to the DeviceList
  * 
  * @param  dev Pointer to the device object
- * @retval None
+ * 
+ * @return None
  */
 void DEVICE_c::AddDevice(DEVICE_c *dev)
 {
@@ -106,7 +122,8 @@ void DEVICE_c::AddDevice(DEVICE_c *dev)
  * @brief  Delete a device from the DeviceList
  * 
  * @param  dev Pointer to the device object
- * @retval None
+ * 
+ * @return None
  */
 void DEVICE_c::DelDevice(DEVICE_c *dev)
 {
@@ -121,7 +138,7 @@ void DEVICE_c::DelDevice(DEVICE_c *dev)
 /**
  * @brief  Trigger heartbeat check of all devices
  * 
- * @retval None
+ * @return None
  */
 void DEVICE_Heartbeat(void)
 {
