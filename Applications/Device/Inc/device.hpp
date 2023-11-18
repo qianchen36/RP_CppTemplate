@@ -12,7 +12,6 @@
 #ifndef __DEVICE_HPP__
 #define __DEVICE_HPP__
 
-#include "main.h"
 #include "device_def.hpp"
 #include "comm.hpp"
 
@@ -38,9 +37,10 @@ public:
   DEVICE_c();
   ~DEVICE_c();
 
-  virtual void InitDevice(uint8_t id, comm::COMM_c *hComm);
+  virtual void InitDevice(uint8_t id, comm::COMM_c *hComm, ...);
   virtual void UpdateDevice(void);
-  virtual void Heartbeat(void);
+  virtual void HeartbeatDevice(void);
+  virtual DEVICE_c *GetObjectHandler(void);
 
 };
 

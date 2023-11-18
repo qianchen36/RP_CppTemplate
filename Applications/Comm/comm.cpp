@@ -35,7 +35,7 @@ COMM_c::COMM_c()
 /**
  * @brief Destroy the COMM_c::Comm_c object
  * 
- * @retval None
+ * @return None
  */
 COMM_c::~COMM_c()
 {
@@ -50,9 +50,10 @@ COMM_c::~COMM_c()
  * 
  * @param  id Set the communicate port ID
  * @param  hInterface Set the handle of the communication interface
+ * @param  ... Comm port specific parameters
  * @return None
  */
-void COMM_c::InitComm(uint8_t id, void *hInterface)
+void COMM_c::InitComm(uint8_t id, void *hInterface, ...)
 {
   if (id == NULL || hInterface == nullptr)
     return;
@@ -70,12 +71,10 @@ void COMM_c::InitComm(uint8_t id, void *hInterface)
 /**
  * @brief  Get the handler of communicate object
  * 
- * @retval Reference of the communicate object
+ * @return Reference of the communicate object
  */
 COMM_c *COMM_c::GetObjectHandler(void)
-{
-  return this;
-}
+{ return this; }
 
 
 
@@ -85,9 +84,7 @@ COMM_c *COMM_c::GetObjectHandler(void)
  * @return Pointer to the communication interface
  */
 void *COMM_c::GetInterfaceHandler(void)
-{
-  return hInterface_;
-}
+{ return hInterface_; }
 
 
 
@@ -95,7 +92,7 @@ void *COMM_c::GetInterfaceHandler(void)
  * @brief  Add a new communication interface to the CommList
  * 
  * @param  comm Pointer to the communication interface
- * @retval None
+ * @return None
  */
 void COMM_c::AddCommPort(COMM_c *comm)
 {
@@ -111,7 +108,7 @@ void COMM_c::AddCommPort(COMM_c *comm)
  * @brief  Delete a communication interface from the CommList
  * 
  * @param  comm Pointer to the communication interface
- * @retval None
+ * @return None
  */
 void COMM_c::DelCommPort(COMM_c *comm)
 {

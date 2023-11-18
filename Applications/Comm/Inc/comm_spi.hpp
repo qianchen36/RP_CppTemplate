@@ -24,20 +24,31 @@ typedef enum
 
 } COMM_SPI_NssStatus_e;
 
+typedef struct
+{
+  GPIO_TypeDef *nssPort;
+  uint16_t      nssPin;
+
+} COMM_SPI_InitParam_s;
+
+
+
 class COMM_SPI_c : public COMM_c
 {
 private:
   GPIO_TypeDef *nssPort_;
   uint16_t      nssPin_;
 
+  void ConfigNssPin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin);
+
 public:
   COMM_SPI_c();
 
+  void InitComm(uint8_t id, void *hInterface, ...) override;
   COMM_SPI_c *GetObjectHandler(void) override;
   void Receive(int interfaceType, ...) override;
   void Transmit(int interfaceType, ...) override;
 
-  void ConfigNssPin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin);
   void SetNssPin(COMM_SPI_NssStatus_e nssState);
 
 };

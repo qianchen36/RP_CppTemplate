@@ -12,6 +12,8 @@
 #ifndef __DEVICE_DEF_HPP__
 #define __DEVICE_DEF_HPP__
 
+#include "main.h"
+
 namespace device {
 
 typedef enum

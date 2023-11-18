@@ -30,7 +30,7 @@ public:
   ~CONTROLLER_c();
 
   virtual void InitController(int type, ...);
-  virtual void UpdateController(int type, ...);
+  virtual float UpdateController(int type, ...);
   virtual void ResetController(void);
   virtual CONTROLLER_c *GetObjectHandler(void);
 

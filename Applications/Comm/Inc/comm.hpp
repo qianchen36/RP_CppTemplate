@@ -12,7 +12,6 @@
 #ifndef __COMM_HPP__
 #define __COMM_HPP__
 
-#include "main.h"
 #include "comm_def.hpp"
 
 #include <map>
@@ -35,7 +34,7 @@ public:
   COMM_c();
   ~COMM_c();
 
-  virtual void InitComm(uint8_t id, void *hInterface) final;
+  virtual void InitComm(uint8_t id, void *hInterface, ...);
   virtual COMM_c *GetObjectHandler(void);
   virtual void *GetInterfaceHandler(void);
   virtual void Receive(int interfaceType, ...) = 0;

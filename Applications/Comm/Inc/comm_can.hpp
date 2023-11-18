@@ -26,27 +26,37 @@ typedef struct
 
 } COMM_CAN_DataPack_s;
 
+typedef CAN_FilterTypeDef COMM_CAN_InitParam_s;
+
+
+
 class COMM_CAN_Node_c
 {
-public:
-  uint32_t canStdID;
+friend class COMM_CAN_c;
+
+protected:
+  uint32_t canStdID_;
   virtual void CanNode_ReceiveCallback(COMM_CAN_DataPack_s *dataPack) = 0;
 
 };
+
+
 
 class COMM_CAN_c : public COMM_c
 {
 private:
   std::map<uint32_t, COMM_CAN_Node_c *> canNodeList_;
 
+  void ConfigFilter(CAN_FilterTypeDef *sFilterConfig);
+  
 public:
   COMM_CAN_c();
 
+  void InitComm(uint8_t id, void *hInterface, ...) override;
   COMM_CAN_c *GetObjectHandler(void) override;
   void Receive(int interfaceType, ...) override;
   void Transmit(int interfaceType, ...) override;
 
-  void ConfigFilter(CAN_FilterTypeDef *sFilterConfig);
   void Start(void);
   void Stop(void);
   void AddCanNode(COMM_CAN_Node_c *canNode);

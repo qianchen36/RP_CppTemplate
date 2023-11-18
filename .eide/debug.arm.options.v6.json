@@ -10,8 +10,7 @@
         "language-c": "c99",
         "language-cpp": "c++11",
         "warnings": "ac5-like-warnings",
-        "short-enums#wchar": true,
-        "link-time-optimization": true
+        "short-enums#wchar": true
     },
     "asm-compiler": {
         "$use": "asm-auto"

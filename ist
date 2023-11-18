@@ -1,0 +1,9 @@
+embedded:startup.tcl:28: Error: Can't find openocd.cfg
+in procedure 'script' 
+at file "embedded:startup.tcl", line 28
+Info : Listening on port 6666 for tcl connections
+Info : Listening on port 4444 for telnet connections
+Error: Debug Adapter has to be specified, see "adapter driver" command
+embedded:startup.tcl:28: Error: 
+in procedure 'script' 
+at file "embedded:startup.tcl", line 28

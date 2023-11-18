@@ -69,15 +69,16 @@ void CONTROLLER_c::InitController(int type, ...)
  * @param  type (CTRL_Type_e) Controller type
  * @param  ... (va_list) Controller parameters
  */
-void CONTROLLER_c::UpdateController(int type, ...)
+float CONTROLLER_c::UpdateController(int type, ...)
 {
   if (type != ctrlType)
-    return;
+    return 0;
 
   va_list args;
   va_start(args, type);
 
   va_end(args);
+  return 0;
 }
 
 

@@ -55,6 +55,15 @@
             "name": "Config",
             "files": [
               {
+                "path": "Applications/Config/config_comm.cpp"
+              },
+              {
+                "path": "Applications/Config/config_device.cpp"
+              },
+              {
+                "path": "Applications/Config/config_task.cpp"
+              },
+              {
                 "path": "Applications/Config/config.cpp"
               }
             ],
@@ -123,13 +132,34 @@
             "folders": []
           },
           {
-            "name": "UserTask",
+            "name": "Task",
             "files": [
               {
-                "path": "Applications/UserTask/user_task.cpp"
+                "path": "Applications/Task/task.cpp"
               }
             ],
-            "folders": []
+            "folders": [
+              {
+                "name": "SystemTask",
+                "files": [
+                  {
+                    "path": "Applications/Task/SystemTasks/heartbeat_task.cpp"
+                  },
+                  {
+                    "path": "Applications/Task/SystemTasks/init_task.cpp"
+                  },
+                  {
+                    "path": "Applications/Task/SystemTasks/test_task.cpp"
+                  }
+                ],
+                "folders": []
+              },
+              {
+                "name": "UserTask",
+                "files": [],
+                "folders": []
+              }
+            ]
           }
         ]
       },
@@ -240,6 +270,9 @@
               {
                 "name": "MDK-ARM",
                 "files": [
+                  {
+                    "path": "Boards/Dbldeck_MasterCtrl/MDK-ARM/armlib_lock_glue.c"
+                  },
                   {
                     "path": "Boards/Dbldeck_MasterCtrl/MDK-ARM/startup_stm32f407xx.s"
                   }
@@ -580,7 +613,8 @@
     "debug": {
       "excludeList": [
         "<virtual_root>/Application/Device/IMU/Driver/bmi270/common.c",
-        "<virtual_root>/Board/board.cpp"
+        "<virtual_root>/Board/board.cpp",
+        "<virtual_root>/Board/Dbldeck_MasterCtrl/MDK-ARM/armlib_lock_glue.c"
       ],
       "toolchain": "AC6",
       "compileConfig": {
@@ -626,19 +660,32 @@
         },
         "options": "null"
       },
-      "uploader": "JLink",
+      "uploader": "OpenOCD",
       "uploadConfig": {
         "bin": "",
-        "baseAddr": "",
-        "cpuInfo": {
-          "vendor": "ST",
-          "cpuName": "STM32F407VE"
-        },
-        "proType": 1,
-        "speed": 8000,
-        "otherCmds": ""
+        "target": "stm32f4x",
+        "interface": "cmsis-dap",
+        "baseAddr": "0x08000000"
       },
-      "uploadConfigMap": {},
+      "uploadConfigMap": {
+        "JLink": {
+          "bin": "",
+          "baseAddr": "",
+          "cpuInfo": {
+            "vendor": "ST",
+            "cpuName": "STM32F407VE"
+          },
+          "proType": 1,
+          "speed": 8000,
+          "otherCmds": ""
+        },
+        "OpenOCD": {
+          "bin": "",
+          "target": "stm32f4x",
+          "interface": "cmsis-dap",
+          "baseAddr": "0x08000000"
+        }
+      },
       "custom_dep": {
         "name": "default",
         "incList": [
@@ -647,7 +694,6 @@
           "Applications/Config/Inc",
           "Applications/Device/Inc",
           "Applications/Module/Inc",
-          "Applications/UserTask/Inc",
           "Boards/Dbldeck_MasterCtrl/Core/Inc",
           "Boards/Dbldeck_MasterCtrl/FATFS/Target",
           "Boards/Dbldeck_MasterCtrl/FATFS/App",
@@ -672,7 +718,8 @@
           "Boards/Dbldeck_MasterCtrl/BSP/Inc",
           "Applications/Algo/Controller/Inc",
           "Applications/Algo/Filter/Inc",
-          "Applications/Algo/Inc"
+          "Applications/Algo/Inc",
+          "Applications/Task/Inc"
         ],
         "libList": [],
         "sourceDirList": [],

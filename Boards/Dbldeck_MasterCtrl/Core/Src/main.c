@@ -22,7 +22,6 @@
 #include "adc.h"
 #include "can.h"
 #include "crc.h"
-#include "dma.h"
 #include "fatfs.h"
 #include "i2c.h"
 #include "iwdg.h"
@@ -124,7 +123,7 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-
+#if 0
 /* USER CODE END 4 */
 
 /**
@@ -135,7 +134,7 @@ void SystemClock_Config(void)
   * @param  htim : TIM handle
   * @retval None
   */
-__weak void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
   /* USER CODE BEGIN Callback 0 */
 
@@ -147,6 +146,8 @@ __weak void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
   /* USER CODE END Callback 1 */
 }
+
+#endif
 
 /**
   * @brief  This function is executed in case of error occurrence.

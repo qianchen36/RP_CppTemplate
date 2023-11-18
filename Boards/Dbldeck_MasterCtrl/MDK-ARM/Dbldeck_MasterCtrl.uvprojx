@@ -4,14 +4,14 @@
   <Header>### uVision Project, (C) Keil Software</Header>
   <Targets>
     <Target>
-      <TargetName>GimbalController</TargetName>
+      <TargetName>Dbldeck_MasterCtrl</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32F407VETx</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <Cpu>IRAM(0x20000000-0x2001BFFF) IRAM2(0x2001C000-0x2001FFFF) IROM(0x8000000-0x807FFFF)  CLOCK(25000000) FPU2 CPUTYPE("Cortex-M4") TZ</Cpu>
+          <Cpu>IRAM(0x20000000-0x2001BFFF) IRAM2(0x2001C000-0x2001FFFF) IROM(0x8000000-0x807FFFF) CLOCK(25000000) FPU2 CPUTYPE("Cortex-M4") TZ</Cpu>
           <FlashUtilSpec />
           <StartupFile />
           <FlashDriverDll />
@@ -41,14 +41,14 @@
             <NotGenerated>0</NotGenerated>
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
-          <OutputDirectory>GimbalController\</OutputDirectory>
-          <OutputName>GimbalController</OutputName>
+          <OutputDirectory>Dbldeck_MasterCtrl\</OutputDirectory>
+          <OutputName>Dbldeck_MasterCtrl</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>1</CreateHexFile>
           <DebugInformation>1</DebugInformation>
           <BrowseInformation>1</BrowseInformation>
-          <ListingPath>./GimbalController/</ListingPath>
+          <ListingPath>./Dbldeck_MasterCtrl/</ListingPath>
           <HexFormatSelection>1</HexFormatSelection>
           <Merge32K>0</Merge32K>
           <CreateBatchFile>0</CreateBatchFile>
@@ -330,7 +330,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls />
-              <Define>USE_HAL_DRIVER,STM32F407xx</Define>
+              <Define>USE_HAL_DRIVER,STM32F407xx,STM32_THREAD_SAFE_STRATEGY=4</Define>
               <Undefine />
               <IncludePath>../Core/Inc;../FATFS/Target;../FATFS/App;../USB_DEVICE/App;../USB_DEVICE/Target;C:/Users/qianchen/STM32Cube/Repository/STM32Cube_FW_F4_V1.27.1/Drivers/STM32F4xx_HAL_Driver/Inc;C:/Users/qianchen/STM32Cube/Repository/STM32Cube_FW_F4_V1.27.1/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;C:/Users/qianchen/STM32Cube/Repository/STM32Cube_FW_F4_V1.27.1/Middlewares/Third_Party/FreeRTOS/Source/include;C:/Users/qianchen/STM32Cube/Repository/STM32Cube_FW_F4_V1.27.1/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2;C:/Users/qianchen/STM32Cube/Repository/STM32Cube_FW_F4_V1.27.1/Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;C:/Users/qianchen/STM32Cube/Repository/STM32Cube_FW_F4_V1.27.1/Middlewares/Third_Party/FatFs/src;C:/Users/qianchen/STM32Cube/Repository/STM32Cube_FW_F4_V1.27.1/Middlewares/ST/STM32_USB_Device_Library/Core/Inc;C:/Users/qianchen/STM32Cube/Repository/STM32Cube_FW_F4_V1.27.1/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc;C:/Users/qianchen/STM32Cube/Repository/STM32Cube_FW_F4_V1.27.1/Drivers/CMSIS/Device/ST/STM32F4xx/Include;C:/Users/qianchen/STM32Cube/Repository/STM32Cube_FW_F4_V1.27.1/Drivers/CMSIS/Include</IncludePath>
             </VariousControls>
@@ -380,6 +380,11 @@
               <FileName>startup_stm32f407xx.s</FileName>
               <FileType>2</FileType>
               <FilePath>startup_stm32f407xx.s</FilePath>
+            </File>
+            <File>
+              <FileName>armlib_lock_glue.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>armlib_lock_glue.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -822,7 +827,7 @@
       <component Cclass="CMSIS" Cgroup="CORE" Cvendor="ARM" Cversion="4.3.0" condition="CMSIS Core">
         <package name="CMSIS" schemaVersion="1.3" url="http://www.keil.com/pack/" vendor="ARM" version="4.5.0" />
         <targetInfos>
-          <targetInfo name="GimbalController" />
+          <targetInfo name="Dbldeck_MasterCtrl" />
         </targetInfos>
       </component>
     </components>

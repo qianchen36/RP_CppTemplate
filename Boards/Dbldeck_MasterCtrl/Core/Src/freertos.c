@@ -47,11 +47,11 @@
 /* USER CODE BEGIN Variables */
 
 /* USER CODE END Variables */
-/* Definitions for wakeupTask */
-osThreadId_t wakeupTaskHandle;
-const osThreadAttr_t wakeupTask_attributes = {
-  .name = "wakeupTask",
-  .stack_size = 128 * 4,
+/* Definitions for initTask */
+osThreadId_t initTaskHandle;
+const osThreadAttr_t initTask_attributes = {
+  .name = "initTask",
+  .stack_size = 512 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
 
@@ -60,7 +60,7 @@ const osThreadAttr_t wakeupTask_attributes = {
 
 /* USER CODE END FunctionPrototypes */
 
-void StartWakeupTask(void *argument);
+void StartInitTask(void *argument);
 
 extern void MX_USB_DEVICE_Init(void);
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
@@ -109,8 +109,8 @@ void MX_FREERTOS_Init(void) {
   /* USER CODE END RTOS_QUEUES */
 
   /* Create the thread(s) */
-  /* creation of wakeupTask */
-  wakeupTaskHandle = osThreadNew(StartWakeupTask, NULL, &wakeupTask_attributes);
+  /* creation of initTask */
+  initTaskHandle = osThreadNew(StartInitTask, NULL, &initTask_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -122,24 +122,24 @@ void MX_FREERTOS_Init(void) {
 
 }
 
-/* USER CODE BEGIN Header_StartWakeupTask */
+/* USER CODE BEGIN Header_StartInitTask */
 /**
-  * @brief  Function implementing the wakeupTask thread.
+  * @brief  Function implementing the initTask thread.
   * @param  argument: Not used
   * @retval None
   */
-/* USER CODE END Header_StartWakeupTask */
-void StartWakeupTask(void *argument)
+/* USER CODE END Header_StartInitTask */
+__weak void StartInitTask(void *argument)
 {
   /* init code for USB_DEVICE */
   MX_USB_DEVICE_Init();
-  /* USER CODE BEGIN StartWakeupTask */
+  /* USER CODE BEGIN StartInitTask */
   /* Infinite loop */
   for(;;)
   {
     osDelay(1);
   }
-  /* USER CODE END StartWakeupTask */
+  /* USER CODE END StartInitTask */
 }
 
 /* Private application code --------------------------------------------------*/

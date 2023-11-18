@@ -12,44 +12,56 @@
 #ifndef __MOTOR_DEF_HPP__
 #define __MOTOR_DEF_HPP__
 
+#include "main.h"
+
 namespace device {
 
 namespace motor {
 
 typedef enum
 {
-  MOTOR_UNDEF,
+  MTR_UNDEF,
 
-  MOTOR_GM6020,
-  MOTOR_M3502,
+  MTR_GM6020,
+  MTR_M3502,
 
 } MOTOR_Type_e;
 
 typedef enum
 {
-  MOTOR_DATA_UNDEF,
+  MTR_DATA_UNDEF,
 
-  MOTOR_DATA_ANGLE,
-  MOTOR_DATA_SPEED,
-  MOTOR_DATA_VOLTAGE,
-  MOTOR_DATA_CURRENT,
-  MOTOR_DATA_TORQUE,
-  MOTOR_DATA_COUNT,
-  MOTOR_DATA_TEMP,
+  MTR_DATA_ANGLE,
+  MTR_DATA_SPEED,
+  MTR_DATA_VOLTAGE,
+  MTR_DATA_CURRENT,
+  MTR_DATA_TORQUE,
+  MTR_DATA_COUNT,
+  MTR_DATA_TEMP,
 
 } MOTOR_DataType_e;
 
 typedef enum
 {
-  MOTOR_CTRL_UNDEF,
+  MTR_CTRL_UNDEF,
 
-  MOTOR_CTRL_ANGLE,
-  MOTOR_CTRL_SPEED,
-  MOTOR_CTRL_TORQUE,
-  MOTOR_CTRL_VOLTAGE,
-  MOTOR_CTRL_CURRENT,
+  MTR_CTRL_ANGLE,
+  MTR_CTRL_POSIT,
+  MTR_CTRL_SPEED,
+  MTR_CTRL_TORQUE,
+  MTR_CTRL_CURRENT,
+
+  MTR_CTRL_CNT,
 
 } MOTOR_CtrlType_e;
+
+typedef enum
+{
+  MTR_ERR_NONE,
+
+  MTR_ERR_STALL,
+
+} MOTOR_ErrType_e;
 
 typedef struct
 {
@@ -60,6 +72,8 @@ typedef struct
   int16_t torque;
   int32_t count;
   int16_t temp;
+
+  MOTOR_ErrType_e errCode;
 
 } MOTOR_Data_s;
 

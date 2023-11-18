@@ -18,7 +18,7 @@ namespace comm {
 /**
  * @brief  Construct a new comm spi c::comm spi c object
  * 
- * @retval None
+ * @return None
  */
 COMM_SPI_c::COMM_SPI_c()
 {
@@ -31,9 +31,42 @@ COMM_SPI_c::COMM_SPI_c()
 
 
 /**
+ * @brief  Initialize the SPI interface
+ * 
+ * @param  id Set the communicate port ID
+ * @param  hInterface Set the handle of the communication interface
+ * @param  pStruct Set the SPI specific parameters
+ * @return None
+ */
+void COMM_SPI_c::InitComm(uint8_t id, void *hInterface, ...)
+{
+  /* Check id and hInterface */
+  if (id == NULL || hInterface == nullptr)
+    return;
+
+  /* Get args */
+  va_list args;
+  va_start(args, hInterface);
+
+  comID       = id;
+  hInterface_ = hInterface;
+
+  auto pStruct = va_arg(args, COMM_SPI_InitParam_s *);
+
+  ConfigNssPin(pStruct->nssPort, pStruct->nssPin);
+  AddCommPort(this);
+
+  /* Clean up */
+  va_end(args);
+  comState = COMM_STOP;
+}
+
+
+
+/**
  * @brief  Get the handler object of SPI interface
  * 
- * @retval Reference of the SPI interface handler
+ * @return Reference of the SPI interface handler
  */
 COMM_SPI_c *COMM_SPI_c::GetObjectHandler(void)
 {
@@ -49,7 +82,7 @@ COMM_SPI_c *COMM_SPI_c::GetObjectHandler(void)
  * @param  pData (uint8_t *) Pointer to the data buffer
  * @param  size (uint16_t) Size of the data buffer
  * @param  timeout (uint32_t) Timeout value
- * @retval None
+ * @return None
  */
 void COMM_SPI_c::Receive(int interfaceType, ...)
 {
@@ -88,7 +121,7 @@ void COMM_SPI_c::Receive(int interfaceType, ...)
  * @param  pData (uint8_t *) Pointer to the data buffer
  * @param  size (uint16_t) Size of the data buffer
  * @param  timeout (uint32_t) Timeout value
- * @retval None
+ * @return None
  */
 void COMM_SPI_c::Transmit(int interfaceType, ...)
 {
@@ -121,27 +154,10 @@ void COMM_SPI_c::Transmit(int interfaceType, ...)
 
 
 /**
- * @brief  Configure the NSS pin of SPI interface
- * 
- * @param  GPIOx Set GPIO port of NSS pin
- * @param  GPIO_Pin Set GPIO pin of NSS pin
- * @retval None
- */
-void COMM_SPI_c::ConfigNssPin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
-{
-  nssPort_ = GPIOx;
-  nssPin_  = GPIO_Pin;
-
-  HAL_GPIO_WritePin(nssPort_, nssPin_, GPIO_PIN_RESET);
-}
-
-
-
-/**
  * @brief  Set NSS pin value
  * 
  * @param  nssState GPIO_PIN_RESET for high, GPIO_PIN_SET for low
- * @retval None
+ * @return None
  */
 void COMM_SPI_c::SetNssPin(COMM_SPI_NssStatus_e nssState)
 {
@@ -153,6 +169,23 @@ void COMM_SPI_c::SetNssPin(COMM_SPI_NssStatus_e nssState)
 
   else if (nssState == COMM_SPI_NSS_SET)
     HAL_GPIO_WritePin(nssPort_, nssPin_, GPIO_PIN_RESET);
+}
+
+
+
+/**
+ * @brief  Configure the NSS pin of SPI interface
+ * 
+ * @param  GPIOx Set GPIO port of NSS pin
+ * @param  GPIO_Pin Set GPIO pin of NSS pin
+ * @return None
+ */
+void COMM_SPI_c::ConfigNssPin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
+{
+  nssPort_ = GPIOx;
+  nssPin_  = GPIO_Pin;
+
+  HAL_GPIO_WritePin(nssPort_, nssPin_, GPIO_PIN_RESET);
 }
 
 } // namespace comm

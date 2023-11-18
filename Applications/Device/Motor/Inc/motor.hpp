@@ -12,7 +12,6 @@
 #ifndef __MOTOR_HPP__
 #define __MOTOR_HPP__
 
-#include "main.h"
 #include "motor_def.hpp"
 #include "device.hpp"
 #include "controller.hpp"
@@ -26,19 +25,27 @@ namespace motor {
 class MOTOR_c : public device::DEVICE_c
 {
 protected:
-  std::map<uint8_t, algo::controller::CONTROLLER_c *> controllerList_;
+  uint16_t encoderRes_;
 
   void AddMotor(MOTOR_c *mtr);
   void DelMotor(MOTOR_c *mtr);
+  int32_t UpdateRoundCount(int16_t curAngle, int16_t lstAngle);
 
 public:
-  MOTOR_Type_e motorType;
-  MOTOR_Data_s motorData;
+  MOTOR_Type_e mtrType;
+  MOTOR_Data_s mtrData;
+  std::map<uint8_t, algo::controller::CONTROLLER_c *> mtrCtrlList;
 
   MOTOR_c();
   ~MOTOR_c();
 
-  virtual void InitMotor(uint8_t id, comm::COMM_c *hComm, MOTOR_Type_e type, ...);
+  int32_t GetAngleSum(void);
+
+  void HeartbeatDevice(void) override;
+  MOTOR_c *GetObjectHandler(void) override;
+
+  virtual float CalcMotorController(uint8_t id, float set);
+  virtual float CalcMotorController(uint8_t id, float get, float set);
   virtual void AddMotorController(uint8_t id, algo::controller::CONTROLLER_c *ctrl);
   virtual void DelMotorController(uint8_t id);
 };

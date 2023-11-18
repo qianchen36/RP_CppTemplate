@@ -16,8 +16,6 @@ namespace device {
 /* Devices List */
 std::map<uint8_t, DEVICE_c *> DeviceList;
 
-
-
 /**
  * @brief  Construct a new device::DEVICE_c object
  * 
@@ -52,12 +50,12 @@ DEVICE_c::~DEVICE_c()
 /**
  * @brief 
  * 
- * @param id 
- * @param hComm 
- * 
+ * @param  id Set the device ID
+ * @param  hComm Set the communication interface
+ * @param  ... Device specific parameters
  * @return None
  */
-void DEVICE_c::InitDevice(uint8_t id, comm::COMM_c *hComm)
+void DEVICE_c::InitDevice(uint8_t id, comm::COMM_c *hComm, ...)
 {
   devID = id;
   devComm = hComm->comType;
@@ -87,10 +85,10 @@ void DEVICE_c::UpdateDevice(void)
 
 /**
  * @brief  Check the heartbeat of the device
- * 
+
  * @return None
  */
-void DEVICE_c::Heartbeat(void)
+void DEVICE_c::HeartbeatDevice(void)
 {
   if (devState == DEV_OFFLINE)
     return;
@@ -102,10 +100,21 @@ void DEVICE_c::Heartbeat(void)
 
 
 /**
+ * @brief  Get the object handle of the device
+ * 
+ * @return DEVICE_c* Pointer to the device object
+ */
+DEVICE_c *DEVICE_c::GetObjectHandler(void)
+{
+  return this;
+}
+
+
+
+/**
  * @brief  Add a new device to the DeviceList
  * 
  * @param  dev Pointer to the device object
- * 
  * @return None
  */
 void DEVICE_c::AddDevice(DEVICE_c *dev)
@@ -122,7 +131,6 @@ void DEVICE_c::AddDevice(DEVICE_c *dev)
  * @brief  Delete a device from the DeviceList
  * 
  * @param  dev Pointer to the device object
- * 
  * @return None
  */
 void DEVICE_c::DelDevice(DEVICE_c *dev)
@@ -143,7 +151,8 @@ void DEVICE_c::DelDevice(DEVICE_c *dev)
 void DEVICE_Heartbeat(void)
 {
   for (auto it : DeviceList)
-    it.second->Heartbeat();
+    it.second->HeartbeatDevice();
+
 }
 
 } // namespace device

@@ -28,14 +28,45 @@ COMM_CAN_c::COMM_CAN_c()
 
 
 /**
+ * @brief  Initialize the CAN interface
+ * 
+ * @param  id Set the communicate port ID
+ * @param  hInterface Set the handle of the communication interface
+ * @param  pStruct Set the CAN specific parameters
+ * @return None
+ */
+void COMM_CAN_c::InitComm(uint8_t id, void *hInterface, ...)
+{
+  /* Check id and hInterface */
+  if (id == NULL || hInterface == nullptr)
+    return;
+
+  /* Get args */
+  va_list args;
+  va_start(args, hInterface);
+
+  comID = id;
+  hInterface_ = hInterface;
+
+  auto pStruct = va_arg(args, COMM_CAN_InitParam_s *);
+
+  ConfigFilter(pStruct);
+  AddCommPort(this);
+
+  /* Clean up */
+  va_end(args);
+  comState = COMM_STOP;
+}
+
+
+
+/**
  * @brief  Get the handler object of CAN interface
  * 
  * @retval Pointer of the CAN interface handler
  */
 COMM_CAN_c *COMM_CAN_c::GetObjectHandler(void)
-{
-  return this;
-}
+{ return this; }
 
 
 
@@ -45,9 +76,9 @@ COMM_CAN_c *COMM_CAN_c::GetObjectHandler(void)
  * @param   interfaceType (COMM_Type_e) Type of the interface
  * @param   hcan (CAN_HandleTypeDef *) Handle of the CAN interface
  * @param   fifo (uint32_t) FIFO number of the CAN interface
- * @retval  None
+ * @return  None
  * 
- * @warning You should not call this function directly
+ * @warning You should never call this function directly
  */
 void COMM_CAN_c::Receive(int interfaceType, ...)
 {
@@ -94,7 +125,7 @@ void COMM_CAN_c::Receive(int interfaceType, ...)
  * @param  interfaceType (COMM_Type_e) Type of the interface
  * @param  stdID (uint32_t) Standard ID of CAN frame
  * @param  data (uint8_t *) Data pack to be transmitted
- * @retval None
+ * @return None
  */
 void COMM_CAN_c::Transmit(int interfaceType, ...)
 {
@@ -135,10 +166,74 @@ void COMM_CAN_c::Transmit(int interfaceType, ...)
 
 
 /**
+ * @brief  Start the CAN interface
+ * 
+ * @return None
+ */
+void COMM_CAN_c::Start(void)
+{
+  if (comState == COMM_RESET)
+    return;
+
+  HAL_CAN_Start((CAN_HandleTypeDef *)hInterface_);
+  comState = COMM_IDLE;
+}
+
+
+
+/**
+ * @brief  Stop the CAN interface
+ * 
+ * @return None
+ */
+void COMM_CAN_c::Stop(void)
+{
+  if (comState == COMM_RESET)
+    return;
+
+  HAL_CAN_Stop((CAN_HandleTypeDef *)hInterface_);
+  comState = COMM_STOP;
+}
+
+
+
+/**
+ * @brief  Add a CAN node to canNodeList
+ * 
+ * @param  canNode Pointer to the CAN node
+ * @return None
+ */
+void COMM_CAN_c::AddCanNode(COMM_CAN_Node_c *canNode)
+{
+  if (canNode == nullptr || canNode->canStdID_ == NULL)
+    return;
+  
+  canNodeList_.insert(std::pair<uint32_t, COMM_CAN_Node_c *>(canNode->canStdID_, canNode));
+}
+
+
+
+/**
+ * @brief Delete a CAN node from canNodeList
+ * 
+ * @param  canNode Pointer to the CAN node
+ * @return None
+ */
+void COMM_CAN_c::DelCanNode(COMM_CAN_Node_c *canNode)
+{
+  if (canNode == nullptr || canNode->canStdID_ == NULL)
+    return;
+
+  canNodeList_.erase(canNode->canStdID_);
+}
+
+
+
+/**
  * @brief  Set CAN receive filter
  * 
  * @param  sFilterConfig Pointer to the filter config
- * @retval None
+ * @return None
  */
 void COMM_CAN_c::ConfigFilter(CAN_FilterTypeDef *sFilterConfig)
 {
@@ -152,69 +247,9 @@ void COMM_CAN_c::ConfigFilter(CAN_FilterTypeDef *sFilterConfig)
 
 }
 
-
-
-/**
- * @brief  Start the CAN interface
- * 
- * @retval None
- */
-void COMM_CAN_c::Start(void)
-{
-  if (comState == COMM_RESET)
-    return;
-
-  HAL_CAN_Start((CAN_HandleTypeDef *)hInterface_);
-}
-
-
-
-/**
- * @brief  Stop the CAN interface
- * 
- * @retval None
- */
-void COMM_CAN_c::Stop(void)
-{
-  if (comState == COMM_RESET)
-    return;
-
-  HAL_CAN_Stop((CAN_HandleTypeDef *)hInterface_);
-}
-
-
-
-/**
- * @brief  Add a CAN node to canNodeList
- * 
- * @param  canNode Pointer to the CAN node
- * @retval None
- */
-void COMM_CAN_c::AddCanNode(COMM_CAN_Node_c *canNode)
-{
-  if (canNode == nullptr || canNode->canStdID == NULL)
-    return;
-  
-  canNodeList_.insert(std::pair<uint32_t, COMM_CAN_Node_c *>(canNode->canStdID, canNode));
-}
-
-
-
-/**
- * @brief Delete a CAN node from canNodeList
- * 
- * @param  canNode Pointer to the CAN node
- * @retval None
- */
-void COMM_CAN_c::DelCanNode(COMM_CAN_Node_c *canNode)
-{
-  if (canNode == nullptr || canNode->canStdID == NULL)
-    return;
-
-  canNodeList_.erase(canNode->canStdID);
-}
-
 } // namespace comm
+
+
 
 extern "C" {
 
@@ -222,7 +257,7 @@ extern "C" {
  * @brief  Rewrite HAL_CAN_RxFifo0MsgPendingCallback
  * 
  * @param  hcan Handle of the CAN interface
- * @retval None
+ * @return None
  */
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 {
@@ -245,7 +280,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
  * @brief  Rewrite HAL_CAN_RxFifo1MsgPendingCallback
  * 
  * @param  hcan Handle of the CAN interface
- * @retval None
+ * @return None
  */
 void HAL_CAN_RxFifo1MsgPendingCallback(CAN_HandleTypeDef *hcan)
 {

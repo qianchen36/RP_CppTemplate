@@ -86,11 +86,11 @@ void CTRL_PID_c::InitController(int type, ...)
  * 
  * @return None
  */
-void CTRL_PID_c::UpdateController(int type, ...)
+float CTRL_PID_c::UpdateController(int type, ...)
 {
   /* Check type & state */
   if (type != CTRL_PID || ctrlState != CTRL_IDLE)
-    return;
+    return 0;
 
   ctrlState = CTRL_BUSY;
 
@@ -102,11 +102,13 @@ void CTRL_PID_c::UpdateController(int type, ...)
   float set = va_arg(args, double);
 
   /* Calculate */
-  PID_Calculate(get, set);
+  auto rtv = PID_Calculate(get, set);
 
   /* Clean up */
   va_end(args);
   ctrlState = CTRL_IDLE;
+
+  return rtv;
 }
 
 

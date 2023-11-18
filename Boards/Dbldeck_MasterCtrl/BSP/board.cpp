@@ -27,15 +27,11 @@
 #include "fatfs.h"
 #include "usb_device.h"
 
-#include "comm_def.hpp"
-
 extern "C" {
 
 void RunTimeTick_Callback(void);
 void SystemClock_Config(void);
 void MX_FREERTOS_Init(void);
-
-
 
 /**
  * @brief  Main program
@@ -49,6 +45,8 @@ int main(void)
   HAL_Init();
 
   /* Hardware Initialize */
+  MX_CAN1_Init();
+  MX_CAN2_Init();
 
   /* FreeRTOS Initialize */
   osKernelInitialize();
@@ -93,13 +91,9 @@ void configureTimerForRunTimeStats(void)
 }
 
 unsigned long getRunTimeCounterValue(void)
-{
-  return osRunTimeTicks;
-}
+{ return osRunTimeTicks; }
 
 void RunTimeTick_Callback(void)
-{
-  osRunTimeTicks++;
-}
+{ osRunTimeTicks++; }
 
 } // extern "C"
