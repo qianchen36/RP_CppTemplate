@@ -13,10 +13,12 @@
 
 #include "comm_can.hpp"
 #include "mtr_gm6020.hpp"
+#include "mtr_m2006.hpp"
 
 uint8_t FLAG_softReset = 0;
 comm::COMM_CAN_c comm_CAN;
 device::motor::MTR_GM6020_c mtr_GM6020;
+device::motor::MTR_M2006_c mtr_M2006;
 
 namespace task {
 
@@ -42,16 +44,21 @@ extern "C" void StartTestTask(void *argument)
   comm_CAN.Start();
 
   device::motor::MTR_GM6020_InitParam_s sGM6020Config = {
-    .encoderResolution = 8192,
+    // .encoderResolution = 8192,
     .canReceiveStdID   = 0x206,
   };
   mtr_GM6020.InitDevice(1, &comm_CAN, &sGM6020Config);
 
-  comm::COMM_CAN_c comm[5];
+  device::motor::MTR_M2006_InitParam_s sM2006Config = {
+    // .encoderResolution = 8192,
+    .canReceiveStdID   = 0x201,
+  };
+  mtr_M2006.InitDevice(2, &comm_CAN, &sM2006Config);
 
   while (1)
   {
     mtr_GM6020.HeartbeatDevice();
+    mtr_M2006.HeartbeatDevice();
 
     osDelay(1);
   }

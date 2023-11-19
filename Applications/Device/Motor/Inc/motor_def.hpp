@@ -24,6 +24,7 @@ typedef enum
 
   MTR_GM6020,
   MTR_M3502,
+  MTR_M2006,
 
 } MOTOR_Type_e;
 

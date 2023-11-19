@@ -1,15 +1,15 @@
 /**
- * @file    mtr_gm6020.cpp
+ * @file    mtr_m2006.cpp
  * @author  Morthine Xiang (xiang@morthine.com)
  * @brief 
  * @version 1.0
- * @date    2023-11-03
+ * @date    2023-11-19
  * 
- * @copyright SZU-RobotPilots Copyright (c) 2023
+ * @copyright Copyright (c) 2023
  * 
  */
 
-#include "mtr_gm6020.hpp"
+#include "mtr_m2006.hpp"
 
 #include <stdarg.h>
 
@@ -18,14 +18,14 @@ namespace device {
 namespace motor {
 
 /**
- * @brief  Construct a new device::motor::MTR_GM6020_c object
+ * @brief  Construct a new device::motor::MTR_M2006_c object
  * 
  * @return None
  */
-MTR_GM6020_c::MTR_GM6020_c()
+MTR_M2006_c::MTR_M2006_c()
 {
   devType = DEV_MTR;
-  mtrType = MTR_GM6020;
+  mtrType = MTR_M2006;
   devComm = comm::COMM_CAN;
 
   encoderRes_ = 8192;
@@ -34,11 +34,11 @@ MTR_GM6020_c::MTR_GM6020_c()
 
 
 /**
- * @brief  Destroy the device::motor::MTR_GM6020_c object
+ * @brief  Destroy the device::motor::MTR_M2006_c object
  * 
  * @return None
  */
-MTR_GM6020_c::~MTR_GM6020_c()
+MTR_M2006_c::~MTR_M2006_c()
 {
   if (devID != NULL && hComm_ != nullptr)
   {
@@ -51,29 +51,25 @@ MTR_GM6020_c::~MTR_GM6020_c()
 
 
 /**
- * @brief  Initialize the GM6020 motor
+ * @brief  Initialize the M2006 motor
  * 
  * @param  id (uint8_t) Set the device ID
  * @param  hComm (COMM_c *) Set the Comm interface
- * @param  pStruct (MTR_GM6020_InitParam_s *) GM6020 motor specific parameters
+ * @param  pStruct (MTR_M2006_InitParam_s *) M2006 motor specific parameters
  * @return None
  */
-void MTR_GM6020_c::InitDevice(uint8_t id, comm::COMM_c *hComm, ...)
+void MTR_M2006_c::InitDevice(uint8_t id, comm::COMM_c *hComm, ...)
 {
   /* Check ID */
-  if (id == NULL || hComm == nullptr)
-    return;
-
-  /* Get args */
   va_list args;
   va_start(args, hComm);
 
-  devID  = id;
+  /* Get args */
+  devID = id;
   hComm_ = hComm;
 
-  auto pStruct = va_arg(args, MTR_GM6020_InitParam_s *);
-  // encoderRes_  = pStruct->encoderResolution;
-  canStdID_    = pStruct->canReceiveStdID;
+  auto *pStruct = va_arg(args, MTR_M2006_InitParam_s *);
+  canStdID_ = pStruct->canReceiveStdID;
 
   AddMotor(this);
   ((comm::COMM_CAN_c *)hComm_)->AddCanNode(this);
@@ -88,22 +84,22 @@ void MTR_GM6020_c::InitDevice(uint8_t id, comm::COMM_c *hComm, ...)
 
 
 /**
- * @brief  Get the object handle of the GM6020 motor
+ * @brief  Get the object handle of the M2006 motor
  * 
- * @return MTR_GM6020_c* Pointer to the motor object
+ * @return MTR_M2006_c* Pointer to the motor object
  */
-MTR_GM6020_c *MTR_GM6020_c::GetObjectHandler(void)
+MTR_M2006_c *MTR_M2006_c::GetObjectHandler(void)
 { return this; }
 
 
 
 /**
- * @brief  GM6020 motor CAN node receive callback
+ * @brief  M2006 motor CAN node receive callback
  * 
  * @param  dataPack CAN data pack
  * @return None
  */
-void MTR_GM6020_c::CanNode_ReceiveCallback(comm::COMM_CAN_DataPack_s *dataPack)
+void MTR_M2006_c::CanNode_ReceiveCallback(comm::COMM_CAN_DataPack_s *dataPack)
 {
   /* Check CAN stdID */
   if (canStdID_ == NULL || dataPack->stdID != canStdID_)
@@ -115,16 +111,15 @@ void MTR_GM6020_c::CanNode_ReceiveCallback(comm::COMM_CAN_DataPack_s *dataPack)
   mtrData.angle     = (dataPack->data[0] << 8) | dataPack->data[1];
   mtrData.speed     = (dataPack->data[2] << 8) | dataPack->data[3];
   mtrData.voltage   =  NULL;
-  mtrData.current   = (dataPack->data[4] << 8) | dataPack->data[5];
-  mtrData.torque    =  NULL;
+  mtrData.current   =  NULL;
+  mtrData.torque    = (dataPack->data[4] << 8) | dataPack->data[5];;
   mtrData.count     =  UpdateRoundCount(mtrData.angle, lastAngle);
-  mtrData.temp      =  dataPack->data[6];
+  mtrData.temp      =  NULL;
   lastHartbeatTime_ =  dataPack->timeStamp;
 
   /* Update device status */
   if (devState == DEV_OFFLINE)
     devState = DEV_ONLINE;
-
 }
 
 } // namespace motor

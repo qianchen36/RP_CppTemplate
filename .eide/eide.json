@@ -115,6 +115,9 @@
                     "path": "Applications/Device/Motor/mtr_gm6020.cpp"
                   },
                   {
+                    "path": "Applications/Device/Motor/mtr_m2006.cpp"
+                  },
+                  {
                     "path": "Applications/Device/Motor/mtr_m3508.cpp"
                   }
                 ],

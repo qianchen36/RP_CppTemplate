@@ -109,7 +109,7 @@ void COMM_CAN_c::Receive(int interfaceType, ...)
   rxDataPack.timeStamp = HAL_GetTick();
 
   /* Call CAN node callback */
-  if (canNodeList_.find(rxDataPack.stdID) != canNodeList_.end())
+  if (canNodeList_.count(rxDataPack.stdID))
     canNodeList_[rxDataPack.stdID]->CanNode_ReceiveCallback(&rxDataPack);
 
   /* Clean up */
