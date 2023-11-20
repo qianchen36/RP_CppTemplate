@@ -52,10 +52,10 @@ DEVICE_c::~DEVICE_c()
  * 
  * @param  id Set the device ID
  * @param  hComm Set the communication interface
- * @param  ... Device specific parameters
+ * @param  pStruct Set the device specific parameters
  * @return None
  */
-void DEVICE_c::InitDevice(uint8_t id, comm::COMM_c *hComm, ...)
+void DEVICE_c::InitDevice(uint8_t id, comm::COMM_c *hComm, void *pStruct)
 {
   devID = id;
   devComm = hComm->comType;

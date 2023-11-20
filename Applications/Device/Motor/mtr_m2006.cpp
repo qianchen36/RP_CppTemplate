@@ -58,26 +58,26 @@ MTR_M2006_c::~MTR_M2006_c()
  * @param  pStruct (MTR_M2006_InitParam_s *) M2006 motor specific parameters
  * @return None
  */
-void MTR_M2006_c::InitDevice(uint8_t id, comm::COMM_c *hComm, ...)
+void MTR_M2006_c::InitDevice(uint8_t id, comm::COMM_c *hComm, void *pStruct)
 {
   /* Check ID */
-  va_list args;
-  va_start(args, hComm);
+  if (id == NULL || hComm == nullptr)
+    return;
 
-  /* Get args */
-  devID = id;
-  hComm_ = hComm;
+  /* Init params */
+  devID       = id;
+  hComm_      = hComm;
+  canStdID_   = ((MTR_M2006_InitParam_s *)pStruct)->canReceiveStdID;
+  // encoderRes_ = ((MTR_M2006_InitParam_s *)pStruct)->encoderResolution;
 
-  auto *pStruct = va_arg(args, MTR_M2006_InitParam_s *);
-  canStdID_ = pStruct->canReceiveStdID;
-
+  /* Regist device */
   AddMotor(this);
   ((comm::COMM_CAN_c *)hComm_)->AddCanNode(this);
 
+  /* Clean up */
   memset(&mtrData, 0, sizeof(MOTOR_Data_s));
 
-  /* Clean up */
-  va_end(args);
+  /* Update status */
   devState  = DEV_OFFLINE;
 }
 
@@ -112,7 +112,7 @@ void MTR_M2006_c::CanNode_ReceiveCallback(comm::COMM_CAN_DataPack_s *dataPack)
   mtrData.speed     = (dataPack->data[2] << 8) | dataPack->data[3];
   mtrData.voltage   =  NULL;
   mtrData.current   =  NULL;
-  mtrData.torque    = (dataPack->data[4] << 8) | dataPack->data[5];;
+  mtrData.torque    = (dataPack->data[4] << 8) | dataPack->data[5];
   mtrData.count     =  UpdateRoundCount(mtrData.angle, lastAngle);
   mtrData.temp      =  NULL;
   lastHartbeatTime_ =  dataPack->timeStamp;

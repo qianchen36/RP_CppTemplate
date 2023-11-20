@@ -34,7 +34,7 @@ public:
   MTR_M2006_c();
   ~MTR_M2006_c();
 
-  void InitDevice(uint8_t id, comm::COMM_c *hComm, ...) override;
+  void InitDevice(uint8_t id, comm::COMM_c *hComm, void *pStruct) override;
   MTR_M2006_c *GetObjectHandler(void) override;
   void CanNode_ReceiveCallback(comm::COMM_CAN_DataPack_s *dataPack) override;
 

@@ -58,30 +58,26 @@ MTR_GM6020_c::~MTR_GM6020_c()
  * @param  pStruct (MTR_GM6020_InitParam_s *) GM6020 motor specific parameters
  * @return None
  */
-void MTR_GM6020_c::InitDevice(uint8_t id, comm::COMM_c *hComm, ...)
+void MTR_GM6020_c::InitDevice(uint8_t id, comm::COMM_c *hComm, void *pStruct)
 {
   /* Check ID */
   if (id == NULL || hComm == nullptr)
     return;
 
-  /* Get args */
-  va_list args;
-  va_start(args, hComm);
+  /* Init params */
+  devID       = id;
+  hComm_      = hComm;
+  canStdID_   = ((MTR_GM6020_InitParam_s *)pStruct)->canReceiveStdID;
+  // encoderRes_ = ((MTR_GM6020_InitParam_s *)pStruct)->encoderResolution;
 
-  devID  = id;
-  hComm_ = hComm;
-
-  auto pStruct = va_arg(args, MTR_GM6020_InitParam_s *);
-  // encoderRes_  = pStruct->encoderResolution;
-  canStdID_    = pStruct->canReceiveStdID;
-
+  /* Regist device */
   AddMotor(this);
   ((comm::COMM_CAN_c *)hComm_)->AddCanNode(this);
 
+  /* Clean up */
   memset(&mtrData, 0, sizeof(MOTOR_Data_s));
 
-  /* Clean up */
-  va_end(args);
+  /* Update status */
   devState  = DEV_OFFLINE;
 }
 

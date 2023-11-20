@@ -37,7 +37,7 @@ public:
   DEVICE_c();
   ~DEVICE_c();
 
-  virtual void InitDevice(uint8_t id, comm::COMM_c *hComm, ...);
+  virtual void InitDevice(uint8_t id, comm::COMM_c *hComm, void *pStruct);
   virtual void UpdateDevice(void);
   virtual void HeartbeatDevice(void);
   virtual DEVICE_c *GetObjectHandler(void);
