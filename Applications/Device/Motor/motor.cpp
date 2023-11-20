@@ -59,7 +59,7 @@ int32_t MOTOR_c::GetAngleSum(void)
   if (encoderRes_ == NULL)
     return 0;
 
-  return (mtrData.angle + mtrData.count * encoderRes_);
+  return (mtrData.angle + mtrData.posit * encoderRes_);
 }
 
 
@@ -249,26 +249,26 @@ void MOTOR_c::DelMotor(MOTOR_c *mtr)
  * 
  * @return (int32_t) Round count
  */
-int32_t MOTOR_c::UpdateRoundCount(int16_t curAngle, int16_t lstAngle)
+int32_t MOTOR_c::Angle2Posit(int16_t curAngle, int16_t lstAngle)
 {
   if (encoderRes_ == NULL)
     return 0;
 
-  if (mtrData.count == 0 && lstAngle == 0)
+  if (mtrData.posit == 0 && lstAngle == 0)
     return 0;
   
-  int16_t error      = curAngle - lstAngle;
-  int32_t roundCount = mtrData.count;
+  int16_t error = curAngle - lstAngle;
+  int32_t posit = mtrData.posit;
 
   if (ABS(error) > encoderRes_ / 2)
   {
     if (error > 0)
-      roundCount--;
+      posit += error - encoderRes_;
     else // error < 0
-      roundCount++;
+      posit += error + encoderRes_;
   }
 
-  return roundCount;
+  return posit;
 }
 
 } // namespace motor

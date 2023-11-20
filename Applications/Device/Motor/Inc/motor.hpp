@@ -29,7 +29,7 @@ protected:
 
   void AddMotor(MOTOR_c *mtr);
   void DelMotor(MOTOR_c *mtr);
-  int32_t UpdateRoundCount(int16_t curAngle, int16_t lstAngle);
+  int32_t Angle2Posit(int16_t curAngle, int16_t lstAngle);
 
 public:
   MOTOR_Type_e mtrType;

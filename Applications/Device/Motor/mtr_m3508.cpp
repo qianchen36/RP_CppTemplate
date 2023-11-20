@@ -111,7 +111,7 @@ void MTR_M3508_c::CanNode_ReceiveCallback(comm::COMM_CAN_DataPack_s *dataPack)
   mtrData.voltage   =  NULL;
   mtrData.current   = (dataPack->data[4] << 8) | dataPack->data[5];
   mtrData.torque    =  NULL;
-  mtrData.count     =  UpdateRoundCount(mtrData.angle, lastAngle);
+  mtrData.posit     =  Angle2Posit(mtrData.angle, lastAngle);
   mtrData.temp      =  dataPack->data[6];
   lastHartbeatTime_ =  dataPack->timeStamp;
 

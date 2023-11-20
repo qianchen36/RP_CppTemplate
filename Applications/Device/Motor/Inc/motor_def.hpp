@@ -71,7 +71,7 @@ typedef struct
   int16_t voltage;
   int16_t current;
   int16_t torque;
-  int32_t count;
+  int32_t posit;
   int16_t temp;
 
   MOTOR_ErrType_e errCode;
