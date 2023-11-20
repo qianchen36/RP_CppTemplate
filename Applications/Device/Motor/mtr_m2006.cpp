@@ -11,8 +11,6 @@
 
 #include "mtr_m2006.hpp"
 
-#include <stdarg.h>
-
 namespace device {
 
 namespace motor {

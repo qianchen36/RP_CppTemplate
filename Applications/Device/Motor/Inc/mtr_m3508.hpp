@@ -30,7 +30,7 @@ class MTR_M3508_c : public device::motor::MOTOR_c, public comm::COMM_CAN_Node_c
 {
 protected:
 
-public:  
+public:
   MTR_M3508_c();
   ~MTR_M3508_c();
 

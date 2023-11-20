@@ -11,8 +11,6 @@
 
 #include "mtr_gm6020.hpp"
 
-#include <stdarg.h>
-
 namespace device {
 
 namespace motor {

@@ -11,8 +11,6 @@
 
 #include "mtr_m3508.hpp"
 
-#include <stdarg.h>
-
 namespace device {
 
 namespace motor {
