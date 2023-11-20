@@ -15,3 +15,6 @@
 # eide template
 *.ept
 *.eide-template
+
+# log files
+/ist
