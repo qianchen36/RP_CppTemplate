@@ -245,7 +245,6 @@ void MOTOR_c::DelMotor(MOTOR_c *mtr)
  * 
  * @param  curAngle Current angle
  * @param  lstAngle Last angle
- * @param  range Range of the angle
  * 
  * @return (int32_t) Round count
  */
@@ -258,14 +257,15 @@ int32_t MOTOR_c::Angle2Posit(int16_t curAngle, int16_t lstAngle)
     return 0;
   
   int16_t error = curAngle - lstAngle;
-  int32_t posit = mtrData.posit;
+  int32_t posit = mtrData.posit + error;
 
   if (ABS(error) > encoderRes_ / 2)
   {
     if (error > 0)
-      posit += error - encoderRes_;
+      posit -= encoderRes_;
     else // error < 0
-      posit += error + encoderRes_;
+      posit += encoderRes_;
+      
   }
 
   return posit;
