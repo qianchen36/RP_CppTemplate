@@ -50,21 +50,6 @@ MOTOR_c::~MOTOR_c()
 
 
 /**
- * @brief  Get the angle sum of the motor
- * 
- * @return (int32_t) Angle sum
- */
-int32_t MOTOR_c::GetAngleSum(void)
-{
-  if (encoderRes_ == NULL)
-    return 0;
-
-  return (mtrData.angle + mtrData.posit * encoderRes_);
-}
-
-
-
-/**
  * @brief  Check the heartbeat of the motor
  * 
  * @return None
@@ -175,7 +160,6 @@ float MOTOR_c::CalcMotorController(uint8_t id, float get, float set)
  * 
  * @param  id Set the controller ID
  * @param  ctrl Handle of the controller
- * 
  * @return None
  */
 void MOTOR_c::AddMotorController(uint8_t id, algo::controller::CONTROLLER_c *ctrl)
@@ -206,7 +190,6 @@ void MOTOR_c::DelMotorController(uint8_t id)
  * @brief  Add a motor to MotorList
  * 
  * @param  mtr Handle of the motor
- * 
  * @return None
  */
 void MOTOR_c::AddMotor(MOTOR_c *mtr)
@@ -225,7 +208,6 @@ void MOTOR_c::AddMotor(MOTOR_c *mtr)
  * @brief  Delete a motor from MotorList
  * 
  * @param  mtr Handle of the motor
- * 
  * @return None
  */
 void MOTOR_c::DelMotor(MOTOR_c *mtr)
@@ -259,13 +241,14 @@ int32_t MOTOR_c::Angle2Posit(int16_t curAngle, int16_t lstAngle)
   int16_t error = curAngle - lstAngle;
   int32_t posit = mtrData.posit + error;
 
+  /* Check zero crossing */
   if (ABS(error) > encoderRes_ / 2)
   {
     if (error > 0)
       posit -= encoderRes_;
     else // error < 0
       posit += encoderRes_;
-      
+
   }
 
   return posit;

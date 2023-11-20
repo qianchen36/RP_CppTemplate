@@ -39,8 +39,6 @@ public:
   MOTOR_c();
   ~MOTOR_c();
 
-  int32_t GetAngleSum(void);
-
   void HeartbeatDevice(void) override;
   MOTOR_c *GetObjectHandler(void) override;
 
