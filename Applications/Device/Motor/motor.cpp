@@ -17,14 +17,29 @@ namespace device {
 
 namespace motor {
 
+/* Motor List */
 std::map<uint8_t, MOTOR_c *> MotorList;
+
+/**
+ * @brief  Construct a new device::motor::MTR_InitParam_s structure
+ * 
+ * @return None
+ */
+_MTR_InitParam::_MTR_InitParam(void)
+{
+  devID   = NULL;
+  devType = DEV_UNDEF;
+  hComm   = nullptr;
+}
+
+
 
 /**
  * @brief  Construct a new device::motor::MOTOR_c object
  * 
  * @return None
  */
-MOTOR_c::MOTOR_c()
+MOTOR_c::MOTOR_c(void)
 {
   devType = DEV_MTR;
   mtrType = MTR_UNDEF;
@@ -41,7 +56,7 @@ MOTOR_c::MOTOR_c()
  * 
  * @return None
  */
-MOTOR_c::~MOTOR_c()
+MOTOR_c::~MOTOR_c(void)
 {
   if (devID != NULL)
     DelMotor(this);
@@ -110,7 +125,7 @@ float MOTOR_c::CalcMotorController(uint8_t id, float set)
     return target;
 
   case MTR_CTRL_POSIT:
-    target = CalcMotorController(MTR_CTRL_POSIT, GetAngleSum(), target);
+    target = CalcMotorController(MTR_CTRL_POSIT, mtrData.posit, target);
     target = CalcMotorController(MTR_CTRL_SPEED, mtrData.speed, target);
     return target;
 
@@ -144,7 +159,7 @@ float MOTOR_c::CalcMotorController(uint8_t id, float set)
  */
 float MOTOR_c::CalcMotorController(uint8_t id, float get, float set)
 {
-  if (id == NULL)
+  if (id == NULL || devState == DEV_OFFLINE)
     return 0;
 
   if (!mtrCtrlList.count(id))

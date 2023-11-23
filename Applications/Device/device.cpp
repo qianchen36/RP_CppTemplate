@@ -17,6 +17,19 @@ namespace device {
 std::map<uint8_t, DEVICE_c *> DeviceList;
 
 /**
+ * @brief  Construct a new device::DEV_InitParam_s structure
+ * 
+ * @return None
+ */
+_DEV_InitParam::_DEV_InitParam(void)
+{
+  devID = NULL;
+  hComm = nullptr;
+}
+
+
+
+/**
  * @brief  Construct a new device::DEVICE_c object
  * 
  * @return None

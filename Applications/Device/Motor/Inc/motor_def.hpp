@@ -13,6 +13,7 @@
 #define __MOTOR_DEF_HPP__
 
 #include "main.h"
+#include "config.hpp"
 
 namespace device {
 

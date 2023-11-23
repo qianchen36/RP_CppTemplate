@@ -19,6 +19,18 @@
 
 namespace device {
 
+typedef struct _DEV_InitParam
+{
+  uint8_t            devID;
+  DEVICE_Type_e      devType;
+  comm::COMM_Type_e *hComm;
+
+  _DEV_InitParam(void);
+
+} DEV_InitParam_s;
+
+
+
 class DEVICE_c
 {
 protected:

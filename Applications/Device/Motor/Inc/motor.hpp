@@ -22,10 +22,24 @@ namespace device {
 
 namespace motor {
 
+typedef struct _MTR_InitParam : _DEV_InitParam
+{
+  MOTOR_Type_e mtrType;
+  uint16_t     encoderResolution;
+  FUNC_STATE_e useStallDetect;
+  uint16_t     maxStallCount;
+
+  _MTR_InitParam(void);
+
+} MTR_InitParam_s;
+
+
+
 class MOTOR_c : public device::DEVICE_c
 {
 protected:
   uint16_t encoderRes_;
+  uint16_t maxStallCnt_;
 
   void AddMotor(MOTOR_c *mtr);
   void DelMotor(MOTOR_c *mtr);
@@ -36,8 +50,8 @@ public:
   MOTOR_Data_s mtrData;
   std::map<uint8_t, algo::controller::CONTROLLER_c *> mtrCtrlList;
 
-  MOTOR_c();
-  ~MOTOR_c();
+  MOTOR_c(void);
+  ~MOTOR_c(void);
 
   void HeartbeatDevice(void) override;
   MOTOR_c *GetObjectHandler(void) override;
