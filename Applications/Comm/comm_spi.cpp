@@ -91,10 +91,8 @@ void COMM_SPI_c::Receive(int interfaceType, ...)
     return;
 
   /* Check comState */
-  if (comState != COMM_IDLE)
+  if (comState != COMM_RUN)
     return;
-
-  comState = COMM_BUSY;
 
   /* Get args */
   va_list args;
@@ -108,7 +106,6 @@ void COMM_SPI_c::Receive(int interfaceType, ...)
   HAL_SPI_Receive((SPI_HandleTypeDef *)hInterface_, pData, size, timeout);
 
   /* Clean up */
-  comState = COMM_IDLE;
   va_end(args);
 }
 
@@ -130,10 +127,8 @@ void COMM_SPI_c::Transmit(int interfaceType, ...)
     return;
 
   /* Check comState */
-  if (comState != COMM_IDLE)
+  if (comState != COMM_RUN)
     return;
-
-  comState = COMM_BUSY;
 
   /* Get args */
   va_list args;
@@ -147,7 +142,6 @@ void COMM_SPI_c::Transmit(int interfaceType, ...)
   HAL_SPI_Transmit((SPI_HandleTypeDef *)hInterface_, pData, size, timeout);
 
   /* Clean up */
-  comState = COMM_IDLE;
   va_end(args);
 }
 

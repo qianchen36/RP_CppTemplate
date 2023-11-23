@@ -83,7 +83,6 @@ void CTRL_PID_c::InitController(int type, ...)
  * @param  type (CTRL_Type_e) Controller type
  * @param  get (float) Get value
  * @param  set (float) Set value
- * 
  * @return None
  */
 float CTRL_PID_c::UpdateController(int type, ...)
@@ -142,13 +141,12 @@ CTRL_PID_c *CTRL_PID_c::GetObjectHandler(void)
  * 
  * @param  get Feedback value
  * @param  set Target value
- * 
  * @return PID controller output
  */
 float CTRL_PID_c::PID_Calculate(float get, float set)
 {
   /* Check type & state */
-  if (pidType == PID_UNDEF || ctrlState != CTRL_IDLE)
+  if (pidType == PID_UNDEF)
     return 0.0f;
 
   switch (pidType)

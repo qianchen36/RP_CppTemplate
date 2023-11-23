@@ -21,7 +21,7 @@ typedef enum
   COMM_RESET,
 
   COMM_STOP,
-  COMM_IDLE,
+  COMM_RUN,
   COMM_BUSY,
 
   COMM_ERROR,

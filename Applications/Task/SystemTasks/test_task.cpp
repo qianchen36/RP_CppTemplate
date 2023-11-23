@@ -48,18 +48,18 @@ extern "C" void StartTestTask(void *argument)
 
   algo::controller::CTRL_PID_Params_t sCtrlConfig = {
     .pidType = algo::controller::PID_SPEED,
-    .Kp = 1.0f,
-    .Ki = 0.0f,
+    .Kp = 0.0f,
+    .Ki = 10.0f,
     .Kd = 0.0f,
     .deadBand = 0,
-    .maxOutput = 10000,
-    .maxIntegral = 10000,
+    .maxOutput = 20000,
+    .maxIntegral = 20000,
   };
   ctrl_GM6020.InitController(1, &sCtrlConfig);
 
   device::motor::MTR_GM6020_InitParam_s sGM6020Config = {
     // .encoderResolution = 8192,
-    .canReceiveStdID   = 0x206,
+    .canReceiveStdID   = 0x205,
   };
   mtr_GM6020.InitDevice(1, &comm_CAN, &sGM6020Config);
   mtr_GM6020.AddMotorController(device::motor::MTR_CTRL_SPEED, &ctrl_GM6020);
@@ -79,7 +79,7 @@ extern "C" void StartTestTask(void *argument)
     uint16_t target = mtr_GM6020.CalcMotorController(device::motor::MTR_CTRL_SPEED, 100);
     data[0] = target >> 8;
     data[1] = target;
-    comm_CAN.Transmit(comm::COMM_CAN, 0x201, data);
+    comm_CAN.Transmit(comm::COMM_CAN, 0x1FF, data);
 
     osDelay(1);
   }

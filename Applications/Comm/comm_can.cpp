@@ -87,10 +87,8 @@ void COMM_CAN_c::Receive(int interfaceType, ...)
     return;
 
   /* Check comState */
-  if (comState != COMM_IDLE)
+  if (comState != COMM_RUN)
     return;
-
-  comState = COMM_BUSY;
 
   /* Get CAN handler from variable args */
   va_list args;
@@ -113,7 +111,6 @@ void COMM_CAN_c::Receive(int interfaceType, ...)
     canNodeList_[rxDataPack.stdID]->CanNode_ReceiveCallback(&rxDataPack);
 
   /* Clean up */
-  comState = COMM_IDLE;
   va_end(args);
 }
 
@@ -134,10 +131,8 @@ void COMM_CAN_c::Transmit(int interfaceType, ...)
     return;
 
   /* Check comState */
-  if (comState != COMM_IDLE)
+  if (comState != COMM_RUN)
     return;
-
-  comState = COMM_BUSY;
 
   /* Get CAN datapack from variable args */
   va_list args;
@@ -159,7 +154,6 @@ void COMM_CAN_c::Transmit(int interfaceType, ...)
   HAL_CAN_AddTxMessage((CAN_HandleTypeDef *)hInterface_, &TxHeader, data, &TxMailbox);
 
   /* Clean up */
-  comState = COMM_IDLE;
   va_end(args);
 }
 
@@ -172,11 +166,11 @@ void COMM_CAN_c::Transmit(int interfaceType, ...)
  */
 void COMM_CAN_c::Start(void)
 {
-  if (comState == COMM_RESET)
+  if (comState != COMM_STOP)
     return;
 
   HAL_CAN_Start((CAN_HandleTypeDef *)hInterface_);
-  comState = COMM_IDLE;
+  comState = COMM_RUN;
 }
 
 
