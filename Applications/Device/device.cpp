@@ -21,7 +21,7 @@ std::map<uint8_t, DEVICE_c *> DeviceList;
  * 
  * @return None
  */
-_DEV_InitParam::_DEV_InitParam(void)
+_DEV_InitParam::_DEV_InitParam()
 {
   devID = NULL;
   hComm = nullptr;

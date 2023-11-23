@@ -50,8 +50,8 @@ public:
   MOTOR_Data_s mtrData;
   std::map<uint8_t, algo::controller::CONTROLLER_c *> mtrCtrlList;
 
-  MOTOR_c(void);
-  ~MOTOR_c(void);
+  MOTOR_c();
+  ~MOTOR_c();
 
   void HeartbeatDevice(void) override;
   MOTOR_c *GetObjectHandler(void) override;

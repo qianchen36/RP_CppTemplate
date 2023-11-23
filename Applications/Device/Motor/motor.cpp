@@ -39,7 +39,7 @@ _MTR_InitParam::_MTR_InitParam(void)
  * 
  * @return None
  */
-MOTOR_c::MOTOR_c(void)
+MOTOR_c::MOTOR_c()
 {
   devType = DEV_MTR;
   mtrType = MTR_UNDEF;
@@ -56,7 +56,7 @@ MOTOR_c::MOTOR_c(void)
  * 
  * @return None
  */
-MOTOR_c::~MOTOR_c(void)
+MOTOR_c::~MOTOR_c()
 {
   if (devID != NULL)
     DelMotor(this);
@@ -77,6 +77,9 @@ void MOTOR_c::HeartbeatDevice(void)
   if (HAL_GetTick() - lastHartbeatTime_ > 50)   // 50ms
   {
     devState = DEV_OFFLINE;
+
+    for (auto &it : mtrCtrlList)
+      it.second->ResetController();
 
     return;
   }
