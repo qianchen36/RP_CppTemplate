@@ -46,6 +46,9 @@
                 "path": "Applications/Comm/comm_spi.cpp"
               },
               {
+                "path": "Applications/Comm/comm_uart.cpp"
+              },
+              {
                 "path": "Applications/Comm/comm.cpp"
               }
             ],
@@ -245,6 +248,15 @@
                 "files": [],
                 "folders": [
                   {
+                    "name": "App",
+                    "files": [
+                      {
+                        "path": "Boards/Dbldeck_MasterCtrl/FATFS/App/fatfs.c"
+                      }
+                    ],
+                    "folders": []
+                  },
+                  {
                     "name": "Target",
                     "files": [
                       {
@@ -255,15 +267,6 @@
                       },
                       {
                         "path": "Boards/Dbldeck_MasterCtrl/FATFS/Target/fatfs_platform.c"
-                      }
-                    ],
-                    "folders": []
-                  },
-                  {
-                    "name": "App",
-                    "files": [
-                      {
-                        "path": "Boards/Dbldeck_MasterCtrl/FATFS/App/fatfs.c"
                       }
                     ],
                     "folders": []
@@ -663,12 +666,13 @@
         },
         "options": "null"
       },
-      "uploader": "OpenOCD",
+      "uploader": "pyOCD",
       "uploadConfig": {
         "bin": "",
-        "target": "stm32f4x",
-        "interface": "cmsis-dap",
-        "baseAddr": "0x08000000"
+        "targetName": "stm32f407vetx",
+        "baseAddr": "0x08000000",
+        "speed": "8M",
+        "config": ".eide/debug.pyocd.yaml"
       },
       "uploadConfigMap": {
         "JLink": {

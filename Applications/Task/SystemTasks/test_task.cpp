@@ -13,15 +13,17 @@
 
 #include "comm_can.hpp"
 #include "ctrl_pid.hpp"
-#include "mtr_gm6020.hpp"
 #include "mtr_m2006.hpp"
+#include "mtr_m3508.hpp"
 
-uint8_t FLAG_softReset = 0;
-comm::COMM_CAN_c comm_CAN;
-algo::controller::CTRL_PID_c ctrl_GM6020;
-device::motor::MTR_GM6020_c mtr_GM6020;
-algo::controller::CTRL_PID_c ctrl_M2006;
-device::motor::MTR_M2006_c mtr_M2006;
+comm::COMM_CAN_c             comm_CAN;
+device::motor::MTR_M2006_c   mtr_1;
+device::motor::MTR_M2006_c   mtr_2;
+device::motor::MTR_M2006_c   mtr_3;
+device::motor::MTR_M2006_c   mtr_4;
+device::motor::MTR_M2006_c   mtr_5;
+device::motor::MTR_M3508_c   mtr_6;
+device::motor::MTR_M3508_c   mtr_7;
 
 namespace task {
 
@@ -46,55 +48,45 @@ extern "C" void StartTestTask(void *argument)
   comm_CAN.InitComm(1, &hcan1, &sCanConfig);
   comm_CAN.Start();
 
-  /* GM6020 Init */
-  algo::controller::CTRL_PID_Params_t sGM6020CtrlConfig = {
-    .pidType = algo::controller::PID_SPEED,
-    .Kp = 0.0f,
-    .Ki = 10.0f,
-    .Kd = 0.0f,
-    .deadBand = 0,
-    .maxOutput = 20000,
-    .maxIntegral = 20000,
-  };
-  ctrl_GM6020.InitController(algo::controller::CTRL_PID, &sGM6020CtrlConfig);
-
-  device::motor::MTR_GM6020_InitParam_s sGM6020MtrConfig = {
-    // .encoderResolution = 8192,
-    .canReceiveStdID   = 0x205,
-  };
-  mtr_GM6020.InitDevice(1, &comm_CAN, &sGM6020MtrConfig);
-  mtr_GM6020.AddMotorController(device::motor::MTR_CTRL_SPEED, &ctrl_GM6020);
-
-  /* M2006 Init */
-  algo::controller::CTRL_PID_Params_t sM2006CtrlConfig = {
-    .pidType = algo::controller::PID_SPEED,
-    .Kp = 1.64f,
-    .Ki = 0.00686f,
-    .Kd = 0.82f,
-    .deadBand = 0,
-    .maxOutput = 25000,
-    .maxIntegral = 25000,
-  };
-  ctrl_M2006.InitController(algo::controller::CTRL_PID, &sM2006CtrlConfig);
-
-  device::motor::MTR_M2006_InitParam_s sM2006MtrConfig = {
-    // .encoderResolution = 8192,
+  /* Mtr Init */
+  device::motor::MTR_M2006_InitParam_s sMtr01Config = {
     .canReceiveStdID   = 0x201,
   };
-  mtr_M2006.InitDevice(2, &comm_CAN, &sM2006MtrConfig);
-  mtr_M2006.AddMotorController(device::motor::MTR_CTRL_SPEED, &ctrl_M2006);
+  mtr_1.InitDevice(1, &comm_CAN, &sMtr01Config);
+
+  device::motor::MTR_M2006_InitParam_s sMtr02Config = {
+    .canReceiveStdID   = 0x202,
+  };
+  mtr_2.InitDevice(2, &comm_CAN, &sMtr02Config);
+
+  device::motor::MTR_M2006_InitParam_s sMtr03Config = {
+    .canReceiveStdID   = 0x203,
+  };
+  mtr_3.InitDevice(3, &comm_CAN, &sMtr03Config);
+
+  device::motor::MTR_M2006_InitParam_s sMtr04Config = {
+    .canReceiveStdID   = 0x204,
+  };
+  mtr_4.InitDevice(4, &comm_CAN, &sMtr04Config);
+
+  device::motor::MTR_M2006_InitParam_s sMtr05Config = {
+    .canReceiveStdID   = 0x205,
+  };
+  mtr_5.InitDevice(5, &comm_CAN, &sMtr05Config);
+
+  device::motor::MTR_M3508_InitParam_s sMtr06Config = {
+    .canReceiveStdID   = 0x206,
+  };
+  mtr_6.InitDevice(6, &comm_CAN, &sMtr06Config);
+
+  device::motor::MTR_M3508_InitParam_s sMtr07Config = {
+    .canReceiveStdID   = 0x207,
+  };
+  mtr_7.InitDevice(7, &comm_CAN, &sMtr07Config);
 
   while (1)
   {
-    mtr_GM6020.HeartbeatDevice();
-    mtr_M2006.HeartbeatDevice();
-
-    uint8_t data[8] = {0};
-    int16_t target1 = mtr_GM6020.CalcMotorController(device::motor::MTR_CTRL_SPEED, 100);
-    int16_t target2 = mtr_M2006.CalcMotorController(device::motor::MTR_CTRL_SPEED, 3000);
-    data[0] = target2 >> 8;
-    data[1] = target2;
-    comm_CAN.Transmit(comm::COMM_CAN, 0x200, data);
+    device::DEVICE_Heartbeat();
 
     osDelay(1);
   }

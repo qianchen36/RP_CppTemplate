@@ -88,7 +88,7 @@ public:
   CTRL_PID_c();
   ~CTRL_PID_c();
 
-  void InitController(int type, ...) override;
+  void InitController(void *pStruct) override;
   float UpdateController(int type, ...) override;
   void ResetController(void) override;
   CTRL_PID_c *GetObjectHandler(void) override;

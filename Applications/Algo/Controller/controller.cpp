@@ -43,59 +43,6 @@ CONTROLLER_c::~CONTROLLER_c()
 
 
 /**
- * @brief  Initialize the controller
- * 
- * @param  type (CTRL_Type_e) Controller type
- * @param  ... (va_list) Controller parameters
- * 
- * @return None
- */
-void CONTROLLER_c::InitController(int type, ...)
-{
-  ctrlType = (CTRL_Type_e)type;
-
-  va_list args;
-  va_start(args, type);
-
-  va_end(args);
-  ctrlState = CTRL_IDLE;
-}
-
-
-
-/**
- * @brief  Update the controller
- * 
- * @param  type (CTRL_Type_e) Controller type
- * @param  ... (va_list) Controller parameters
- */
-float CONTROLLER_c::UpdateController(int type, ...)
-{
-  if (type != ctrlType)
-    return 0;
-
-  va_list args;
-  va_start(args, type);
-
-  va_end(args);
-  return 0;
-}
-
-
-
-/**
- * @brief  Reset the controller
- * 
- * @return None
- */
-void CONTROLLER_c::ResetController(void)
-{
-
-}
-
-
-
-/**
  * @brief  Get the controller handler
  * 
  * @return Pointer of the controller object handler

@@ -29,9 +29,9 @@ public:
   CONTROLLER_c();
   ~CONTROLLER_c();
 
-  virtual void InitController(int type, ...);
-  virtual float UpdateController(int type, ...);
-  virtual void ResetController(void);
+  virtual void InitController(void *pStruct) = 0;
+  virtual float UpdateController(int type, ...) = 0;
+  virtual void ResetController(void) = 0;
   virtual CONTROLLER_c *GetObjectHandler(void);
 
 };

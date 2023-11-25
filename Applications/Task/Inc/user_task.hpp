@@ -29,6 +29,12 @@ namespace user_task {
 __weak void StartupUserTasks(void)
 {
   
+  while (1)
+  {
+    
+    osDelay(10);
+  }
+  
 }
 
 } // namespace user_task

@@ -81,7 +81,6 @@ void MOTOR_c::HeartbeatDevice(void)
     for (auto &it : mtrCtrlList)
       it.second->ResetController();
 
-    return;
   }
   else
   {
@@ -194,7 +193,6 @@ void MOTOR_c::AddMotorController(uint8_t id, algo::controller::CONTROLLER_c *ctr
  * @brief  Delete a motor controller
  * 
  * @param  id ID of the controller
- * 
  * @return None
  */
 void MOTOR_c::DelMotorController(uint8_t id)
@@ -245,7 +243,6 @@ void MOTOR_c::DelMotor(MOTOR_c *mtr)
  * 
  * @param  curAngle Current angle
  * @param  lstAngle Last angle
- * 
  * @return (int32_t) Round count
  */
 int32_t MOTOR_c::Angle2Posit(int16_t curAngle, int16_t lstAngle)

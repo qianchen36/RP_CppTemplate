@@ -49,29 +49,20 @@ CTRL_PID_c::~CTRL_PID_c()
 /**
  * @brief  Initialize the PID controller
  * 
- * @param  type (CTRL_Type_e) Controller type
- * @param  sParm (CTRL_PID_Params_t *) PID controller parameters structure
- * 
+ * @param  pStruct (CTRL_PID_Params_t *) PID controller parameters structure
  * @return None
  */
-void CTRL_PID_c::InitController(int type, ...)
+void CTRL_PID_c::InitController(void *pStruct)
 {
-  /* Check type */
-  if (type != CTRL_PID)
+  /* Check ptr */
+  if (pStruct == nullptr)
     return;
 
   /* Get args */
-  va_list args;
-  va_start(args, type);
-
-  auto sParm = va_arg(args, CTRL_PID_Params_t *);
-
-  pidType = sParm->pidType;
-  pidParm = *sParm;
-  // memcpy(&pidParm, sParm, sizeof(pidParm));
+  pidType = ((CTRL_PID_Params_t *)pStruct)->pidType;
+  pidParm = *((CTRL_PID_Params_t *)pStruct);
 
   /* Clean up */
-  va_end(args);
   ctrlState = CTRL_IDLE;
 }
 
@@ -83,7 +74,7 @@ void CTRL_PID_c::InitController(int type, ...)
  * @param  type (CTRL_Type_e) Controller type
  * @param  get (float) Get value
  * @param  set (float) Set value
- * @return None
+ * @return (float) Controller output
  */
 float CTRL_PID_c::UpdateController(int type, ...)
 {
@@ -115,7 +106,7 @@ float CTRL_PID_c::UpdateController(int type, ...)
 /**
  * @brief  Reset the PID controller
  * 
- * @retval None 
+ * @return None 
  */
 void CTRL_PID_c::ResetController(void)
 {

@@ -1,0 +1,423 @@
+/**
+ * @file    comm_uart.cpp
+ * @author  Morthine Xiang (xiang@morthine.com)
+ * @brief 
+ * @version 1.0
+ * @date    2023-11-24
+ * 
+ * @copyright Copyright (c) 2023
+ * 
+ */
+
+#include "comm_uart.hpp"
+
+#include <stdarg.h>
+
+namespace comm {
+
+/**
+ * @brief Construct a new comm::COMM_UART_c object
+ * 
+ */
+COMM_UART_c::COMM_UART_c()
+{
+  comType = COMM_UART;
+}
+
+
+
+/**
+ * @brief  Initialize the UART communication interface
+ * 
+ * @param  id (uint8_t) Set the communicate port ID
+ * @param  hInterface (UART_HandleTypeDef *) Set the handle of the communication interface
+ * @param  pStruct (COMM_UART_InitParam_s *) Set the UART specific parameters
+ * @return None
+ */
+void COMM_UART_c::InitComm(uint8_t id, void *hInterface, ...)
+{
+  /* Check id and hInterface */
+  if (id == NULL || hInterface == nullptr)
+    return;
+
+  Stop();
+
+  /* Clear buffer */
+  for (auto it : rxBuffer_)
+    DeleteBuffer(it);
+
+  rxBuffer_.clear();
+
+  for (auto it : txBuffer_)
+    DeleteBuffer(it);
+
+  txBuffer_.clear();
+
+  /* Get args */
+  va_list args;
+  va_start(args, hInterface);
+
+  comID            = id;
+  hInterface_      = hInterface;
+  useAutoReceive_  = DISABLE;
+  useAutoTransmit_ = DISABLE;
+
+  auto pStruct = va_arg(args, COMM_UART_InitParam_s *);
+
+  if (pStruct->useAutoReceive == ENABLE)  // Use DMA to receive data
+  {
+    useAutoReceive_ = ENABLE;
+
+    for (uint16_t i = 0; i < pStruct->rxBufferCount; i++)
+    {
+      auto pBuffer = CreateBuffer(pStruct->rxBufferSize);
+      rxBuffer_.push_back(pBuffer);
+    }
+
+  }
+
+  if (pStruct->useAutoTransmit == ENABLE) // Use DMA to transmit data
+  {
+    useAutoTransmit_ = ENABLE;
+    txQueueLength_   = pStruct->txQueueLength;
+
+  }
+
+  /* Update iterator */
+  rxBufferIt_ = rxBuffer_.begin();
+  txBufferIt_ = txBuffer_.begin();
+
+  /* Clean up */
+  va_end(args);
+  comState = COMM_STOP;
+}
+
+
+
+/**
+ * @brief  Get the object handler
+ * 
+ * @return (COMM_UART_c*) Pointer to the object handler
+ */
+COMM_UART_c *COMM_UART_c::GetObjectHandler(void)
+{ return this; }
+
+
+
+/**
+ * @brief  Receive data from UART interface
+ * 
+ * @param  interfaceType Set the interface type
+ * @param  pData Pointer to the data buffer
+ * @param  len Length of the data buffer
+ * @return None
+ * 
+ * @note   You should not call this function,
+ *         when using auto receive mode.
+ */
+void COMM_UART_c::Receive(int interfaceType, ...)
+{
+  /* Check comState */
+  if (comState == COMM_STOP)
+    return;
+
+  if (useAutoReceive_ == ENABLE)
+    return;
+
+  /* Get args */
+  va_list args;
+  va_start(args, interfaceType);
+
+  auto pData = va_arg(args, uint8_t *);
+  auto len = va_arg(args, int);
+
+  /* Receive data */
+  HAL_UART_Receive((UART_HandleTypeDef *)hInterface_, pData, len, 1000);
+    
+  /* Clean up */
+  va_end(args);
+}
+
+
+
+/**
+ * @brief  Transmit data through UART interface
+ * 
+ * @param interfaceType (COMM_Type_e) Type of the interface
+ * @param pData (uint8_t *) Data pack to be transmitted
+ * @param len (uint16_t) Length of the data pack
+ * @return None
+ */
+void COMM_UART_c::Transmit(int interfaceType, ...)
+{
+  /* Check comState */
+  if (comState == COMM_STOP)
+    return;
+
+  /* Get args */
+  va_list args;
+  va_start(args, interfaceType);
+
+  auto pData = va_arg(args, uint8_t *);
+  auto len = va_arg(args, int);
+
+  if (useAutoTransmit_) // Use DMA to transmit data
+  {
+    if (txBuffer_.size() >= txQueueLength_)
+    {
+      va_end(args);
+      return;
+    }
+
+    /* Add datapack to transmit queue */
+    auto *pBuffer = CreateBuffer(len);
+    memcpy(pBuffer->pData, pData, len);
+    txBuffer_.push_back(pBuffer);
+
+    /* Start DMA transmit */
+    if (txBuffer_.size() == 1)
+    {
+      txBufferIt_ = txBuffer_.begin();
+      HAL_UART_Transmit_DMA((UART_HandleTypeDef *)hInterface_, (*txBufferIt_)->pData, (*txBufferIt_)->len);
+    }
+
+    /* Clean up */
+    va_end(args);
+    return;
+  }
+
+  /* Transmit data normally */
+  HAL_UART_Transmit((UART_HandleTypeDef *)hInterface_, pData, len, 1000);
+
+  /* Clean up */
+  va_end(args);
+}
+
+
+
+/**
+ * @brief  Start the UART interface auto receive
+ * 
+ * @return None
+ */
+void COMM_UART_c::Start(void)
+{
+  if (comState != COMM_STOP || useAutoReceive_ != ENABLE)
+    return;
+
+  HAL_UARTEx_ReceiveToIdle_DMA((UART_HandleTypeDef *)hInterface_, (*rxBufferIt_)->pData, (*rxBufferIt_)->len);
+  
+  comState = COMM_RUN;
+}
+
+
+
+/**
+ * @brief  Stop the UART interface auto receive & transmit
+ * 
+ * @return None
+ */
+void COMM_UART_c::Stop(void)
+{
+  if (comState != COMM_RUN)
+    return;
+
+  HAL_UART_DMAStop((UART_HandleTypeDef *)hInterface_);
+
+  comState = COMM_STOP;
+}
+
+
+
+/**
+ * @brief  Add a UART node to auto receive callback list
+ * 
+ * @param node (COMM_UART_Node_c *) Pointer to the UART node
+ * @return None
+ */
+void COMM_UART_c::AddUartNode(COMM_UART_Node_c *node)
+{
+  if (node == nullptr)
+    return;
+
+  for (auto it : uartNodeList_)
+  {
+    if (it == node)
+      return;
+
+  }
+
+  uartNodeList_.push_back(node);
+}
+
+
+
+/**
+ * @brief  Delete a UART node from auto receive callback list
+ * 
+ * @param node (COMM_UART_Node_c *) Pointer to the UART node
+ * @return None
+ */
+void COMM_UART_c::DelUartNode(COMM_UART_Node_c *node)
+{
+  if (node == nullptr)
+    return;
+
+  for (auto it : uartNodeList_)
+  {
+    if (it == node)
+    {
+      uartNodeList_.remove(it);
+      return;
+    }
+
+  }
+
+}
+
+
+
+/**
+ * @brief  UART auto receive callback
+ * 
+ * @param  huart (UART_HandleTypeDef *) Pointer to the UART handler
+ * @param  size (uint16_t) Size of the received data
+ * @return None
+ */
+void COMM_UART_c::UartAutoReceiveCallback(UART_HandleTypeDef *huart, uint16_t size)
+{
+  if (comState != COMM_RUN || useAutoReceive_ != ENABLE)
+    return;
+
+  /* Resum DMA receive */
+  auto pDataPack = *rxBufferIt_;
+  rxBufferIt_++;
+
+  if (rxBufferIt_ == rxBuffer_.end())
+    rxBufferIt_ = rxBuffer_.begin();
+
+  HAL_UARTEx_ReceiveToIdle_DMA((UART_HandleTypeDef *)hInterface_, (*rxBufferIt_)->pData, (*rxBufferIt_)->len);
+
+  /* Notify all nodes */
+  for (auto it : uartNodeList_)
+    it->UartNode_ReceiveCallback(pDataPack->pData, size);
+
+  /* Clean up */
+  memset(pDataPack->pData, 0, pDataPack->len);
+}
+
+
+
+/**
+ * @brief  UART auto transmit callback
+ * 
+ * @param  huart (UART_HandleTypeDef *) Pointer to the UART handler
+ * @return None
+ */
+void COMM_UART_c::UartAutoTransmitCallback(UART_HandleTypeDef *huart)
+{
+  if (comState != COMM_RUN || useAutoTransmit_ != ENABLE)
+    return;
+
+  /* Resum DMA transmit */
+  auto lastBufferIt = txBufferIt_;
+  txBufferIt_++;
+
+  if (txBufferIt_ != txBuffer_.end())
+    HAL_UART_Transmit_DMA((UART_HandleTypeDef *)hInterface_, (*txBufferIt_)->pData, (*txBufferIt_)->len);
+
+  /* Clean up */
+  DeleteBuffer(*lastBufferIt);
+  txBuffer_.erase(lastBufferIt);
+
+}
+
+
+
+/**
+ * @brief  Create a new buffer
+ * 
+ * @param  size (uint16_t) Size of the buffer
+ * @return (COMM_UART_Buffer_s*) Pointer to the buffer
+ */
+COMM_UART_Buffer_s *COMM_UART_c::CreateBuffer(uint16_t size)
+{
+  auto *pBuffer = new COMM_UART_Buffer_s;
+
+  pBuffer->len = size;
+  pBuffer->pData = new uint8_t[size];
+  memset(pBuffer->pData, 0, size);
+
+  return pBuffer;
+}
+
+
+
+/**
+ * @brief  Delete a buffer
+ * 
+ * @param  pBuffer (COMM_UART_Buffer_s *) Pointer to the buffer
+ * @return None
+ */
+void COMM_UART_c::DeleteBuffer(COMM_UART_Buffer_s *pBuffer)
+{
+  if (pBuffer == nullptr)
+    return;
+
+  delete pBuffer->pData;
+  delete pBuffer;
+}
+
+} // namespace comm
+
+
+
+extern "C" {
+
+/**
+ * @brief  Override the HAL_UARTEx_RxEventCallback
+ * 
+ * @param  huart (UART_HandleTypeDef *) Pointer to the UART handler
+ * @param  len (uint16_t) Length of the received data
+ */
+void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t len)
+{
+  for (auto it : comm::CommList)
+  {
+    if (it.second->GetInterfaceHandler() == huart)
+    {
+      auto *pComm = (comm::COMM_UART_c *)it.second;
+      pComm->UartAutoReceiveCallback(huart, len);
+
+      break;
+    }
+
+  }
+
+}
+
+
+
+/**
+ * @brief  Override the HAL_UART_TxCpltCallback
+ * 
+ * @param  huart (UART_HandleTypeDef *) Pointer to the UART handler
+ * @return None
+ */
+void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
+{
+  for (auto it : comm::CommList)
+  {
+    if (it.second->GetInterfaceHandler() == huart)
+    {
+      auto *pComm = (comm::COMM_UART_c *)it.second;
+      pComm->UartAutoTransmitCallback(huart);
+
+      break;
+    }
+
+  }
+
+}
+
+} // extern "C"
