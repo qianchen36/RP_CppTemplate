@@ -12,11 +12,14 @@
 #include "system_task.hpp"
 
 #include "comm_can.hpp"
+#include "comm_uart.hpp"
 #include "ctrl_pid.hpp"
+#include "rc_dr16.hpp"
 #include "mtr_m2006.hpp"
 #include "mtr_m3508.hpp"
 
 comm::COMM_CAN_c             comm_CAN;
+comm::COMM_UART_c            comm_UART;
 device::motor::MTR_M2006_c   mtr_1;
 device::motor::MTR_M2006_c   mtr_2;
 device::motor::MTR_M2006_c   mtr_3;
@@ -24,6 +27,9 @@ device::motor::MTR_M2006_c   mtr_4;
 device::motor::MTR_M2006_c   mtr_5;
 device::motor::MTR_M3508_c   mtr_6;
 device::motor::MTR_M3508_c   mtr_7;
+device::rc::RC_DR16_c        rc_dr16;
+
+device::rc::RC_ChData_s rcData[device::rc::DR16_CH_NUM];
 
 namespace task {
 
@@ -33,6 +39,7 @@ osThreadId_t testTaskHandle;
 
 extern "C" void StartTestTask(void *argument)
 {
+  /* Comm init */
   comm::COMM_CAN_InitParam_s sCanConfig = {
     .FilterIdHigh         = 0x0000,
     .FilterIdLow          = 0x0000,
@@ -48,7 +55,19 @@ extern "C" void StartTestTask(void *argument)
   comm_CAN.InitComm(1, &hcan1, &sCanConfig);
   comm_CAN.Start();
 
-  /* Mtr Init */
+  comm::COMM_UART_InitParam_s sUartConfig = {
+    .useAutoReceive = ENABLE,
+    .rxBufferSize   = 200,
+    .rxBufferCount  = 2,
+    .useAutoTransmit= DISABLE,
+  };
+  comm_UART.InitComm(2, &huart2, &sUartConfig);
+  comm_UART.Start();
+
+  /* RC init */
+  rc_dr16.InitDevice(1, &comm_UART, nullptr);
+
+  /* Mtr init */
   device::motor::MTR_M2006_InitParam_s sMtr01Config = {
     .canReceiveStdID   = 0x201,
   };
@@ -87,6 +106,9 @@ extern "C" void StartTestTask(void *argument)
   while (1)
   {
     device::DEVICE_Heartbeat();
+
+    for (uint8_t i = 0; i < device::rc::DR16_CH_NUM; i++)
+      rcData[i] = rc_dr16.rcData[i];
 
     osDelay(1);
   }

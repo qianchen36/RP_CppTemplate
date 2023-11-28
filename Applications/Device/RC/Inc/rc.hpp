@@ -1,0 +1,44 @@
+/**
+ * @file    rc.hpp
+ * @author  Morthine Xiang (xiang@morthine.com)
+ * @brief 
+ * @version 1.0
+ * @date    2023-11-25
+ * 
+ * @copyright Copyright (c) 2023
+ * 
+ */
+
+#ifndef __RC_HPP__
+#define __RC_HPP__
+
+#include "rc_def.hpp"
+#include "device.hpp"
+
+#include <map>
+
+namespace device {
+
+namespace rc {
+
+class RC_c : public DEVICE_c
+{
+protected:
+
+public:
+  RC_Type_e    rcType;
+  RC_ChData_s *rcData;
+
+  RC_c();
+  ~RC_c();
+
+  // void HeartbeatDevice(void) override;
+  RC_c *GetObjectHandler(void) override;
+
+};
+
+} // namespace rc
+
+} // namespace device
+
+#endif // __RC_HPP__

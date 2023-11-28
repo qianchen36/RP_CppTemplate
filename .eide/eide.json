@@ -125,6 +125,18 @@
                   }
                 ],
                 "folders": []
+              },
+              {
+                "name": "RC",
+                "files": [
+                  {
+                    "path": "Applications/Device/RC/rc_dr16.cpp"
+                  },
+                  {
+                    "path": "Applications/Device/RC/rc.cpp"
+                  }
+                ],
+                "folders": []
               }
             ]
           },
@@ -666,13 +678,12 @@
         },
         "options": "null"
       },
-      "uploader": "pyOCD",
+      "uploader": "OpenOCD",
       "uploadConfig": {
         "bin": "",
-        "targetName": "stm32f407vetx",
-        "baseAddr": "0x08000000",
-        "speed": "8M",
-        "config": ".eide/debug.pyocd.yaml"
+        "target": "stm32f4x",
+        "interface": "cmsis-dap",
+        "baseAddr": "0x08000000"
       },
       "uploadConfigMap": {
         "JLink": {
@@ -691,17 +702,44 @@
           "target": "stm32f4x",
           "interface": "cmsis-dap",
           "baseAddr": "0x08000000"
+        },
+        "pyOCD": {
+          "bin": "",
+          "targetName": "stm32f407vetx",
+          "baseAddr": "0x08000000",
+          "speed": "8M",
+          "config": ".eide/debug.pyocd.yaml"
+        },
+        "STLink": {
+          "bin": "",
+          "proType": "SWD",
+          "resetMode": "default",
+          "runAfterProgram": true,
+          "speed": 4000,
+          "address": "0x08000000",
+          "elFile": "None",
+          "optionBytes": ".eide/debug.st.option.bytes.ini",
+          "otherCmds": ""
         }
       },
       "custom_dep": {
         "name": "default",
         "incList": [
           ".eide/deps",
+          "Applications/Algo/Inc",
+          "Applications/Algo/Filter/Inc",
+          "Applications/Algo/Controller/Inc",
           "Applications/Comm/Inc",
           "Applications/Config/Inc",
           "Applications/Device/Inc",
+          "Applications/Device/RC/Inc",
+          "Applications/Device/Motor/Inc",
+          "Applications/Device/IMU/Inc",
+          "Applications/Device/IMU/Driver",
           "Applications/Module/Inc",
+          "Applications/Task/Inc",
           "Boards/Dbldeck_MasterCtrl/Core/Inc",
+          "Boards/Dbldeck_MasterCtrl/BSP/Inc",
           "Boards/Dbldeck_MasterCtrl/FATFS/Target",
           "Boards/Dbldeck_MasterCtrl/FATFS/App",
           "Boards/Dbldeck_MasterCtrl/USB_DEVICE/App",
@@ -717,16 +755,8 @@
           "Middlewares/FreeRTOS/Source/portable/GCC/ARM_CM4F",
           "Middlewares/STM32_USB_Device_Library/Core/Inc",
           "Middlewares/STM32_USB_Device_Library/Class/CDC/Inc",
-          "Applications/Device/Motor/Inc",
-          "Applications/Device/IMU/Inc",
           "Middlewares/CMSIS_DSP/Include",
-          "Middlewares/CMSIS_DSP/PrivateInclude",
-          "Applications/Device/IMU/Driver",
-          "Boards/Dbldeck_MasterCtrl/BSP/Inc",
-          "Applications/Algo/Controller/Inc",
-          "Applications/Algo/Filter/Inc",
-          "Applications/Algo/Inc",
-          "Applications/Task/Inc"
+          "Middlewares/CMSIS_DSP/PrivateInclude"
         ],
         "libList": [],
         "sourceDirList": [],
@@ -800,12 +830,19 @@
         "incList": [
           ".eide/deps",
           "Applications/Algo/Inc",
+          "Applications/Algo/Filter/Inc",
+          "Applications/Algo/Controller/Inc",
           "Applications/Comm/Inc",
           "Applications/Config/Inc",
           "Applications/Device/Inc",
+          "Applications/Device/RC/Inc",
+          "Applications/Device/Motor/Inc",
+          "Applications/Device/IMU/Inc",
+          "Applications/Device/IMU/Driver",
           "Applications/Module/Inc",
-          "Applications/UserTask/Inc",
+          "Applications/Task/Inc",
           "Boards/Dbldeck_MasterCtrl/Core/Inc",
+          "Boards/Dbldeck_MasterCtrl/BSP/Inc",
           "Boards/Dbldeck_MasterCtrl/FATFS/Target",
           "Boards/Dbldeck_MasterCtrl/FATFS/App",
           "Boards/Dbldeck_MasterCtrl/USB_DEVICE/App",
@@ -820,7 +857,9 @@
           "Middlewares/FreeRTOS/Source/CMSIS_RTOS_V2",
           "Middlewares/FreeRTOS/Source/portable/GCC/ARM_CM4F",
           "Middlewares/STM32_USB_Device_Library/Core/Inc",
-          "Middlewares/STM32_USB_Device_Library/Class/CDC/Inc"
+          "Middlewares/STM32_USB_Device_Library/Class/CDC/Inc",
+          "Middlewares/CMSIS_DSP/Include",
+          "Middlewares/CMSIS_DSP/PrivateInclude"
         ],
         "libList": [],
         "sourceDirList": [],

@@ -87,6 +87,8 @@ void COMM_UART_c::InitComm(uint8_t id, void *hInterface, ...)
   rxBufferIt_ = rxBuffer_.begin();
   txBufferIt_ = txBuffer_.begin();
 
+  AddCommPort(this);
+
   /* Clean up */
   va_end(args);
   comState = COMM_STOP;
@@ -170,7 +172,7 @@ void COMM_UART_c::Transmit(int interfaceType, ...)
     }
 
     /* Add datapack to transmit queue */
-    auto *pBuffer = CreateBuffer(len);
+    auto pBuffer = CreateBuffer(len);
     memcpy(pBuffer->pData, pData, len);
     txBuffer_.push_back(pBuffer);
 
@@ -222,7 +224,7 @@ void COMM_UART_c::Stop(void)
   if (comState != COMM_RUN)
     return;
 
-  HAL_UART_DMAStop((UART_HandleTypeDef *)hInterface_);
+  HAL_UART_Abort((UART_HandleTypeDef *)hInterface_);
 
   comState = COMM_STOP;
 }
@@ -291,9 +293,8 @@ void COMM_UART_c::UartAutoReceiveCallback(UART_HandleTypeDef *huart, uint16_t si
 
   /* Resum DMA receive */
   auto pDataPack = *rxBufferIt_;
-  rxBufferIt_++;
 
-  if (rxBufferIt_ == rxBuffer_.end())
+  if (++rxBufferIt_ == rxBuffer_.end())
     rxBufferIt_ = rxBuffer_.begin();
 
   HAL_UARTEx_ReceiveToIdle_DMA((UART_HandleTypeDef *)hInterface_, (*rxBufferIt_)->pData, (*rxBufferIt_)->len);
@@ -320,15 +321,12 @@ void COMM_UART_c::UartAutoTransmitCallback(UART_HandleTypeDef *huart)
     return;
 
   /* Resum DMA transmit */
-  auto lastBufferIt = txBufferIt_;
-  txBufferIt_++;
-
-  if (txBufferIt_ != txBuffer_.end())
+  if (++txBufferIt_ != txBuffer_.end())
     HAL_UART_Transmit_DMA((UART_HandleTypeDef *)hInterface_, (*txBufferIt_)->pData, (*txBufferIt_)->len);
 
   /* Clean up */
-  DeleteBuffer(*lastBufferIt);
-  txBuffer_.erase(lastBufferIt);
+  DeleteBuffer(txBuffer_.front());
+  txBuffer_.pop_front();
 
 }
 
@@ -378,16 +376,17 @@ extern "C" {
  * @brief  Override the HAL_UARTEx_RxEventCallback
  * 
  * @param  huart (UART_HandleTypeDef *) Pointer to the UART handler
- * @param  len (uint16_t) Length of the received data
+ * @param  Size (uint16_t) Size of the received data
+ * @return None
  */
-void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t len)
+void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
 {
   for (auto it : comm::CommList)
   {
     if (it.second->GetInterfaceHandler() == huart)
     {
       auto *pComm = (comm::COMM_UART_c *)it.second;
-      pComm->UartAutoReceiveCallback(huart, len);
+      pComm->UartAutoReceiveCallback(huart, Size);
 
       break;
     }

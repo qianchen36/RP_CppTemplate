@@ -16,5 +16,11 @@
 *.ept
 *.eide-template
 
+# keil project
+DebugConfig
+*.uvguix.*
+*.scvd
+*.uvoptx
+
 # log files
 /ist
