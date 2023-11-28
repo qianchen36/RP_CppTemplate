@@ -51,7 +51,6 @@ RC_DR16_c::RC_DR16_c()
 {
   devComm = comm::COMM_UART;
   rcType  = RC_DR16;
-  rcData  = new RC_ChData_s[DR16_CH_NUM];
 
   for (uint8_t i = 0; i < DR16_CH_NUM; i++)
   {
@@ -71,14 +70,12 @@ RC_DR16_c::RC_DR16_c()
  */
 RC_DR16_c::~RC_DR16_c()
 {
-  delete rcData;
-
   if (devID != NULL && hComm_ != nullptr)
   {
     DelDevice(this);
     ((comm::COMM_UART_c *)hComm_)->DelUartNode(this);
   }
-  
+
 }
 
 
@@ -100,7 +97,7 @@ void RC_DR16_c::InitDevice(uint8_t id, comm::COMM_c *hComm, void *pStruct)
   hComm_ = hComm;
   
   AddDevice(this);
-  ((comm::COMM_UART_c *)hComm_)->AddUartNode(this); 
+  ((comm::COMM_UART_c *)hComm_)->AddUartNode(this);
 
   devState = DEV_OFFLINE;
 }
@@ -128,12 +125,6 @@ void RC_DR16_c::UartNode_ReceiveCallback(uint8_t *pData, uint16_t len)
   if (pData == nullptr || len < 18)
     return;
 
-  if (rcData == nullptr)
-    return;
-
-  devState          = DEV_ONLINE;
-  lastHartbeatTime_ = HAL_GetTick();
-
   rcData[DR16_CH_0].chValue           = ((pData[0] | pData[1] << 8) & 0x07FF) - 1024;
   rcData[DR16_CH_1].chValue           = ((pData[1] >> 3 | pData[2] << 5) & 0x07FF) - 1024;
   rcData[DR16_CH_2].chValue           = ((pData[2] >> 6 | pData[3] << 2 | pData[4] << 10) & 0x07FF) - 1024;
@@ -145,6 +136,12 @@ void RC_DR16_c::UartNode_ReceiveCallback(uint8_t *pData, uint16_t len)
   rcData[DR16_CH_MOUSE_Z].chValue     =   pData[10] | pData[11] << 8;
   rcData[DR16_CH_MOUSE_LEFT].chValue  =   pData[12];
   rcData[DR16_CH_MOUSE_RIGHT].chValue =   pData[13];
+  lastHartbeatTime_                   = HAL_GetTick();
+
+  /* Update device status */
+  if (devState == DEV_OFFLINE)
+    devState = DEV_ONLINE;
+
 }
 
 } // namespace rc

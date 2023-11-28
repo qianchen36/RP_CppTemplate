@@ -21,13 +21,25 @@ namespace device {
 
 namespace rc {
 
+class RC_ChData_c
+{
+protected:
+
+public:
+  RC_ChType_e   chType;
+  RC_ChStatus_e chState;
+  int16_t       chValue;
+
+};
+
 class RC_c : public DEVICE_c
 {
 protected:
 
 public:
-  RC_Type_e    rcType;
-  RC_ChData_s *rcData;
+  RC_Type_e rcType;
+  std::map<uint8_t, RC_ChData_c> rcData;
+  // RC_ChData_s *rcData;
 
   RC_c();
   ~RC_c();

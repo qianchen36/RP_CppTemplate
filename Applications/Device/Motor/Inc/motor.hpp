@@ -47,7 +47,7 @@ protected:
 
 public:
   MOTOR_Type_e mtrType;
-  MOTOR_Data_s mtrData;
+  std::map<uint8_t, int16_t> mtrData;
   std::map<uint8_t, algo::controller::CONTROLLER_c *> mtrCtrlList;
 
   MOTOR_c();

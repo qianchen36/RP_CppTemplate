@@ -72,9 +72,6 @@ void MTR_GM6020_c::InitDevice(uint8_t id, comm::COMM_c *hComm, void *pStruct)
   AddMotor(this);
   ((comm::COMM_CAN_c *)hComm_)->AddCanNode(this);
 
-  /* Clean up */
-  memset(&mtrData, 0, sizeof(MOTOR_Data_s));
-
   /* Update status */
   devState  = DEV_OFFLINE;
 }
@@ -103,17 +100,15 @@ void MTR_GM6020_c::CanNode_ReceiveCallback(comm::COMM_CAN_DataPack_s *dataPack)
   if (canStdID_ == NULL || dataPack->stdID != canStdID_)
     return;
 
-  auto lastAngle = mtrData.angle;
+  auto lastAngle = mtrData[MTR_DATA_ANGLE];
 
   /* Unpack datapack */
-  mtrData.angle     = (dataPack->data[0] << 8) | dataPack->data[1];
-  mtrData.speed     = (dataPack->data[2] << 8) | dataPack->data[3];
-  mtrData.voltage   =  NULL;
-  mtrData.current   = (dataPack->data[4] << 8) | dataPack->data[5];
-  mtrData.torque    =  NULL;
-  mtrData.posit     =  Angle2Posit(mtrData.angle, lastAngle);
-  mtrData.temp      =  dataPack->data[6];
-  lastHartbeatTime_ =  dataPack->timeStamp;
+  mtrData[MTR_DATA_ANGLE]   = (dataPack->data[0] << 8) | dataPack->data[1];
+  mtrData[MTR_DATA_SPEED]   = (dataPack->data[2] << 8) | dataPack->data[3];
+  mtrData[MTR_DATA_CURRENT] = (dataPack->data[4] << 8) | dataPack->data[5];
+  mtrData[MTR_DATA_POSIT]   = Angle2Posit(mtrData[MTR_DATA_ANGLE], lastAngle);
+  mtrData[MTR_DATA_TEMP]    = dataPack->data[6];
+  lastHartbeatTime_         = dataPack->timeStamp;
 
   /* Update device status */
   if (devState == DEV_OFFLINE)

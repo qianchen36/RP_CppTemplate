@@ -86,7 +86,7 @@ void MOTOR_c::HeartbeatDevice(void)
   {
     devState = DEV_ONLINE;
 
-    if (mtrData.errCode != MTR_ERR_NONE)
+    if (mtrData[MTR_DATA_ERRCODE] != MTR_ERR_NONE)
       devState = DEV_ERROR;
       
   }
@@ -122,25 +122,25 @@ float MOTOR_c::CalcMotorController(uint8_t id, float set)
   switch (id)
   {
   case MTR_CTRL_ANGLE:
-    target = CalcMotorController(MTR_CTRL_ANGLE, mtrData.angle, target);
-    target = CalcMotorController(MTR_CTRL_SPEED, mtrData.speed, target);
+    target = CalcMotorController(MTR_CTRL_ANGLE, mtrData[MTR_DATA_ANGLE], target);
+    target = CalcMotorController(MTR_CTRL_SPEED, mtrData[MTR_DATA_SPEED], target);
     return target;
 
   case MTR_CTRL_POSIT:
-    target = CalcMotorController(MTR_CTRL_POSIT, mtrData.posit, target);
-    target = CalcMotorController(MTR_CTRL_SPEED, mtrData.speed, target);
+    target = CalcMotorController(MTR_CTRL_POSIT, mtrData[MTR_DATA_POSIT], target);
+    target = CalcMotorController(MTR_CTRL_SPEED, mtrData[MTR_DATA_SPEED], target);
     return target;
 
   case MTR_CTRL_SPEED:
-    target = CalcMotorController(MTR_CTRL_SPEED, mtrData.speed, target);
+    target = CalcMotorController(MTR_CTRL_SPEED, mtrData[MTR_DATA_SPEED], target);
     return target;
 
   case MTR_CTRL_TORQUE:
-    target = CalcMotorController(MTR_CTRL_TORQUE, mtrData.torque, target);
+    target = CalcMotorController(MTR_CTRL_TORQUE, mtrData[MTR_DATA_TORQUE], target);
     return target;
 
   case MTR_CTRL_CURRENT:
-    target = CalcMotorController(MTR_CTRL_CURRENT, mtrData.current, target);
+    target = CalcMotorController(MTR_CTRL_CURRENT, mtrData[MTR_DATA_TORQUE], target);
     return target;
   
   default:
@@ -250,11 +250,11 @@ int32_t MOTOR_c::Angle2Posit(int16_t curAngle, int16_t lstAngle)
   if (encoderRes_ == NULL)
     return 0;
 
-  if (mtrData.posit == 0 && lstAngle == 0)
+  if (mtrData[MTR_DATA_POSIT] == 0 && lstAngle == 0)
     return 0;
   
   int16_t error = curAngle - lstAngle;
-  int32_t posit = mtrData.posit + error;
+  int32_t posit = mtrData[MTR_DATA_POSIT] + error;
 
   /* Check zero crossing */
   if (ABS(error) > encoderRes_ / 2)

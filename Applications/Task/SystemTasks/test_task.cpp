@@ -29,8 +29,6 @@ device::motor::MTR_M3508_c   mtr_6;
 device::motor::MTR_M3508_c   mtr_7;
 device::rc::RC_DR16_c        rc_dr16;
 
-device::rc::RC_ChData_s rcData[device::rc::DR16_CH_NUM];
-
 namespace task {
 
 namespace sys_task {
@@ -106,9 +104,6 @@ extern "C" void StartTestTask(void *argument)
   while (1)
   {
     device::DEVICE_Heartbeat();
-
-    for (uint8_t i = 0; i < device::rc::DR16_CH_NUM; i++)
-      rcData[i] = rc_dr16.rcData[i];
 
     osDelay(1);
   }

@@ -42,17 +42,6 @@ void COMM_UART_c::InitComm(uint8_t id, void *hInterface, ...)
 
   Stop();
 
-  /* Clear buffer */
-  for (auto it : rxBuffer_)
-    DeleteBuffer(it);
-
-  rxBuffer_.clear();
-
-  for (auto it : txBuffer_)
-    DeleteBuffer(it);
-
-  txBuffer_.clear();
-
   /* Get args */
   va_list args;
   va_start(args, hInterface);
@@ -87,6 +76,7 @@ void COMM_UART_c::InitComm(uint8_t id, void *hInterface, ...)
   rxBufferIt_ = rxBuffer_.begin();
   txBufferIt_ = txBuffer_.begin();
 
+  /* Regist comm port */
   AddCommPort(this);
 
   /* Clean up */
@@ -224,7 +214,19 @@ void COMM_UART_c::Stop(void)
   if (comState != COMM_RUN)
     return;
 
+  /* Stop UART interface */
   HAL_UART_Abort((UART_HandleTypeDef *)hInterface_);
+
+  /* Clear buffer */
+  for (auto it : rxBuffer_)
+    DeleteBuffer(it);
+
+  rxBuffer_.clear();
+
+  for (auto it : txBuffer_)
+    DeleteBuffer(it);
+
+  txBuffer_.clear();
 
   comState = COMM_STOP;
 }

@@ -348,31 +348,19 @@
             "name": "STM32F4xx_HAL_Driver",
             "files": [
               {
-                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd.c"
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c"
               },
               {
-                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c"
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c"
               },
               {
-                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c"
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_can.c"
               },
               {
-                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c"
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c"
               },
               {
-                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c"
-              },
-              {
-                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c"
-              },
-              {
-                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c"
-              },
-              {
-                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c"
-              },
-              {
-                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c"
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_crc.c"
               },
               {
                 "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c"
@@ -381,49 +369,49 @@
                 "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c"
               },
               {
-                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c"
-              },
-              {
-                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c"
-              },
-              {
-                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c"
-              },
-              {
-                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c"
-              },
-              {
                 "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c"
               },
               {
-                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c"
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c"
               },
               {
-                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c"
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c"
               },
               {
-                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_adc.c"
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c"
               },
               {
-                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_can.c"
-              },
-              {
-                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_crc.c"
-              },
-              {
-                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c"
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c"
               },
               {
                 "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.c"
               },
               {
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c"
+              },
+              {
                 "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_iwdg.c"
               },
               {
-                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rng.c"
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c"
               },
               {
-                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_sdmmc.c"
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd.c"
+              },
+              {
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c"
+              },
+              {
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c"
+              },
+              {
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c"
+              },
+              {
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c"
+              },
+              {
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rng.c"
               },
               {
                 "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sd.c"
@@ -432,13 +420,25 @@
                 "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.c"
               },
               {
-                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c"
-              },
-              {
                 "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c"
               },
               {
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c"
+              },
+              {
                 "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c"
+              },
+              {
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c"
+              },
+              {
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_adc.c"
+              },
+              {
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_sdmmc.c"
+              },
+              {
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c"
               }
             ],
             "folders": []
@@ -631,8 +631,7 @@
     "debug": {
       "excludeList": [
         "<virtual_root>/Application/Device/IMU/Driver/bmi270/common.c",
-        "<virtual_root>/Board/board.cpp",
-        "<virtual_root>/Board/Dbldeck_MasterCtrl/MDK-ARM/armlib_lock_glue.c"
+        "<virtual_root>/Board/board.cpp"
       ],
       "toolchain": "AC6",
       "compileConfig": {

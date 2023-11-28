@@ -24,7 +24,6 @@ RC_c::RC_c()
 {
   devType = DEV_RC;
   rcType  = RC_UNDEF;
-  rcData  = nullptr;
 }
 
 

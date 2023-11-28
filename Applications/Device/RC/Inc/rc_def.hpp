@@ -50,14 +50,6 @@ typedef enum
   
 } RC_ChStatus_e;
 
-typedef struct
-{
-  RC_ChType_e   chType;
-  RC_ChStatus_e chState;
-  int16_t       chValue;
-
-} RC_ChData_s;
-
 } // namespace rc
 
 } // namespace device
