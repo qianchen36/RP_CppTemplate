@@ -94,9 +94,11 @@ void MOTOR_c::HeartbeatDevice(void)
   {
     devState = DEV_ONLINE;
 
+    StallDetect();
+
     if (mtrData[MTR_DATA_ERRCODE] != MTR_ERR_NONE)
       devState = DEV_ERROR;
-      
+
   }
 
 }
