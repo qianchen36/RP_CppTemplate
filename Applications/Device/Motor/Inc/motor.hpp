@@ -24,10 +24,15 @@ namespace motor {
 
 typedef struct _MTR_InitParam : _DEV_InitParam
 {
-  MOTOR_Type_e mtrType;
-  uint16_t     encoderResolution;
-  FUNC_STATE_e useStallDetect;
-  uint16_t     maxStallCount;
+  MOTOR_Type_e      mtrType;
+
+  FUNC_STATE_e      useAngle2Position;
+  uint16_t          encoderResolution;
+
+  FUNC_STATE_e      useStallDetect;
+  MOTOR_DataType_e  stallDataSource;
+  uint16_t          maxStallValue;
+  uint16_t          maxStallCount;       // Value in ms
 
   _MTR_InitParam(void);
 
@@ -38,11 +43,11 @@ typedef struct _MTR_InitParam : _DEV_InitParam
 class MOTOR_c : public device::DEVICE_c
 {
 protected:
-  uint16_t encoderRes_;
-  uint16_t maxStallCnt_;
+  uint16_t         stallCnt_;
 
   void AddMotor(MOTOR_c *mtr);
   void DelMotor(MOTOR_c *mtr);
+  void StallDetect(void);
   int32_t Angle2Posit(int16_t curAngle, int16_t lstAngle);
 
 public:
@@ -53,6 +58,7 @@ public:
   MOTOR_c();
   ~MOTOR_c();
 
+  // void InitDevice(DEV_InitParam_s *initParam) override;
   void HeartbeatDevice(void) override;
   MOTOR_c *GetObjectHandler(void) override;
 

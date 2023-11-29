@@ -17,7 +17,6 @@ namespace rc {
 
 /* DR16 CH type list */
 RC_ChType_e RC_DR16_ChType[DR16_CH_NUM] = {
-
   RC_CH_JOYSTICK,
   RC_CH_JOYSTICK,
   RC_CH_JOYSTICK,
@@ -122,9 +121,11 @@ RC_DR16_c *RC_DR16_c::GetObjectHandler(void)
  */
 void RC_DR16_c::UartNode_ReceiveCallback(uint8_t *pData, uint16_t len)
 {
+  /* Check data pointer & length */
   if (pData == nullptr || len < 18)
     return;
 
+  /* Unpack datapack */
   rcData[DR16_CH_0].chValue           = ((pData[0] | pData[1] << 8) & 0x07FF) - 1024;
   rcData[DR16_CH_1].chValue           = ((pData[1] >> 3 | pData[2] << 5) & 0x07FF) - 1024;
   rcData[DR16_CH_2].chValue           = ((pData[2] >> 6 | pData[3] << 2 | pData[4] << 10) & 0x07FF) - 1024;

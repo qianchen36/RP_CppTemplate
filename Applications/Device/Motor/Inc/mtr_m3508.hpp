@@ -19,10 +19,11 @@ namespace device {
 
 namespace motor {
 
-typedef struct
+typedef struct _MTR_M3508_InitParam : _MTR_InitParam
 {
-  // uint16_t encoderResolution;
   uint32_t canReceiveStdID;
+
+  _MTR_M3508_InitParam(void);
 
 } MTR_M3508_InitParam_s;
 
@@ -34,7 +35,7 @@ public:
   MTR_M3508_c();
   ~MTR_M3508_c();
 
-  void InitDevice(uint8_t id, comm::COMM_c *hComm, void *pStruct) override;
+  void InitDevice(DEV_InitParam_s *initParam) override;
   MTR_M3508_c *GetObjectHandler(void) override;
   void CanNode_ReceiveCallback(comm::COMM_CAN_DataPack_s *dataPack) override;
 

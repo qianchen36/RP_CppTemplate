@@ -66,40 +66,61 @@ extern "C" void StartTestTask(void *argument)
   rc_dr16.InitDevice(1, &comm_UART, nullptr);
 
   /* Mtr init */
-  device::motor::MTR_M2006_InitParam_s sMtr01Config = {
-    .canReceiveStdID   = 0x201,
-  };
-  mtr_1.InitDevice(1, &comm_CAN, &sMtr01Config);
+  device::motor::MTR_M2006_InitParam_s sMtr01Config;
+  sMtr01Config.devID             = 1;
+  sMtr01Config.hComm             = &comm_CAN;
+  sMtr01Config.canReceiveStdID   = 0x201;
+  sMtr01Config.useAngle2Position = ENABLE;
+  sMtr01Config.useStallDetect    = ENABLE;
+  mtr_1.InitDevice(&sMtr01Config);
 
-  device::motor::MTR_M2006_InitParam_s sMtr02Config = {
-    .canReceiveStdID   = 0x202,
-  };
-  mtr_2.InitDevice(2, &comm_CAN, &sMtr02Config);
+  device::motor::MTR_M2006_InitParam_s sMtr02Config;
+  sMtr02Config.devID             = 2;
+  sMtr02Config.hComm             = &comm_CAN;
+  sMtr02Config.canReceiveStdID   = 0x202;
+  sMtr02Config.useAngle2Position = ENABLE;
+  sMtr02Config.useStallDetect    = ENABLE;
+  mtr_2.InitDevice(&sMtr02Config);
 
-  device::motor::MTR_M2006_InitParam_s sMtr03Config = {
-    .canReceiveStdID   = 0x203,
-  };
-  mtr_3.InitDevice(3, &comm_CAN, &sMtr03Config);
+  device::motor::MTR_M2006_InitParam_s sMtr03Config;
+  sMtr03Config.devID             = 3;
+  sMtr03Config.hComm             = &comm_CAN;
+  sMtr03Config.canReceiveStdID   = 0x203;
+  sMtr03Config.useAngle2Position = ENABLE;
+  sMtr03Config.useStallDetect    = ENABLE;
+  mtr_3.InitDevice(&sMtr03Config);
 
-  device::motor::MTR_M2006_InitParam_s sMtr04Config = {
-    .canReceiveStdID   = 0x204,
-  };
-  mtr_4.InitDevice(4, &comm_CAN, &sMtr04Config);
+  device::motor::MTR_M2006_InitParam_s sMtr04Config;
+  sMtr04Config.devID             = 4;
+  sMtr04Config.hComm             = &comm_CAN;
+  sMtr04Config.canReceiveStdID   = 0x204;
+  sMtr04Config.useAngle2Position = ENABLE;
+  sMtr04Config.useStallDetect    = ENABLE;
+  mtr_4.InitDevice(&sMtr04Config);
 
-  device::motor::MTR_M2006_InitParam_s sMtr05Config = {
-    .canReceiveStdID   = 0x205,
-  };
-  mtr_5.InitDevice(5, &comm_CAN, &sMtr05Config);
+  device::motor::MTR_M2006_InitParam_s sMtr05Config;
+  sMtr05Config.devID             = 5;
+  sMtr05Config.hComm             = &comm_CAN;
+  sMtr05Config.canReceiveStdID   = 0x205;
+  sMtr05Config.useAngle2Position = ENABLE;
+  sMtr05Config.useStallDetect    = ENABLE;
+  mtr_5.InitDevice(&sMtr05Config);
 
-  device::motor::MTR_M3508_InitParam_s sMtr06Config = {
-    .canReceiveStdID   = 0x206,
-  };
-  mtr_6.InitDevice(6, &comm_CAN, &sMtr06Config);
+  device::motor::MTR_M3508_InitParam_s sMtr06Config;
+  sMtr06Config.devID             = 6;
+  sMtr06Config.hComm             = &comm_CAN;
+  sMtr06Config.canReceiveStdID   = 0x206;
+  sMtr06Config.useAngle2Position = ENABLE;
+  sMtr06Config.useStallDetect    = ENABLE;
+  mtr_6.InitDevice(&sMtr06Config);
 
-  device::motor::MTR_M3508_InitParam_s sMtr07Config = {
-    .canReceiveStdID   = 0x207,
-  };
-  mtr_7.InitDevice(7, &comm_CAN, &sMtr07Config);
+  device::motor::MTR_M3508_InitParam_s sMtr07Config;
+  sMtr07Config.devID             = 7;
+  sMtr07Config.hComm             = &comm_CAN;
+  sMtr07Config.canReceiveStdID   = 0x207;
+  sMtr07Config.useAngle2Position = ENABLE;
+  sMtr07Config.useStallDetect    = ENABLE;
+  mtr_7.InitDevice(&sMtr07Config);
 
   while (1)
   {

@@ -15,6 +15,19 @@ namespace device {
 
 namespace rc {
 
+int16_t RC_ChData_c::operator=(const int16_t chValue)
+{
+  return 0;
+}
+
+RC_ChStatus_e RC_ChData_c::UpdateChState(int16_t current)
+{
+  if (chType == RC_CH_UNDEF)
+    return CH_RESET;
+
+  return CH_RESET;
+}
+
 /**
  * @brief  Construct a new device::rc::RC_c object
  * 

@@ -28,8 +28,18 @@ std::map<uint8_t, MOTOR_c *> MotorList;
 _MTR_InitParam::_MTR_InitParam(void)
 {
   devID   = NULL;
-  devType = DEV_UNDEF;
+  devType = DEV_MTR;
   hComm   = nullptr;
+
+  mtrType = MTR_UNDEF;
+
+  useAngle2Position = DISABLE;
+  encoderResolution = 8192;
+
+  useStallDetect  = DISABLE;
+  stallDataSource = MTR_DATA_CURRENT;
+  maxStallValue   = 5000;
+  maxStallCount   = 200;
 }
 
 
@@ -43,8 +53,6 @@ MOTOR_c::MOTOR_c()
 {
   devType = DEV_MTR;
   mtrType = MTR_UNDEF;
-
-  encoderRes_ = NULL;
 
   memset(&mtrData, 0, sizeof(MOTOR_Data_s));
 }
@@ -239,6 +247,40 @@ void MOTOR_c::DelMotor(MOTOR_c *mtr)
 
 
 /**
+ * @brief  Check if the motor is stalled
+ * 
+ * @return None
+ */
+void MOTOR_c::StallDetect(void)
+{
+  if (initParam_ == nullptr)
+    return;
+  
+  auto param = (MTR_InitParam_s *)initParam_;
+
+  if (!param->useStallDetect)
+    return;
+
+  /* Check stall */
+  if (mtrData[param->stallDataSource] > param->maxStallValue)
+  {
+    stallCnt_++;
+
+    if (stallCnt_ > param->maxStallCount)
+      mtrData[MTR_DATA_ERRCODE] = MTR_ERR_STALL;
+
+  }
+  else
+  {
+    stallCnt_ = 0;
+    mtrData[MTR_DATA_ERRCODE] = MTR_ERR_NONE;
+  }
+
+}
+
+
+
+/**
  * @brief  Update the round count of the motor
  * 
  * @param  curAngle Current angle
@@ -247,7 +289,12 @@ void MOTOR_c::DelMotor(MOTOR_c *mtr)
  */
 int32_t MOTOR_c::Angle2Posit(int16_t curAngle, int16_t lstAngle)
 {
-  if (encoderRes_ == NULL)
+  if (initParam_ == nullptr)
+    return 0;
+  
+  auto param = (MTR_InitParam_s *)initParam_;
+
+  if (!param->useAngle2Position)
     return 0;
 
   if (mtrData[MTR_DATA_POSIT] == 0 && lstAngle == 0)
@@ -257,12 +304,12 @@ int32_t MOTOR_c::Angle2Posit(int16_t curAngle, int16_t lstAngle)
   int32_t posit = mtrData[MTR_DATA_POSIT] + error;
 
   /* Check zero crossing */
-  if (ABS(error) > encoderRes_ / 2)
+  if (ABS(error) > param->encoderResolution / 2)
   {
     if (error > 0)
-      posit -= encoderRes_;
+      posit -= param->encoderResolution;
     else // error < 0
-      posit += encoderRes_;
+      posit += param->encoderResolution;
 
   }
 

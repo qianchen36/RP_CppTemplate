@@ -83,6 +83,35 @@ void DEVICE_c::InitDevice(uint8_t id, comm::COMM_c *hComm, void *pStruct)
 
 
 /**
+ * @brief  Initialize the device
+ * 
+ * @param  initParam Pointer to device initialization parameter structure
+ * @return None
+ */
+void DEVICE_c::InitDevice(DEV_InitParam_s *initParam)
+{
+  /* Check input pointer */
+  if (initParam == nullptr)
+    return;
+
+  if (initParam->devID == NULL || initParam->hComm == nullptr)
+    return;
+
+  /* Initialize */
+  devID   = initParam->devID;
+  devComm = initParam->hComm->comType;
+
+  hComm_ = initParam->hComm;
+
+  /* Regist */
+  AddDevice(this);
+
+  devState = DEV_OFFLINE;
+}
+
+
+
+/**
  * @brief  Update the device
  * 
  * @return None

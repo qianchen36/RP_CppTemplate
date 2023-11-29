@@ -19,12 +19,15 @@ namespace device {
 
 namespace motor {
 
-typedef struct
+typedef struct _MTR_GM6020_InitParam : _MTR_InitParam
 {
-  // uint16_t encoderResolution;
   uint32_t canReceiveStdID;
 
+  _MTR_GM6020_InitParam(void);
+
 } MTR_GM6020_InitParam_s;
+
+
 
 class MTR_GM6020_c : public device::motor::MOTOR_c, public comm::COMM_CAN_Node_c
 {
@@ -34,7 +37,7 @@ public:
   MTR_GM6020_c();
   ~MTR_GM6020_c();
 
-  void InitDevice(uint8_t id, comm::COMM_c *hComm, void *pStruct) override;
+  void InitDevice(DEV_InitParam_s *initParam) override;
   MTR_GM6020_c *GetObjectHandler(void) override;
   void CanNode_ReceiveCallback(comm::COMM_CAN_DataPack_s *dataPack) override;
 

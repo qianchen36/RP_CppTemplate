@@ -21,9 +21,9 @@ namespace device {
 
 typedef struct _DEV_InitParam
 {
-  uint8_t            devID;
-  DEVICE_Type_e      devType;
-  comm::COMM_Type_e *hComm;
+  uint8_t       devID;
+  DEVICE_Type_e devType;
+  comm::COMM_c *hComm;
 
   _DEV_InitParam(void);
 
@@ -34,8 +34,9 @@ typedef struct _DEV_InitParam
 class DEVICE_c
 {
 protected:
-  comm::COMM_c *hComm_;
-  uint32_t      lastHartbeatTime_;
+  DEV_InitParam_s *initParam_;
+  comm::COMM_c    *hComm_;
+  uint32_t         lastHartbeatTime_;
 
   void AddDevice(DEVICE_c *dev);
   void DelDevice(DEVICE_c *dev);
@@ -50,6 +51,7 @@ public:
   ~DEVICE_c();
 
   virtual void InitDevice(uint8_t id, comm::COMM_c *hComm, void *pStruct);
+  virtual void InitDevice(DEV_InitParam_s *initParam);
   virtual void UpdateDevice(void);
   virtual void HeartbeatDevice(void);
   virtual DEVICE_c *GetObjectHandler(void);

@@ -24,11 +24,14 @@ namespace rc {
 class RC_ChData_c
 {
 protected:
+  RC_ChStatus_e UpdateChState(int16_t current);
 
 public:
   RC_ChType_e   chType;
   RC_ChStatus_e chState;
   int16_t       chValue;
+
+  int16_t operator=(const int16_t chValue);
 
 };
 
