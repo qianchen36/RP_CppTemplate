@@ -43,7 +43,7 @@ typedef struct _MTR_InitParam : _DEV_InitParam
 class MOTOR_c : public device::DEVICE_c
 {
 protected:
-  uint16_t         stallCnt_;
+  uint16_t stallCnt_;
 
   void AddMotor(MOTOR_c *mtr);
   void DelMotor(MOTOR_c *mtr);
