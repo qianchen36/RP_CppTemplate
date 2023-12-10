@@ -82,6 +82,12 @@ void MTR_M2006_c::InitDevice(DEV_InitParam_s *initParam)
   initParam_  = initParam;
   canStdID_   = ((MTR_M2006_InitParam_s *)initParam_)->canReceiveStdID;
 
+  mtrData[MTR_DATA_ANGLE]   = 0;
+  mtrData[MTR_DATA_SPEED]   = 0;
+  mtrData[MTR_DATA_TORQUE]  = 0;
+  mtrData[MTR_DATA_POSIT]   = 0;
+  mtrData[MTR_DATA_ERRCODE] = 0;
+
   /* Regist */
   AddMotor(this);
   ((comm::COMM_CAN_c *)hComm_)->AddCanNode(this);
@@ -117,9 +123,9 @@ void MTR_M2006_c::CanNode_ReceiveCallback(comm::COMM_CAN_DataPack_s *dataPack)
   auto lastAngle = mtrData[MTR_DATA_ANGLE];
 
   /* Unpack datapack */
-  mtrData[MTR_DATA_ANGLE]  = (dataPack->data[0] << 8) | dataPack->data[1];
-  mtrData[MTR_DATA_SPEED]  = (dataPack->data[2] << 8) | dataPack->data[3];
-  mtrData[MTR_DATA_TORQUE] = (dataPack->data[4] << 8) | dataPack->data[5];
+  mtrData[MTR_DATA_ANGLE]  = (int16_t)((dataPack->data[0] << 8) | dataPack->data[1]);
+  mtrData[MTR_DATA_SPEED]  = (int16_t)((dataPack->data[2] << 8) | dataPack->data[3]);
+  mtrData[MTR_DATA_TORQUE] = (int16_t)((dataPack->data[4] << 8) | dataPack->data[5]);
   mtrData[MTR_DATA_POSIT]  =  Angle2Posit(mtrData[MTR_DATA_ANGLE], lastAngle);
   lastHartbeatTime_        =  dataPack->timeStamp;
 

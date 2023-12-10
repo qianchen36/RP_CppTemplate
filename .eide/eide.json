@@ -144,6 +144,9 @@
             "name": "Module",
             "files": [
               {
+                "path": "Applications/Module/mod_chassis.cpp"
+              },
+              {
                 "path": "Applications/Module/module.cpp"
               }
             ],
@@ -631,7 +634,8 @@
     "debug": {
       "excludeList": [
         "<virtual_root>/Application/Device/IMU/Driver/bmi270/common.c",
-        "<virtual_root>/Board/board.cpp"
+        "<virtual_root>/Board/board.cpp",
+        "<virtual_root>/Board/Dbldeck_MasterCtrl/MDK-ARM/armlib_lock_glue.c"
       ],
       "toolchain": "AC6",
       "compileConfig": {

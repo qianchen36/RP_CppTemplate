@@ -74,4 +74,9 @@ extern std::map<uint8_t, MOTOR_c *> MotorList;
 
 } // namespace device
 
+/* Sub include */
+#include "mtr_gm6020.hpp"
+#include "mtr_m3508.hpp"
+#include "mtr_m2006.hpp"
+
 #endif // __MOTOR_HPP__

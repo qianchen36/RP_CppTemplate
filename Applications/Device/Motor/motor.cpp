@@ -268,8 +268,11 @@ void MOTOR_c::StallDetect(void)
   {
     stallCnt_++;
 
-    if (stallCnt_ > param->maxStallCount)
+    if (stallCnt_ >= param->maxStallCount / 10)
+    {
       mtrData[MTR_DATA_ERRCODE] = MTR_ERR_STALL;
+      stallCnt_ = param->maxStallCount / 10;
+    }
 
   }
   else

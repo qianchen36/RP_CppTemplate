@@ -34,7 +34,7 @@ extern osThreadId_t testTaskHandle;
 extern "C" void StartTestTask(void *argument);
 const osThreadAttr_t testTask_attributes = {
   .name = "testTask",
-  .stack_size = 512 * 4,
+  .stack_size = 1024 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
 

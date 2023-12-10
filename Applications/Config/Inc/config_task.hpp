@@ -12,7 +12,7 @@
 #ifndef __CONFIG_TASK_HPP__
 #define __CONFIG_TASK_HPP__
 
-#include "config.hpp"
+#include "config_def.hpp"
 
 #define USE_TEST_TASK 1U
 #define USE_USER_TASK 1U

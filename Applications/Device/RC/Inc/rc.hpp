@@ -56,4 +56,7 @@ public:
 
 } // namespace device
 
+/* Sub include */
+#include "rc_dr16.hpp"
+
 #endif // __RC_HPP__

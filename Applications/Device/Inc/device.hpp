@@ -64,4 +64,9 @@ void DEVICE_Heartbeat(void);
 
 } // namespace device
 
+/* Sub include */
+#include "rc.hpp"
+#include "imu.hpp"
+#include "motor.hpp"
+
 #endif // __DEVICE_HPP__

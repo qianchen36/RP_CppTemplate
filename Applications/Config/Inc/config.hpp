@@ -12,8 +12,9 @@
 #ifndef __CONFIG_HPP__
 #define __CONFIG_HPP__
 
-#include "main.h"
-
-typedef FunctionalState FUNC_STATE_e;
+#include "config_def.hpp"
+#include "config_comm.hpp"
+#include "config_device.hpp"
+#include "config_task.hpp"
 
 #endif // __CONFIG_HPP__
