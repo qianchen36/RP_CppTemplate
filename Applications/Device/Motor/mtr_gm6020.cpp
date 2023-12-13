@@ -16,8 +16,9 @@ namespace device {
 namespace motor {
 
 /**
- * @brief Construct a new device::motor::MTR_GM6020_InitParam_s structure
+ * @brief  Construct a new device::motor::MTR_GM6020_InitParam_s structure
  * 
+ * @return None
  */
 _MTR_GM6020_InitParam::_MTR_GM6020_InitParam(void)
 {

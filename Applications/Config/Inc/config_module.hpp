@@ -18,10 +18,9 @@ typedef enum
 {
   MOD_UNDEF,
 
-  MOD_CHASIS, // Chasis
-  MOD_GANTRY, // Gantry
-  MOD_ROLLER, // Roller
-  MOD_MANIP,  // Manipulator
+  MOD_SLAVE,    // Slave
+  MOD_VISION,   // Vision
+  MOD_CHASSIS,  // Chassis
 
 } MOD_ID_e;
 

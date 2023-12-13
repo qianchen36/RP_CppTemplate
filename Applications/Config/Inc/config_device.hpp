@@ -18,7 +18,7 @@ typedef enum
 {
   DEV_UNDEF,
 
-  DEV_DR16,
+  DEV_RC_DR16,
 
   DEV_CHAS_MTR1,
   DEV_CHAS_MTR2,

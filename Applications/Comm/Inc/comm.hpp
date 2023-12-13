@@ -46,4 +46,10 @@ extern std::map<uint8_t, COMM_c *> CommList;
 
 } // namespace comm
 
+/* Sub include */
+#include "comm_can.hpp"
+#include "comm_i2c.hpp"
+#include "comm_spi.hpp"
+#include "comm_uart.hpp"
+
 #endif // __COMM_HPP__

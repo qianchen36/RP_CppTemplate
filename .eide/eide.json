@@ -31,7 +31,14 @@
               },
               {
                 "name": "Filter",
-                "files": [],
+                "files": [
+                  {
+                    "path": "Applications/Algo/Filter/filter.cpp"
+                  },
+                  {
+                    "path": "Applications/Algo/Filter/fl_ave.cpp"
+                  }
+                ],
                 "folders": []
               }
             ]

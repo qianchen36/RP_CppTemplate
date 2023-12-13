@@ -23,7 +23,12 @@ namespace chassis {
 typedef struct _MOD_CHAS_InitParam : public _MOD_InitParam
 {
   device::motor::MOTOR_c *mtrHandler[4];
-  
+
+  FUNC_STATE_e useSpeedLimit;
+  int16_t      maxWheelSpeed;
+
+  FUNC_STATE_e useCurrentLimit;
+  int16_t      maxWheelCurrent;
 
   _MOD_CHAS_InitParam();
 
@@ -50,6 +55,8 @@ public:
 };
 
 } // namespace chassis
+
+extern chassis::MOD_CHASSIS_c MOD_Chassis;
 
 } // namespace module
 

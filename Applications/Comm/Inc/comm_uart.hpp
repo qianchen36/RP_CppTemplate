@@ -51,7 +51,7 @@ protected:
 class COMM_UART_c : public COMM_c
 {
 private:
-  std::list<COMM_UART_Node_c *> uartNodeList_;
+  std::list<COMM_UART_Node_c *>   uartNodeList_;
   std::list<COMM_UART_Buffer_s *> rxBuffer_, txBuffer_;
   std::list<COMM_UART_Buffer_s *>::iterator rxBufferIt_ , txBufferIt_;  
 
