@@ -640,8 +640,6 @@
   "targets": {
     "debug": {
       "excludeList": [
-        "<virtual_root>/Application/Device/IMU/Driver/bmi270/common.c",
-        "<virtual_root>/Board/board.cpp",
         "<virtual_root>/Board/Dbldeck_MasterCtrl/MDK-ARM/armlib_lock_glue.c"
       ],
       "toolchain": "AC6",
@@ -758,6 +756,7 @@
           "Drivers/CMSIS/Device/ST/STM32F4xx/Include",
           "Drivers/STM32F4xx_HAL_Driver/Inc",
           "Drivers/STM32F4xx_HAL_Driver/Inc/Legacy",
+          "Drivers/BMI270-Sensor-API",
           "Middlewares/FatFs/src",
           "Middlewares/FreeRTOS/Source/include",
           "Middlewares/FreeRTOS/Source/CMSIS_RTOS_V2",
@@ -765,8 +764,7 @@
           "Middlewares/STM32_USB_Device_Library/Core/Inc",
           "Middlewares/STM32_USB_Device_Library/Class/CDC/Inc",
           "Middlewares/CMSIS_DSP/Include",
-          "Middlewares/CMSIS_DSP/PrivateInclude",
-          "Drivers/BMI270-Sensor-API"
+          "Middlewares/CMSIS_DSP/PrivateInclude"
         ],
         "libList": [],
         "sourceDirList": [],
@@ -777,7 +775,9 @@
       }
     },
     "release": {
-      "excludeList": [],
+      "excludeList": [
+        "<virtual_root>/Board/Dbldeck_MasterCtrl/MDK-ARM/armlib_lock_glue.c"
+      ],
       "toolchain": "AC6",
       "compileConfig": {
         "cpuType": "Cortex-M4",
@@ -848,7 +848,6 @@
           "Applications/Device/RC/Inc",
           "Applications/Device/Motor/Inc",
           "Applications/Device/IMU/Inc",
-          "Applications/Device/IMU/Driver",
           "Applications/Module/Inc",
           "Applications/Task/Inc",
           "Boards/Dbldeck_MasterCtrl/Core/Inc",
@@ -862,6 +861,7 @@
           "Drivers/CMSIS/Device/ST/STM32F4xx/Include",
           "Drivers/STM32F4xx_HAL_Driver/Inc",
           "Drivers/STM32F4xx_HAL_Driver/Inc/Legacy",
+          "Drivers/BMI270-Sensor-API",
           "Middlewares/FatFs/src",
           "Middlewares/FreeRTOS/Source/include",
           "Middlewares/FreeRTOS/Source/CMSIS_RTOS_V2",

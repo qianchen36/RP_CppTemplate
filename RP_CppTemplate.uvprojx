@@ -1,10 +1,7 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="project_projx.xsd">
-
   <SchemaVersion>2.1</SchemaVersion>
-
   <Header>### uVision Project, (C) Keil Software</Header>
-
   <Targets>
     <Target>
       <TargetName>RP_CppTemplate</TargetName>
@@ -18,29 +15,29 @@
           <Vendor>STMicroelectronics</Vendor>
           <PackID>Keil.STM32F4xx_DFP.2.16.0</PackID>
           <PackURL>http://www.keil.com/pack/</PackURL>
-          <Cpu>IRAM(0x20000000,0x00020000) IRAM2(0x10000000,0x00010000) IROM(0x08000000,0x00080000) CPUTYPE("Cortex-M4") FPU2 CLOCK(12000000) ELITTLE</Cpu>
-          <FlashUtilSpec></FlashUtilSpec>
-          <StartupFile></StartupFile>
-          <FlashDriverDll></FlashDriverDll>
+          <Cpu>IRAM(0x20000000,0x00020000) IRAM2(0x10000000,0x00010000) IROM(0x08000000,0x00080000) CPUTYPE(&quot;Cortex-M4&quot;) FPU2 CLOCK(12000000) ELITTLE</Cpu>
+          <FlashUtilSpec/>
+          <StartupFile/>
+          <FlashDriverDll/>
           <DeviceId>0</DeviceId>
-          <RegisterFile></RegisterFile>
-          <MemoryEnv></MemoryEnv>
-          <Cmp></Cmp>
-          <Asm></Asm>
-          <Linker></Linker>
-          <OHString></OHString>
-          <InfinionOptionDll></InfinionOptionDll>
-          <SLE66CMisc></SLE66CMisc>
-          <SLE66AMisc></SLE66AMisc>
-          <SLE66LinkerMisc></SLE66LinkerMisc>
+          <RegisterFile/>
+          <MemoryEnv/>
+          <Cmp/>
+          <Asm/>
+          <Linker/>
+          <OHString/>
+          <InfinionOptionDll/>
+          <SLE66CMisc/>
+          <SLE66AMisc/>
+          <SLE66LinkerMisc/>
           <SFDFile>$$Device:STM32F407VETx$CMSIS\SVD\STM32F40x.svd</SFDFile>
           <bCustSvd>0</bCustSvd>
           <UseEnv>0</UseEnv>
-          <BinPath></BinPath>
-          <IncludePath></IncludePath>
-          <LibPath></LibPath>
-          <RegisterFilePath></RegisterFilePath>
-          <DBRegisterFilePath></DBRegisterFilePath>
+          <BinPath/>
+          <IncludePath/>
+          <LibPath/>
+          <RegisterFilePath/>
+          <DBRegisterFilePath/>
           <TargetStatus>
             <Error>0</Error>
             <ExitCodeStop>0</ExitCodeStop>
@@ -62,8 +59,8 @@
           <BeforeCompile>
             <RunUserProg1>0</RunUserProg1>
             <RunUserProg2>0</RunUserProg2>
-            <UserProg1Name></UserProg1Name>
-            <UserProg2Name></UserProg2Name>
+            <UserProg1Name/>
+            <UserProg2Name/>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
             <nStopU1X>0</nStopU1X>
@@ -72,8 +69,8 @@
           <BeforeMake>
             <RunUserProg1>0</RunUserProg1>
             <RunUserProg2>0</RunUserProg2>
-            <UserProg1Name></UserProg1Name>
-            <UserProg2Name></UserProg2Name>
+            <UserProg1Name/>
+            <UserProg2Name/>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
             <nStopB1X>0</nStopB1X>
@@ -82,15 +79,15 @@
           <AfterMake>
             <RunUserProg1>0</RunUserProg1>
             <RunUserProg2>0</RunUserProg2>
-            <UserProg1Name></UserProg1Name>
-            <UserProg2Name></UserProg2Name>
+            <UserProg1Name/>
+            <UserProg2Name/>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
             <nStopA1X>0</nStopA1X>
             <nStopA2X>0</nStopA2X>
           </AfterMake>
           <SelectedForBatchBuild>0</SelectedForBatchBuild>
-          <SVCSIdString></SVCSIdString>
+          <SVCSIdString/>
         </TargetCommonOption>
         <CommonProperty>
           <UseCPPCompiler>0</UseCPPCompiler>
@@ -104,8 +101,8 @@
           <AssembleAssemblyFile>0</AssembleAssemblyFile>
           <PublicsOnly>0</PublicsOnly>
           <StopOnExitCode>3</StopOnExitCode>
-          <CustomArgument></CustomArgument>
-          <IncludeLibraryModules></IncludeLibraryModules>
+          <CustomArgument/>
+          <IncludeLibraryModules/>
           <ComprImg>1</ComprImg>
         </CommonProperty>
         <DllOption>
@@ -114,7 +111,7 @@
           <SimDlgDll>DCM.DLL</SimDlgDll>
           <SimDlgDllArguments>-pCM3</SimDlgDllArguments>
           <TargetDllName>SARMCM3.DLL</TargetDllName>
-          <TargetDllArguments></TargetDllArguments>
+          <TargetDllArguments/>
           <TargetDlgDll>TCM.DLL</TargetDlgDll>
           <TargetDlgDllArguments>-pCM3</TargetDlgDllArguments>
         </DllOption>
@@ -138,11 +135,11 @@
           </Flash1>
           <bUseTDR>1</bUseTDR>
           <Flash2>BIN\UL2CM3.DLL</Flash2>
-          <Flash3>"" ()</Flash3>
-          <Flash4></Flash4>
-          <pFcarmOut></pFcarmOut>
-          <pFcarmGrp></pFcarmGrp>
-          <pFcArmRoot></pFcArmRoot>
+          <Flash3>&quot;&quot; ()</Flash3>
+          <Flash4/>
+          <pFcarmOut/>
+          <pFcarmGrp/>
+          <pFcArmRoot/>
           <FcArmLst>0</FcArmLst>
         </Utilities>
         <TargetArmAds>
@@ -174,8 +171,8 @@
             <AdsLsxf>1</AdsLsxf>
             <RvctClst>0</RvctClst>
             <GenPPlst>0</GenPPlst>
-            <AdsCpuType>"Cortex-M4"</AdsCpuType>
-            <RvctDeviceName></RvctDeviceName>
+            <AdsCpuType>&quot;Cortex-M4&quot;</AdsCpuType>
+            <RvctDeviceName/>
             <mOS>0</mOS>
             <uocRom>0</uocRom>
             <uocRam>0</uocRam>
@@ -261,8 +258,8 @@
               </XRAM>
               <OCR_RVCT1>
                 <Type>1</Type>
-                <StartAddress>0x8000000</StartAddress>
-                <Size>0x80000</Size>
+                <StartAddress>0x08000000</StartAddress>
+                <Size>0x00080000</Size>
               </OCR_RVCT1>
               <OCR_RVCT2>
                 <Type>1</Type>
@@ -287,12 +284,12 @@
               <OCR_RVCT6>
                 <Type>0</Type>
                 <StartAddress>0x20000000</StartAddress>
-                <Size>0x20000</Size>
+                <Size>0x00020000</Size>
               </OCR_RVCT6>
               <OCR_RVCT7>
                 <Type>0</Type>
                 <StartAddress>0x10000000</StartAddress>
-                <Size>0x10000</Size>
+                <Size>0x00010000</Size>
               </OCR_RVCT7>
               <OCR_RVCT8>
                 <Type>0</Type>
@@ -310,7 +307,7 @@
                 <Size>0x0</Size>
               </OCR_RVCT10>
             </OnChipMemories>
-            <RvctStartVector></RvctStartVector>
+            <RvctStartVector/>
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
@@ -337,10 +334,10 @@
             <v6WtE>0</v6WtE>
             <v6Rtti>0</v6Rtti>
             <VariousControls>
-              <MiscControls></MiscControls>
+              <MiscControls/>
               <Define>USE_HAL_DRIVER,STM32F407xx</Define>
-              <Undefine></Undefine>
-              <IncludePath>.eide\deps;Applications\Algo\Inc;Applications\Algo\Filter\Inc;Applications\Algo\Controller\Inc;Applications\Comm\Inc;Applications\Config\Inc;Applications\Device\Inc;Applications\Device\RC\Inc;Applications\Device\Motor\Inc;Applications\Device\IMU\Inc;Applications\Device\IMU\Driver;Applications\Module\Inc;Applications\Task\Inc;Boards\Dbldeck_MasterCtrl\Core\Inc;Boards\Dbldeck_MasterCtrl\BSP\Inc;Boards\Dbldeck_MasterCtrl\FATFS\Target;Boards\Dbldeck_MasterCtrl\FATFS\App;Boards\Dbldeck_MasterCtrl\USB_DEVICE\App;Boards\Dbldeck_MasterCtrl\USB_DEVICE\Target;Boards\Dbldeck_MasterCtrl\MDK-ARM\RTE\_Dbldeck_MasterCtrl;Drivers\CMSIS\Include;Drivers\CMSIS\Device\ST\STM32F4xx\Include;Drivers\STM32F4xx_HAL_Driver\Inc;Drivers\STM32F4xx_HAL_Driver\Inc\Legacy;Middlewares\FatFs\src;Middlewares\FreeRTOS\Source\include;Middlewares\FreeRTOS\Source\CMSIS_RTOS_V2;Middlewares\FreeRTOS\Source\portable\GCC\ARM_CM4F;Middlewares\STM32_USB_Device_Library\Core\Inc;Middlewares\STM32_USB_Device_Library\Class\CDC\Inc;Middlewares\CMSIS_DSP\Include;Middlewares\CMSIS_DSP\PrivateInclude</IncludePath>
+              <Undefine/>
+              <IncludePath>.eide\deps;Applications\Algo\Inc;Applications\Algo\Filter\Inc;Applications\Algo\Controller\Inc;Applications\Comm\Inc;Applications\Config\Inc;Applications\Device\Inc;Applications\Device\RC\Inc;Applications\Device\Motor\Inc;Applications\Device\IMU\Inc;Applications\Module\Inc;Applications\Task\Inc;Boards\Dbldeck_MasterCtrl\Core\Inc;Boards\Dbldeck_MasterCtrl\BSP\Inc;Boards\Dbldeck_MasterCtrl\FATFS\Target;Boards\Dbldeck_MasterCtrl\FATFS\App;Boards\Dbldeck_MasterCtrl\USB_DEVICE\App;Boards\Dbldeck_MasterCtrl\USB_DEVICE\Target;Boards\Dbldeck_MasterCtrl\MDK-ARM\RTE\_Dbldeck_MasterCtrl;Drivers\CMSIS\Include;Drivers\CMSIS\Device\ST\STM32F4xx\Include;Drivers\STM32F4xx_HAL_Driver\Inc;Drivers\STM32F4xx_HAL_Driver\Inc\Legacy;Middlewares\FatFs\src;Middlewares\FreeRTOS\Source\include;Middlewares\FreeRTOS\Source\CMSIS_RTOS_V2;Middlewares\FreeRTOS\Source\portable\GCC\ARM_CM4F;Middlewares\STM32_USB_Device_Library\Core\Inc;Middlewares\STM32_USB_Device_Library\Class\CDC\Inc;Middlewares\CMSIS_DSP\Include;Middlewares\CMSIS_DSP\PrivateInclude;Drivers\BMI270-Sensor-API</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -355,10 +352,10 @@
             <useXO>0</useXO>
             <ClangAsOpt>4</ClangAsOpt>
             <VariousControls>
-              <MiscControls></MiscControls>
+              <MiscControls/>
               <Define>USE_HAL_DRIVER,STM32F407xx</Define>
-              <Undefine></Undefine>
-              <IncludePath></IncludePath>
+              <Undefine/>
+              <IncludePath/>
             </VariousControls>
           </Aads>
           <LDads>
@@ -370,13 +367,13 @@
             <useFile>0</useFile>
             <TextAddressRange>0x08000000</TextAddressRange>
             <DataAddressRange>0x20000000</DataAddressRange>
-            <pXoBase></pXoBase>
+            <pXoBase/>
             <ScatterFile>&lt;YOUR_SCATTER_FILE&gt;.sct</ScatterFile>
-            <IncludeLibs></IncludeLibs>
-            <IncludeLibsPath></IncludeLibsPath>
-            <Misc></Misc>
-            <LinkerInputFile></LinkerInputFile>
-            <DisabledWarnings></DisabledWarnings>
+            <IncludeLibs/>
+            <IncludeLibsPath/>
+            <Misc/>
+            <LinkerInputFile/>
+            <DisabledWarnings/>
           </LDads>
         </TargetArmAds>
       </TargetOption>
@@ -812,6 +809,21 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Drivers/BMI270-Sensor-API</GroupName>
+          <Files>
+            <File>
+              <FileName>bmi2.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>Drivers/BMI270-Sensor-API/bmi2.c</FilePath>
+            </File>
+            <File>
+              <FileName>bmi270.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>Drivers/BMI270-Sensor-API/bmi270.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Board/Dbldeck_MasterCtrl/USB_DEVICE/Target</GroupName>
           <Files>
             <File>
@@ -848,6 +860,11 @@
               <FileName>armlib_lock_glue.c</FileName>
               <FileType>1</FileType>
               <FilePath>Boards/Dbldeck_MasterCtrl/MDK-ARM/armlib_lock_glue.c</FilePath>
+              <FileOption>
+                <CommonProperty>
+                  <IncludeInBuild>0</IncludeInBuild>
+                </CommonProperty>
+              </FileOption>
             </File>
             <File>
               <FileName>startup_stm32f407xx.s</FileName>
@@ -1020,6 +1037,11 @@
           <GroupName>Application/Module</GroupName>
           <Files>
             <File>
+              <FileName>mod_chassis.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>Applications/Module/mod_chassis.cpp</FilePath>
+            </File>
+            <File>
               <FileName>module.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>Applications/Module/module.cpp</FilePath>
@@ -1080,6 +1102,11 @@
           <GroupName>Application/Device/IMU</GroupName>
           <Files>
             <File>
+              <FileName>imu_bmi270.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>Applications/Device/IMU/imu_bmi270.cpp</FilePath>
+            </File>
+            <File>
               <FileName>imu.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>Applications/Device/IMU/imu.cpp</FilePath>
@@ -1137,6 +1164,31 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Application/Algo</GroupName>
+          <Files>
+            <File>
+              <FileName>algo.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>Applications/Algo/algo.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Application/Algo/Filter</GroupName>
+          <Files>
+            <File>
+              <FileName>filter.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>Applications/Algo/Filter/filter.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>fl_ave.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>Applications/Algo/Filter/fl_ave.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Application/Algo/Controller</GroupName>
           <Files>
             <File>
@@ -1154,13 +1206,11 @@
       </Groups>
     </Target>
   </Targets>
-
   <RTE>
     <apis/>
     <components/>
     <files/>
   </RTE>
-
   <LayerInfo>
     <Layers>
       <Layer>
@@ -1169,5 +1219,4 @@
       </Layer>
     </Layers>
   </LayerInfo>
-
 </Project>
