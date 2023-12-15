@@ -1,0 +1,15 @@
+# Workspace
+.git
+.git\*
+.eide\log
+.vscode
+build
+.eide.usr.ctx.json
+*.ept
+*.log
+
+# Keil
+DebugConfig
+*.uvguix.*
+*.scvd
+*.uvoptx
