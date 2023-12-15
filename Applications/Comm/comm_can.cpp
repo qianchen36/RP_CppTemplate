@@ -15,6 +15,23 @@
 
 namespace comm {
 
+_COMM_CAN_InitParam::_COMM_CAN_InitParam()
+{
+  comID = NULL;
+  comType = COMM_CAN;
+  hInterface = nullptr;
+
+  FilterBank = 0;
+  FilterMode = CAN_FILTERMODE_IDMASK;
+  FilterScale = CAN_FILTERSCALE_32BIT;
+  FilterIdHigh = 0;
+  FilterIdLow = 0;
+  FilterMaskIdHigh = 0;
+  FilterMaskIdLow = 0;
+  FilterFIFOAssignment = CAN_RX_FIFO0;
+  FilterActivation = ENABLE;
+}
+
 /**
  * @brief  Construct a new COMM_CAN_c::COMM_CAN_c object
  * 
@@ -30,31 +47,41 @@ COMM_CAN_c::COMM_CAN_c()
 /**
  * @brief  Initialize the CAN interface
  * 
- * @param  id Set the communicate port ID
- * @param  hInterface Set the handle of the communication interface
- * @param  pStruct Set the CAN specific parameters
+ * @param  initParam Pointer to the initialization parameters
  * @return None
  */
-void COMM_CAN_c::InitComm(uint8_t id, void *hInterface, ...)
+void COMM_CAN_c::InitComm(COMM_InitParam_s *initParam)
 {
-  /* Check id and hInterface */
-  if (id == NULL || hInterface == nullptr)
+  /* Check initParam */
+  if (initParam == nullptr)
     return;
 
-  /* Get args */
-  va_list args;
-  va_start(args, hInterface);
+  if (initParam->comID == NULL || initParam->hInterface == nullptr)
+    return;
 
-  comID = id;
-  hInterface_ = hInterface;
+  if (initParam->comType != COMM_CAN)
+    return;
 
-  auto pStruct = va_arg(args, COMM_CAN_InitParam_s *);
+  /* Get parameters */
+  if (initParam_ != nullptr)
+    delete initParam_;
+  
+  initParam_ = new COMM_CAN_InitParam_s;
+  memcpy(initParam_, initParam, sizeof(COMM_CAN_InitParam_s));
 
-  ConfigFilter(pStruct);
+  auto param = (COMM_CAN_InitParam_s *)initParam_;
+
+  /* Initialize */
+  comID = param->comID;
+
+  hInterface_ = param->hInterface;
+
+  ConfigFilter(param);
+
+  /* Regist */
   AddCommPort(this);
 
-  /* Clean up */
-  va_end(args);
+  /* Update state */
   comState = COMM_STOP;
 }
 

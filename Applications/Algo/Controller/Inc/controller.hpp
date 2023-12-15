@@ -12,27 +12,30 @@
 #ifndef __CONTROLLER_HPP__
 #define __CONTROLLER_HPP__
 
-#include "main.h"
-#include "algo.hpp"
 #include "controller_def.hpp"
+#include "algo.hpp"
 
 namespace algo {
 
 namespace controller {
 
-class CONTROLLER_c
+typedef struct _CTRL_InitParam : public _ALGO_InitParam
+{
+  CTRL_Type_e ctrlType;
+
+  _CTRL_InitParam();
+
+} CTRL_InitParam_s;
+
+class CONTROLLER_c : public ALGO_c
 {
 public:
   CTRL_Type_e   ctrlType;
-  CTRL_Status_e ctrlState;
 
   CONTROLLER_c();
   ~CONTROLLER_c();
 
-  virtual void InitController(void *pStruct) = 0;
-  virtual float UpdateController(int type, ...) = 0;
-  virtual void ResetController(void) = 0;
-  virtual CONTROLLER_c *GetObjectHandler(void);
+  CONTROLLER_c *GetObjectHandler(void) override;
 
 };
 

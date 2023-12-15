@@ -21,7 +21,7 @@
 
 namespace comm {
 
-typedef struct
+typedef struct _COMM_UART_InitParam : public _COMM_InitParam
 {
   FUNC_STATE_e useAutoReceive;
   uint16_t     rxBufferSize;
@@ -29,6 +29,8 @@ typedef struct
 
   FUNC_STATE_e useAutoTransmit;
   uint16_t     txQueueLength;
+
+  _COMM_UART_InitParam();
 
 } COMM_UART_InitParam_s;
 
@@ -65,7 +67,7 @@ private:
 public:
   COMM_UART_c();
 
-  void InitComm(uint8_t id, void *hInterface, ...) override;
+  void InitComm(COMM_InitParam_s *initParam) override;
   COMM_UART_c *GetObjectHandler(void) override;
   void Receive(int interfaceType, ...) override;
   void Transmit(int interfaceType, ...) override;

@@ -21,17 +21,6 @@ namespace filter {
 
 typedef enum
 {
-  FL_RESET,
-
-  FL_IDLE,
-  FL_BUSY,
-
-  FL_ERROR,
-
-} FL_Status_e;
-
-typedef enum
-{
   FL_UNDEF,
 
   FL_AVE,

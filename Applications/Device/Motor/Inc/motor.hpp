@@ -17,6 +17,7 @@
 #include "controller.hpp"
 
 #include <map>
+#include <vector>
 
 namespace device {
 
@@ -24,15 +25,15 @@ namespace motor {
 
 typedef struct _MTR_InitParam : _DEV_InitParam
 {
-  MOTOR_Type_e      mtrType;
+  MOTOR_Type_e     mtrType;
 
-  FUNC_STATE_e      useAngle2Position;
-  uint16_t          encoderResolution;
+  FUNC_STATE_e     useAngle2Position;
+  uint16_t         encoderResolution;
 
-  FUNC_STATE_e      useStallDetect;
-  MOTOR_DataType_e  stallDataSource;
-  uint16_t          maxStallValue;
-  uint16_t          maxStallCount;       // Value in ms
+  FUNC_STATE_e     useStallDetect;
+  MOTOR_DataType_e stallDataSource;
+  uint16_t         maxStallValue;
+  uint16_t         maxStallCount;       // Value in ms
 
   _MTR_InitParam(void);
 
@@ -52,7 +53,7 @@ protected:
 
 public:
   MOTOR_Type_e mtrType;
-  std::map<uint8_t, int16_t> mtrData;
+  std::vector<int16_t> mtrData;
   std::map<uint8_t, algo::controller::CONTROLLER_c *> mtrCtrlList;
 
   MOTOR_c();

@@ -37,7 +37,6 @@ _FL_AVE_Initparam::_FL_AVE_Initparam()
 FL_AVE_c::FL_AVE_c()
 {
   flType  = FL_AVE;
-  flState = FL_RESET;
 
   averageSize_   = NULL;
   averageBuffer_ = nullptr;
@@ -68,12 +67,15 @@ FL_AVE_c::~FL_AVE_c()
  * @param  initParam Pointer to the init param
  * @return None
  */
-void FL_AVE_c::InitFilter(FL_InitParam_t *initParam)
+void FL_AVE_c::InitAlgo(ALGO_InitParam_s *initParam)
 {
   if (initParam == nullptr)
     return;
 
   /* Get params */
+  if (initParam_ != nullptr)
+    delete initParam_;
+
   initParam_ = new FL_AVE_Initparam_t;
   memcpy(initParam_, initParam, sizeof(FL_AVE_Initparam_t));
 
@@ -82,7 +84,7 @@ void FL_AVE_c::InitFilter(FL_InitParam_t *initParam)
   averageBuffer_ = new float[averageSize_];
 
   /* Update State */
-  flState = FL_IDLE;
+  algoState = ALGO_IDLE;
 }
 
 
@@ -90,15 +92,14 @@ void FL_AVE_c::InitFilter(FL_InitParam_t *initParam)
 /**
  * @brief  Update the filter
  * 
- * @param  type (FL_Type_e) Type of filter
- * @param  input (const float &) Input value
+ * @param  input (const float *) Pointer to input value
  * @return (float) Output value
  */
-float FL_AVE_c::UpdateFilter(int type, const float &input)
+float FL_AVE_c::UpdateAlgo(const float *input)
 {
   float output = 0.0f;
 
-  UpdateFilter(type, input, &output);
+  UpdateAlgo(input, &output);
 
   return output;
 }
@@ -108,23 +109,22 @@ float FL_AVE_c::UpdateFilter(int type, const float &input)
 /**
  * @brief  Update the filter
  * 
- * @param  type (FL_Type_e) Type of filter
- * @param  input (const float &) Input value
+ * @param  input (const float *) Pointer to input value
  * @param  output (float *) Pointer to output value
  * @return None
  */
-void FL_AVE_c::UpdateFilter(int type, const float &input, float *output)
+void FL_AVE_c::UpdateAlgo(const float *input, float *output)
 {
-  if (flState != FL_IDLE)
+  if (algoState != ALGO_IDLE)
     return;
 
-  flState = FL_BUSY;
+  algoState = ALGO_BUSY;
 
   /* Update */
   for (uint8_t i = 0; i < averageSize_ - 1; i++)
     averageBuffer_[i] = averageBuffer_[i + 1];
 
-  averageBuffer_[averageSize_ - 1] = input;
+  averageBuffer_[averageSize_ - 1] = *input;
 
   /* Calculate */
   for (uint8_t i = 0; i < averageSize_; i++)
@@ -132,7 +132,7 @@ void FL_AVE_c::UpdateFilter(int type, const float &input, float *output)
 
   *output /= averageSize_;
 
-  flState = FL_IDLE;
+  algoState = ALGO_IDLE;
 }
 
 
@@ -142,9 +142,9 @@ void FL_AVE_c::UpdateFilter(int type, const float &input, float *output)
  * 
  * @return None
  */
-void FL_AVE_c::ResetFilter(void)
+void FL_AVE_c::ResetAlgo(void)
 {
-  if (flState != FL_IDLE)
+  if (algoState != ALGO_IDLE)
     return;
 
   memset(averageBuffer_, 0, averageSize_ * sizeof(float));

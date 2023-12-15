@@ -17,7 +17,36 @@
 
 namespace algo {
 
+typedef struct _ALGO_InitParam
+{
+  ALGO_Type_e algoType;
 
+  _ALGO_InitParam();
+
+} ALGO_InitParam_s;
+
+
+
+class ALGO_c
+{
+protected:
+  ALGO_InitParam_s *initParam_;
+
+public:
+  ALGO_Type_e   algoType;
+  ALGO_Status_e algoState;
+  float         algoTickRate;   // Unit: Hz
+
+  ALGO_c();
+  ~ALGO_c();
+
+  virtual void InitAlgo(ALGO_InitParam_s *initParam);
+  virtual float UpdateAlgo(const float *input);
+  virtual void UpdateAlgo(const float *input, float *output);
+  virtual void ResetAlgo(void);
+  virtual ALGO_c *GetObjectHandler(void);
+
+};
 
 } // namespace algo
 

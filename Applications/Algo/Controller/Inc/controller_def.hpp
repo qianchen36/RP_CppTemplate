@@ -18,17 +18,6 @@ namespace controller {
 
 typedef enum
 {
-  CTRL_RESET,
-
-  CTRL_IDLE,
-  CTRL_BUSY,
-
-  CTRL_ERROR,
-
-} CTRL_Status_e;
-
-typedef enum
-{
   CTRL_UNDEF,
 
   CTRL_PID,

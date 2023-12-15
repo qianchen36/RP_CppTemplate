@@ -13,13 +13,15 @@
 #define __FILTER_HPP__
 
 #include "filter_def.hpp"
+#include "algo.hpp"
 
 namespace algo {
 
 namespace filter {
 
-typedef struct _FL_InitParam
+typedef struct _FL_InitParam : public _ALGO_InitParam
 {
+  FL_Type_e flType;
 
   _FL_InitParam();
 
@@ -27,23 +29,18 @@ typedef struct _FL_InitParam
 
 
 
-class FILTER_c
+class FILTER_c : public ALGO_c
 {
 protected:
   FL_InitParam_t *initParam_;
 
 public:
   FL_Type_e   flType;
-  FL_Status_e flState;
 
   FILTER_c();
   ~FILTER_c();
 
-  virtual void InitFilter(FL_InitParam_t *initParam) = 0;
-  virtual float UpdateFilter(int type, const float &input) = 0;
-  virtual void UpdateFilter(int type, const float &input, float *output) = 0;
-  virtual void ResetFilter(void) = 0;
-  virtual FILTER_c *GetObjectHandler(void);
+  FILTER_c *GetObjectHandler(void) override;
 
 };
 

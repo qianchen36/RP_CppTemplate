@@ -13,6 +13,7 @@
 #define __IMU_DEF_HPP__
 
 #include "main.h"
+#include "config.hpp"
 
 namespace device {
 
@@ -28,57 +29,21 @@ typedef enum
 
 } IMU_Type_e;
 
-// typedef enum
-// {
-//   MEMS_UNDEF,
-
-// } MEMS_Type_e;
-
-typedef struct
+typedef enum
 {
-  int16_t accX;
-  int16_t accY;
-  int16_t accZ;
+  IMU_DATA_ACC_X,
+  IMU_DATA_ACC_Y,
+  IMU_DATA_ACC_Z,
 
-  int16_t gyrX;
-  int16_t gyrY;
-  int16_t gyrZ;
+  IMU_DATA_GYRO_X,
+  IMU_DATA_GYRO_Y,
+  IMU_DATA_GYRO_Z,
 
-  uint32_t timeStamp;
+  IMU_DATA_PITCH,
+  IMU_DATA_ROLL,
+  IMU_DATA_YAW,
 
-} IMU_ImuRawData_s;
-
-// typedef struct
-// {  
-//   int16_t magX;
-//   int16_t magY;
-//   int16_t magZ;
-
-// } IMU_CompRawData_s;
-
-typedef struct
-{
-  float accX;
-  float accY;
-  float accZ;
-
-  float roll;
-  float pitch;
-  float yaw;
-
-  float rollSpeed;
-  float pitchSpeed;
-  float yawSpeed;
-
-} IMU_ImuData_s;
-
-typedef struct
-{
-  bool use_Compass;       // TODO: Compass support
-  bool use_RpySolver;     // TODO: RPY solver support
-  bool use_OutputFilter;  // TODO: Output filter support
-
-} IMU_FuncList_s;
+} IMU_DataType_e;
 
 } // namespace imu
 

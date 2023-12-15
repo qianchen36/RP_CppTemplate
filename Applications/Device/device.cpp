@@ -56,6 +56,10 @@ DEVICE_c::~DEVICE_c()
 {
   if (devID != NULL)
     DelDevice(this);
+
+  if (initParam_ != nullptr)
+    delete initParam_;
+
 }
 
 

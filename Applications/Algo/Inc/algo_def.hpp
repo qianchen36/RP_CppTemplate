@@ -14,6 +14,26 @@
 
 namespace algo {
 
+typedef enum
+{
+  ALGO_UNDEF,
+
+  ALGO_CTRL,
+  ALGO_FL,
+
+} ALGO_Type_e;
+
+typedef enum
+{
+  ALGO_RESET,
+
+  ALGO_IDLE,
+  ALGO_BUSY,
+
+  ALGO_ERROR,
+
+} ALGO_Status_e;
+
 } // namespace algo
 
 #endif // __ALGO_DEF_HPP__

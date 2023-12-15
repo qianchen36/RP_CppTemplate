@@ -5,7 +5,7 @@
  * @version 1.0
  * @date    2023-12-08
  * 
- * @copyright Copyright (c) 2023
+ * @copyright SZU-RobotPilots Copyright (c) 2023
  * 
  */
 
@@ -76,21 +76,21 @@ MOD_CHASSIS_c::~MOD_CHASSIS_c()
  */
 void MOD_CHASSIS_c::InitModule(MOD_InitParam_t *initParam)
 {
-  /* Check input pointer */
+  /* Check pointer */
   if (initParam == nullptr)
     return;
 
   if (initParam->modId == NULL)
     return;
 
-  /* Copy init parameter */
+  /* Copy parameters */
   initParam_ = new MOD_CHAS_InitParam_t;
   memcpy(initParam_, initParam, sizeof(MOD_CHAS_InitParam_t));
 
   auto param = (MOD_CHAS_InitParam_t *)initParam_;
 
   /* Initialize */
-  modId = initParam->modId;
+  modId = param->modId;
 
   mtrHandler_[0] = param->mtrHandler[0];
   mtrHandler_[1] = param->mtrHandler[1];

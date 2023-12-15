@@ -18,14 +18,29 @@ namespace algo {
 namespace controller {
 
 /**
+ * @brief  Construct a new algo::controller::CTRL_InitParam_t struct
+ * 
+ * @return None
+ */
+_CTRL_InitParam::_CTRL_InitParam()
+{
+  algoType = ALGO_CTRL;
+
+  ctrlType = CTRL_UNDEF;
+}
+
+
+
+/**
  * @brief  Construct a new algo::controller::CONTROLLER_c object
  * 
  * @return None
  */
 CONTROLLER_c::CONTROLLER_c()
 {
+  algoType = ALGO_CTRL;
+
   ctrlType  = CTRL_UNDEF;
-  ctrlState = CTRL_RESET;
 }
 
 

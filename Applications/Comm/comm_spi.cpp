@@ -15,6 +15,15 @@
 
 namespace comm {
 
+_COMM_SPI_InitParam::_COMM_SPI_InitParam()
+{
+  comType = COMM_SPI;
+
+  useNssPin = DISABLE;
+  nssPort   = nullptr;
+  nssPin    = NULL;
+}
+
 /**
  * @brief  Construct a new comm spi c::comm spi c object
  * 
@@ -23,9 +32,6 @@ namespace comm {
 COMM_SPI_c::COMM_SPI_c()
 {
   comType = COMM_SPI;
-
-  nssPort_ = nullptr;
-  nssPin_  = NULL;
 }
 
 
@@ -33,31 +39,43 @@ COMM_SPI_c::COMM_SPI_c()
 /**
  * @brief  Initialize the SPI interface
  * 
- * @param  id Set the communicate port ID
- * @param  hInterface Set the handle of the communication interface
- * @param  pStruct Set the SPI specific parameters
+ * @param  initParam Pointer to the initialization parameters
  * @return None
  */
-void COMM_SPI_c::InitComm(uint8_t id, void *hInterface, ...)
+void COMM_SPI_c::InitComm(COMM_InitParam_s *initParam)
 {
-  /* Check id and hInterface */
-  if (id == NULL || hInterface == nullptr)
+  /* Check initParam */
+  if (initParam == nullptr)
     return;
 
-  /* Get args */
-  va_list args;
-  va_start(args, hInterface);
+  if (initParam->comID == NULL || initParam->hInterface == nullptr)
+    return;
 
-  comID       = id;
-  hInterface_ = hInterface;
+  if (initParam->comType != COMM_SPI)
+    return;
 
-  auto pStruct = va_arg(args, COMM_SPI_InitParam_s *);
+  /* Get parameters */
+  if (initParam->comID == 0)
+    return;
 
-  ConfigNssPin(pStruct->nssPort, pStruct->nssPin);
+  initParam_ = new COMM_SPI_InitParam_s;
+  memcpy(initParam_, initParam, sizeof(COMM_SPI_InitParam_s));
+
+  auto param = (COMM_SPI_InitParam_s *)initParam_;
+
+  /* Initialize */
+  comID       = param->comID;
+
+  hInterface_ = param->hInterface;
+  useNssPin_  = param->useNssPin;
+
+  if (useNssPin_)   // NSS pin
+    HAL_GPIO_WritePin(param->nssPort, param->nssPin, GPIO_PIN_RESET);
+
+  /* Regist */
   AddCommPort(this);
 
-  /* Clean up */
-  va_end(args);
+  /* Update state */
   comState = COMM_STOP;
 }
 
@@ -155,31 +173,16 @@ void COMM_SPI_c::Transmit(int interfaceType, ...)
  */
 void COMM_SPI_c::SetNssPin(COMM_SPI_NssStatus_e nssState)
 {
-  if (nssPort_ == nullptr || nssPin_ == NULL)
+  if (!useNssPin_)
     return;
 
+  auto param = (COMM_SPI_InitParam_s *)initParam_;
+
   if (nssState == COMM_SPI_NSS_RESET)
-    HAL_GPIO_WritePin(nssPort_, nssPin_, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(param->nssPort, param->nssPin, GPIO_PIN_SET);
 
   else if (nssState == COMM_SPI_NSS_SET)
-    HAL_GPIO_WritePin(nssPort_, nssPin_, GPIO_PIN_RESET);
-}
-
-
-
-/**
- * @brief  Configure the NSS pin of SPI interface
- * 
- * @param  GPIOx Set GPIO port of NSS pin
- * @param  GPIO_Pin Set GPIO pin of NSS pin
- * @return None
- */
-void COMM_SPI_c::ConfigNssPin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
-{
-  nssPort_ = GPIOx;
-  nssPin_  = GPIO_Pin;
-
-  HAL_GPIO_WritePin(nssPort_, nssPin_, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(param->nssPort, param->nssPin, GPIO_PIN_RESET);
 }
 
 } // namespace comm

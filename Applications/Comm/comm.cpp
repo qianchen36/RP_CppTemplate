@@ -16,10 +16,26 @@ namespace comm {
 /* Communication Port List */
 std::map<uint8_t, COMM_c *> CommList;
 
+
+
+/**
+ * @brief  Construct a new comm::COMM_InitParam_s struct
+ * 
+ * @return None
+ */
+_COMM_InitParam::_COMM_InitParam()
+{
+  comID = NULL;
+  comType = COMM_UNDEF;
+  hInterface = nullptr;
+}
+
+
+
 /**
  * @brief  Construct a new COMM_c::Comm_c object
  * 
- * @retval None
+ * @return None
  */
 COMM_c::COMM_c()
 {
@@ -27,6 +43,7 @@ COMM_c::COMM_c()
   comState = COMM_RESET;
   comType = COMM_UNDEF;
 
+  initParam_  = nullptr;
   hInterface_ = nullptr;
 }
 
@@ -41,6 +58,10 @@ COMM_c::~COMM_c()
 {
   if (comID != 0)
     DelCommPort(this);
+
+  if (initParam_ != nullptr)
+    delete initParam_;
+
 }
 
 
@@ -48,21 +69,32 @@ COMM_c::~COMM_c()
 /**
  * @brief  Initialize the communication interface
  * 
- * @param  id Set the communicate port ID
- * @param  hInterface Set the handle of the communication interface
- * @param  ... Comm port specific parameters
+ * @param  initParam Pointer to the initialization parameters
  * @return None
  */
-void COMM_c::InitComm(uint8_t id, void *hInterface, ...)
+void COMM_c::InitComm(COMM_InitParam_s *initParam)
 {
-  if (id == NULL || hInterface == nullptr)
+  /* Check initParam */
+  if (initParam == nullptr)
+    return;
+  
+  if (initParam->comID == NULL || initParam->hInterface == nullptr)
     return;
 
-  comID = id;
-  hInterface_ = hInterface;
+  /* Get parameters */
+  initParam_ = new COMM_InitParam_s;
+  memcpy(initParam_, initParam, sizeof(COMM_InitParam_s));
 
+  auto param = (COMM_InitParam_s *)initParam_;
+
+  /* Initialize */
+  comID       = param->comID;
+  hInterface_ = param->hInterface;
+
+  /* Regist */
   AddCommPort(this);
 
+  /* Update state */
   comState = COMM_STOP;
 }
 

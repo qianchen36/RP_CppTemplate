@@ -87,7 +87,7 @@ void MOTOR_c::HeartbeatDevice(void)
     devState = DEV_OFFLINE;
 
     for (auto &it : mtrCtrlList)
-      it.second->ResetController();
+      it.second->ResetAlgo();
 
   }
   else
@@ -177,7 +177,9 @@ float MOTOR_c::CalcMotorController(uint8_t id, float get, float set)
   if (!mtrCtrlList.count(id))
     return 0;
 
-  return mtrCtrlList[id]->UpdateController(algo::controller::CTRL_PID, get, set);
+  float input[] = {get, set};
+
+  return mtrCtrlList[id]->UpdateAlgo(input);
 }
 
 

@@ -42,6 +42,18 @@ RC_ChType_e RC_DR16_ChType[DR16_CH_NUM] = {
 
 
 /**
+ * @brief  Construct a new device::rc::RC_DR16_InitParam_s structure
+ * 
+ * @return None
+ */
+_RC_DR16_InitParam::_RC_DR16_InitParam()
+{
+  rcType = RC_DR16;
+}
+
+
+
+/**
  * @brief  Construct a new device::rc::RC_DR16_c object
  * 
  * @return None
@@ -50,14 +62,6 @@ RC_DR16_c::RC_DR16_c()
 {
   devComm = comm::COMM_UART;
   rcType  = RC_DR16;
-
-  for (uint8_t i = 0; i < DR16_CH_NUM; i++)
-  {
-    rcData[i].chType  = RC_DR16_ChType[i];
-    rcData[i].chState = CH_RESET;
-    rcData[i].chValue = 0;
-  }
-
 }
 
 
@@ -87,17 +91,38 @@ RC_DR16_c::~RC_DR16_c()
  * @param  pStruct Set the DR16 specific parameters
  * @return None
  */
-void RC_DR16_c::InitDevice(uint8_t id, comm::COMM_c *hComm, void *pStruct)
+void RC_DR16_c::InitDevice(DEV_InitParam_s *initParam)
 {
-  if (id == NULL || hComm == nullptr)
+  /* Check pointer */
+  if (initParam == nullptr)
     return;
 
-  devID = id;
-  hComm_ = hComm;
-  
+  if (initParam->devID == NULL || initParam->hComm == nullptr)
+    return;
+
+  /* Copy parameters */
+  initParam_ = new RC_DR16_InitParam_s;
+  memcpy(initParam_, initParam, sizeof(RC_DR16_InitParam_s));
+
+  auto param = (RC_DR16_InitParam_s *)initParam_;
+
+  /* Initialize */
+  devID   = param->devID;
+  hComm_  = param->hComm;
+
+  rcData.resize(DR16_CH_NUM);
+  for (uint8_t i = 0; i < DR16_CH_NUM; i++)
+  {
+    rcData[i].chType  = RC_DR16_ChType[i];
+    rcData[i].chValue = 0;
+    rcData[i].chState = CH_RESET;
+  }
+
+  /* Regist */
   AddDevice(this);
   ((comm::COMM_UART_c *)hComm_)->AddUartNode(this);
 
+  /* Update status */
   devState = DEV_OFFLINE;
 }
 

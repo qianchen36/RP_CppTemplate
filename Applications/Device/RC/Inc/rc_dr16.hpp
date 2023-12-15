@@ -19,6 +19,12 @@ namespace device {
 
 namespace rc {
 
+typedef struct _RC_DR16_InitParam : public _RC_InitParam
+{
+  _RC_DR16_InitParam();
+
+} RC_DR16_InitParam_s;
+
 typedef enum
 {
   DR16_CH_0,
@@ -54,8 +60,9 @@ public:
   RC_DR16_c();
   ~RC_DR16_c();
 
-  void InitDevice(uint8_t id, comm::COMM_c *hComm, void *pStruct) override;
+  void InitDevice(DEV_InitParam_s *initParam) override;
   RC_DR16_c *GetObjectHandler(void) override;
+
   void UartNode_ReceiveCallback(uint8_t *pData, uint16_t len) override;
 
 };

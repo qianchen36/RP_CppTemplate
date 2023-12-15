@@ -26,7 +26,11 @@ typedef struct
 
 } COMM_CAN_DataPack_s;
 
-typedef CAN_FilterTypeDef COMM_CAN_InitParam_s;
+typedef struct _COMM_CAN_InitParam : public _COMM_InitParam, public CAN_FilterTypeDef
+{
+  _COMM_CAN_InitParam();
+
+} COMM_CAN_InitParam_s;
 
 
 
@@ -52,10 +56,10 @@ private:
 public:
   COMM_CAN_c();
 
-  void InitComm(uint8_t id, void *hInterface, ...) override;
-  COMM_CAN_c *GetObjectHandler(void) override;
+  void InitComm(COMM_InitParam_s *initParam) override;
   void Receive(int interfaceType, ...) override;
   void Transmit(int interfaceType, ...) override;
+  COMM_CAN_c *GetObjectHandler(void) override;
 
   void Start(void);
   void Stop(void);

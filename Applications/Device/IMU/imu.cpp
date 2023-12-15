@@ -16,22 +16,35 @@ namespace device {
 namespace imu {
 
 /**
+ * @brief  Construct a new device::imu::IMU_InitParam_s struct
+ * 
+ * @return None
+ */
+_IMU_InitParam::_IMU_InitParam()
+{
+  devType = DEV_IMU;
+
+  imuType = IMU_UNDEF;
+
+  localGravity = 9.8f;
+  refreshRate  = 1000.0f;
+
+  useRpySolve = ENABLE;
+}
+
+
+
+/**
  * @brief  Construct a new device::imu::IMU_c object
  * 
- * @retval None
+ * @return None
  */
 IMU_c::IMU_c()
 {
   devType = DEV_IMU;
 
   imuType = IMU_UNDEF;
-  imuData = {NULL};
-  imuRawData = {NULL};
-  // compRawData = {NULL};
-  imuFuncList = {NULL};
 
-  GetImuRawData_ = nullptr;
-  // GetCompRawData_ = nullptr;
 }
 
 
@@ -39,7 +52,7 @@ IMU_c::IMU_c()
 /**
  * @brief  Destroy the device::imu::IMU_c object
  * 
- * @retval None
+ * @return None
  */
 IMU_c::~IMU_c()
 {
@@ -49,39 +62,24 @@ IMU_c::~IMU_c()
 
 
 /**
- * @brief  Initialize IMU device
+ * @brief  Heartbeat the IMU device
  * 
- * @param  type Type of IMU device
- * @param  pFunc Pointer to get IMU raw data function
- * @retval None
+ * @return None
  */
-void IMU_c::InitImu(IMU_Type_e type, void *pFunc)
+void IMU_c::HeartbeatDevice(void)
 {
-  if (type == IMU_UNDEF || pFunc == nullptr)
-    return;
 
-  imuType = type;
-  GetImuRawData_ = (void (*)(comm::COMM_c *, IMU_ImuRawData_s *))pFunc;
-
-  devState = DEV_OFFLINE;
 }
 
 
 
 /**
- * @brief 
+ * @brief  Get the IMU handler
  * 
- * @retval None
+ * @return (IMU_c*) Pointer to the IMU handler
  */
-void IMU_c::UpdateDevice(void)
-{
-  GetImuRawData_(hComm_, &imuRawData);
-
-  if (imuRawData.timeStamp <= lastHartbeatTime_)
-    devState = DEV_ERROR;
-  else
-    lastHartbeatTime_ = imuRawData.timeStamp;
-}
+IMU_c *IMU_c::GetObjectHandler(void)
+{ return this; }
 
 } // namespace imu
 

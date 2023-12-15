@@ -68,26 +68,29 @@ MTR_GM6020_c::~MTR_GM6020_c()
  */
 void MTR_GM6020_c::InitDevice(DEV_InitParam_s *initParam)
 {
-  /* Check input pointer */
+  /* Check pointer */
   if (initParam == nullptr)
     return;
 
   if (initParam->devID == NULL || initParam->hComm == nullptr)
     return;
 
+  /* Copy parameters */
+  if (initParam_ != nullptr)
+    delete initParam_;
+
+  initParam_ = new MTR_GM6020_InitParam_s;
+  memcpy(initParam_, initParam, sizeof(MTR_GM6020_InitParam_s));
+
+  auto param = (MTR_GM6020_InitParam_s *)initParam_;
+
   /* Initialize */
-  devID   = initParam->devID;
+  devID     = param->devID;
+  hComm_    = param->hComm;
+  canStdID_ = param->canReceiveStdID;
 
-  hComm_      = initParam->hComm;
-  initParam_  = initParam;
-  canStdID_   = ((MTR_GM6020_InitParam_s *)initParam_)->canReceiveStdID;
-
-  mtrData[MTR_DATA_ANGLE]   = 0;
-  mtrData[MTR_DATA_SPEED]   = 0;
-  mtrData[MTR_DATA_CURRENT] = 0;
-  mtrData[MTR_DATA_POSIT]   = 0;
-  mtrData[MTR_DATA_TEMP]    = 0;
-  mtrData[MTR_DATA_ERRCODE] = 0;
+  mtrData.resize(MTR_DATA_ERRCODE + 1);
+  memset(mtrData.data(), 0, sizeof(int16_t) * (MTR_DATA_ERRCODE + 1));
 
   /* Regist */
   AddMotor(this);

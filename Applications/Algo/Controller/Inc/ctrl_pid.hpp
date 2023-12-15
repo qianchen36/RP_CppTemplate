@@ -38,15 +38,17 @@ typedef enum
 
 } CTRL_PID_ErrMode_e;
 
-typedef enum
-{
-  LLAST,
-  LAST,
-  NOW,
-
-} CTRL_PID_DataCnt_e;
-
 typedef struct
+{
+  float get[3];
+  float set[3];
+  float err[3];
+  float pOut, iOut, dOut;
+  float output;
+
+} CTRL_PID_Data_t;
+
+typedef struct _CTRL_PID_InitParam : public _CTRL_InitParam
 {
   CTRL_PID_Type_e pidType;
 
@@ -62,17 +64,11 @@ typedef struct
   uint16_t           errRange;  // For PID_ANGLE in encoder mode only
   int16_t            errOffset; // For PID_ANGLE & PID_POSIT only
 
-} CTRL_PID_Params_t;
+  _CTRL_PID_InitParam();
 
-typedef struct
-{
-  float get[3];
-  float set[3];
-  float err[3];
-  float pOut, iOut, dOut;
-  float output;
+} CTRL_PID_InitParam_s;
 
-} CTRL_PID_Data_t;
+
 
 class CTRL_PID_c : public CONTROLLER_c
 {
@@ -83,14 +79,14 @@ protected:
 
 public:
   CTRL_PID_Type_e   pidType;
-  CTRL_PID_Params_t pidParm;
 
   CTRL_PID_c();
   ~CTRL_PID_c();
 
-  void InitController(void *pStruct) override;
-  float UpdateController(int type, ...) override;
-  void ResetController(void) override;
+  void InitAlgo(ALGO_InitParam_s *initParam) override;
+  float UpdateAlgo(const float *input) override;
+  void UpdateAlgo(const float *input, float *output) override;
+  void ResetAlgo(void) override;
   CTRL_PID_c *GetObjectHandler(void) override;
 
 };

@@ -38,10 +38,10 @@ public:
   FL_AVE_c();
   ~FL_AVE_c();
 
-  void InitFilter(FL_InitParam_t *initParam) override;
-  float UpdateFilter(int type, const float &input) override;
-  void UpdateFilter(int type, const float &input, float *output) override;
-  void ResetFilter(void) override;
+  void InitAlgo(ALGO_InitParam_s *initParam) override;
+  float UpdateAlgo(const float *input) override;
+  void UpdateAlgo(const float *input, float *output) override;
+  void ResetAlgo(void) override;
   FL_AVE_c *GetObjectHandler(void) override;
 
 };

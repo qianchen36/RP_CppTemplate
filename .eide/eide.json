@@ -15,7 +15,11 @@
         "folders": [
           {
             "name": "Algo",
-            "files": [],
+            "files": [
+              {
+                "path": "Applications/Algo/algo.cpp"
+              }
+            ],
             "folders": [
               {
                 "name": "Controller",
@@ -91,29 +95,13 @@
                 "name": "IMU",
                 "files": [
                   {
+                    "path": "Applications/Device/IMU/imu_bmi270.cpp"
+                  },
+                  {
                     "path": "Applications/Device/IMU/imu.cpp"
                   }
                 ],
-                "folders": [
-                  {
-                    "name": "Driver",
-                    "files": [],
-                    "folders": [
-                      {
-                        "name": "bmi270",
-                        "files": [
-                          {
-                            "path": "Applications/Device/IMU/Driver/bmi270/bmi2.c"
-                          },
-                          {
-                            "path": "Applications/Device/IMU/Driver/bmi270/bmi270.c"
-                          }
-                        ],
-                        "folders": []
-                      }
-                    ]
-                  }
-                ]
+                "folders": []
               },
               {
                 "name": "Motor",
@@ -345,6 +333,18 @@
         "name": "Drivers",
         "files": [],
         "folders": [
+          {
+            "name": "BMI270-Sensor-API",
+            "files": [
+              {
+                "path": "Drivers/BMI270-Sensor-API/bmi2.c"
+              },
+              {
+                "path": "Drivers/BMI270-Sensor-API/bmi270.c"
+              }
+            ],
+            "folders": []
+          },
           {
             "name": "CMSIS",
             "files": [
@@ -745,7 +745,6 @@
           "Applications/Device/RC/Inc",
           "Applications/Device/Motor/Inc",
           "Applications/Device/IMU/Inc",
-          "Applications/Device/IMU/Driver",
           "Applications/Module/Inc",
           "Applications/Task/Inc",
           "Boards/Dbldeck_MasterCtrl/Core/Inc",
@@ -766,7 +765,8 @@
           "Middlewares/STM32_USB_Device_Library/Core/Inc",
           "Middlewares/STM32_USB_Device_Library/Class/CDC/Inc",
           "Middlewares/CMSIS_DSP/Include",
-          "Middlewares/CMSIS_DSP/PrivateInclude"
+          "Middlewares/CMSIS_DSP/PrivateInclude",
+          "Drivers/BMI270-Sensor-API"
         ],
         "libList": [],
         "sourceDirList": [],

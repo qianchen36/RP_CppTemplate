@@ -16,10 +16,21 @@
 #include "device.hpp"
 
 #include <map>
+#include <vector>
 
 namespace device {
 
 namespace rc {
+
+typedef struct _RC_InitParam : public _DEV_InitParam
+{
+  RC_Type_e rcType;
+
+  _RC_InitParam();
+
+} RC_InitParam_s;
+
+
 
 class RC_ChData_c
 {
@@ -35,14 +46,15 @@ public:
 
 };
 
+
+
 class RC_c : public DEVICE_c
 {
 protected:
 
 public:
   RC_Type_e rcType;
-  std::map<uint8_t, RC_ChData_c> rcData;
-  // RC_ChData_s *rcData;
+  std::vector<RC_ChData_c> rcData;
 
   RC_c();
   ~RC_c();

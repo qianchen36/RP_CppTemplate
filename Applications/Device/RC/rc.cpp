@@ -15,11 +15,35 @@ namespace device {
 
 namespace rc {
 
-int16_t RC_ChData_c::operator=(const int16_t chValue)
+/**
+ * @brief  Construct a new device::rc::RC_InitParam_s structure
+ * 
+ * @return None
+ */
+_RC_InitParam::_RC_InitParam()
 {
-  return 0;
+  rcType = RC_UNDEF;
 }
 
+
+
+/**
+ * @brief  Operator= overload for RC_ChData_c
+ * 
+ * @param  chValue RC channel value
+ * @return (bool) Equal or not
+ */
+int16_t RC_ChData_c::operator=(const int16_t chValue)
+{ return (chValue == this->chValue); }
+
+
+
+/**
+ * @brief  Update the RC channel state
+ * 
+ * @param  current RC channel current value
+ * @return (RC_ChStatus_e) RC channel state 
+ */
 RC_ChStatus_e RC_ChData_c::UpdateChState(int16_t current)
 {
   if (chType == RC_CH_UNDEF)
@@ -27,6 +51,9 @@ RC_ChStatus_e RC_ChData_c::UpdateChState(int16_t current)
 
   return CH_RESET;
 }
+
+
+
 
 /**
  * @brief  Construct a new device::rc::RC_c object

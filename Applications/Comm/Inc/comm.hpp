@@ -18,10 +18,23 @@
 
 namespace comm {
 
+typedef struct _COMM_InitParam
+{
+  uint8_t     comID;
+  COMM_Type_e comType;
+  void       *hInterface;
+
+  _COMM_InitParam();
+
+} COMM_InitParam_s;
+
+
+
 class COMM_c
 {
 protected:
-  void *hInterface_;
+  COMM_InitParam_s *initParam_;
+  void             *hInterface_;
 
   void AddCommPort(COMM_c *comm);
   void DelCommPort(COMM_c *comm);
@@ -34,11 +47,11 @@ public:
   COMM_c();
   ~COMM_c();
 
-  virtual void InitComm(uint8_t id, void *hInterface, ...);
-  virtual COMM_c *GetObjectHandler(void);
-  virtual void *GetInterfaceHandler(void);
+  virtual void InitComm(COMM_InitParam_s *initParam);
   virtual void Receive(int interfaceType, ...) = 0;
   virtual void Transmit(int interfaceType, ...) = 0;
+  virtual COMM_c *GetObjectHandler(void);
+  virtual void *GetInterfaceHandler(void);
 
 };
 

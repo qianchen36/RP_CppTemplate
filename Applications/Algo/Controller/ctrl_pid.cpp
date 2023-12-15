@@ -13,11 +13,45 @@
 
 #include <stdarg.h>
 
-#define ABS(x) ((x > 0) ? (x) : (-x))
-
 namespace algo {
 
 namespace controller {
+
+typedef enum
+{
+  LLAST,
+  LAST,
+  NOW,
+
+} CTRL_PID_DataCnt_e;
+
+
+
+/**
+ * @brief  Construct a new algo::controller::CTRL_PID_InitParam_t struct
+ * 
+ * @return None
+ */
+_CTRL_PID_InitParam::_CTRL_PID_InitParam()
+{
+  ctrlType = CTRL_PID;
+
+  pidType = PID_UNDEF;
+
+  Kp = 0.0f;
+  Ki = 0.0f;
+  Kd = 0.0f;
+
+  deadBand    = 0;
+  maxOutput   = 0;
+  maxIntegral = 0;
+
+  errMode   = PID_ERRMODE_UNDEF;
+  errRange  = 8192;
+  errOffset = 0;
+}
+
+
 
 /**
  * @brief  Construct a new alog::controller::CTRL_PID_c object
@@ -26,9 +60,10 @@ namespace controller {
  */
 CTRL_PID_c::CTRL_PID_c()
 {
+  ctrlType = CTRL_PID;
+
   pidType = PID_UNDEF;
 
-  memset(&pidParm, 0, sizeof(pidParm));
   memset(&pidData_, 0, sizeof(pidData_));
 }
 
@@ -49,21 +84,29 @@ CTRL_PID_c::~CTRL_PID_c()
 /**
  * @brief  Initialize the PID controller
  * 
- * @param  pStruct (CTRL_PID_Params_t *) PID controller parameters structure
+ * @param  initParam Pointer to the PID controller init parameter
  * @return None
  */
-void CTRL_PID_c::InitController(void *pStruct)
+void CTRL_PID_c::InitAlgo(ALGO_InitParam_s *initParam)
 {
   /* Check ptr */
-  if (pStruct == nullptr)
+  if (initParam == nullptr)
     return;
 
-  /* Get args */
-  pidType = ((CTRL_PID_Params_t *)pStruct)->pidType;
-  pidParm = *((CTRL_PID_Params_t *)pStruct);
+  if (initParam->algoType != ALGO_CTRL)
+    return;
+
+  /* Get parameters */
+  if (initParam_ != nullptr)
+    delete initParam_;
+
+  initParam_ = new CTRL_PID_InitParam_s;
+  memcpy(initParam_, initParam, sizeof(CTRL_PID_InitParam_s));
+
+  auto param = (CTRL_PID_InitParam_s *)initParam_;
 
   /* Clean up */
-  ctrlState = CTRL_IDLE;
+  algoState = ALGO_IDLE;
 }
 
 
@@ -71,34 +114,56 @@ void CTRL_PID_c::InitController(void *pStruct)
 /**
  * @brief  Update the PID controller
  * 
- * @param  type (CTRL_Type_e) Controller type
- * @param  get (float) Get value
- * @param  set (float) Set value
+ * @param  input (float *) Pointer to the input value, [0] is feedback value, [1] is target value
  * @return (float) Controller output
  */
-float CTRL_PID_c::UpdateController(int type, ...)
+float CTRL_PID_c::UpdateAlgo(const float *input)
 {
-  /* Check type & state */
-  if (type != CTRL_PID || ctrlState != CTRL_IDLE)
+  /* Check state */
+  if (algoState != ALGO_IDLE)
     return 0;
 
-  ctrlState = CTRL_BUSY;
+  algoState = ALGO_BUSY;
 
   /* Get args */
-  va_list args;
-  va_start(args, type);
-
-  float get = va_arg(args, double);
-  float set = va_arg(args, double);
+  float get = input[0];
+  float set = input[1];
 
   /* Calculate */
   auto rtv = PID_Calculate(get, set);
 
   /* Clean up */
-  va_end(args);
-  ctrlState = CTRL_IDLE;
+  algoState = ALGO_IDLE;
 
   return rtv;
+}
+
+
+
+/**
+ * @brief  Update the PID controller
+ * 
+ * @param  input (float *) Pointer to the input value, [0] is feedback value, [1] is target value
+ * @param  output (float *) Pointer to the output value
+ * @return None
+ */
+void CTRL_PID_c::UpdateAlgo(const float *input, float *output)
+{
+  /* Check state */
+  if (algoState != ALGO_IDLE)
+    return;
+
+  algoState = ALGO_BUSY;
+
+  /* Get args */
+  float get = input[0];
+  float set = input[1];
+
+  /* Calculate */
+  *output = PID_Calculate(get, set);
+
+  /* Clean up */
+  algoState = ALGO_IDLE;
 }
 
 
@@ -108,7 +173,7 @@ float CTRL_PID_c::UpdateController(int type, ...)
  * 
  * @return None 
  */
-void CTRL_PID_c::ResetController(void)
+void CTRL_PID_c::ResetAlgo(void)
 {
   memset(&pidData_, 0, sizeof(pidData_));
 }
@@ -140,6 +205,8 @@ float CTRL_PID_c::PID_Calculate(float get, float set)
   if (pidType == PID_UNDEF)
     return 0.0f;
 
+  auto param = (CTRL_PID_InitParam_s *)initParam_;
+
   switch (pidType)
   {
   case PID_SPEED: // PID in speed mode
@@ -149,40 +216,40 @@ float CTRL_PID_c::PID_Calculate(float get, float set)
     pidData_.err[NOW] = pidData_.set[NOW] - pidData_.get[NOW];
 
     /* Is in deadband */
-    if (pidParm.deadBand != 0 && ABS(pidData_.err[NOW]) < pidParm.deadBand)
+    if (param->deadBand != 0 && abs(pidData_.err[NOW]) < param->deadBand)
       return 0.0f;
 
     /* PID calculate */
-    pidData_.pOut = pidParm.Kp * pidData_.err[NOW];
-    pidData_.iOut += pidParm.Ki * pidData_.err[NOW];
-    pidData_.dOut = pidParm.Kd * (pidData_.err[NOW] - pidData_.err[LAST]);
+    pidData_.pOut = param->Kp * pidData_.err[NOW];
+    pidData_.iOut += param->Ki * pidData_.err[NOW];
+    pidData_.dOut = param->Kd * (pidData_.err[NOW] - pidData_.err[LAST]);
 
     /* Limit integral output */
-    if (pidParm.maxIntegral != 0 && ABS(pidData_.iOut) > pidParm.maxIntegral)
-      pidData_.iOut = (pidData_.iOut > 0) ? pidParm.maxIntegral : -pidParm.maxIntegral;
+    if (param->maxIntegral != 0 && abs(pidData_.iOut) > param->maxIntegral)
+      pidData_.iOut = (pidData_.iOut > 0) ? param->maxIntegral : -param->maxIntegral;
 
     break;
 
   case PID_ANGLE: // PID in angle mode
     /* Get feedback & target value */
-    pidData_.get[NOW] = get - pidParm.errOffset;
-    pidData_.set[NOW] = set - pidParm.errOffset;
+    pidData_.get[NOW] = get - param->errOffset;
+    pidData_.set[NOW] = set - param->errOffset;
 
     /* Get error value */
-    if (pidParm.errMode == PID_ERRMODE_UNDEF)
+    if (param->errMode == PID_ERRMODE_UNDEF)
       return 0.0f;
 
-    if (pidParm.errMode == PID_ERRMODE_ENCODE)
+    if (param->errMode == PID_ERRMODE_ENCODE)
     {
       pidData_.err[NOW] = pidData_.set[NOW] - pidData_.get[NOW];
       
-      if (pidData_.err[NOW] > pidParm.errRange / 2)
-        pidData_.err[NOW] -= pidParm.errRange;
-      else if (pidData_.err[NOW] < -pidParm.errRange / 2)
-        pidData_.err[NOW] += pidParm.errRange;
+      if (pidData_.err[NOW] > param->errRange / 2)
+        pidData_.err[NOW] -= param->errRange;
+      else if (pidData_.err[NOW] < -param->errRange / 2)
+        pidData_.err[NOW] += param->errRange;
     }
 
-    if (pidParm.errMode == PID_ERRMODE_DEGREE)
+    if (param->errMode == PID_ERRMODE_DEGREE)
     {
       pidData_.err[NOW] = pidData_.set[NOW] - pidData_.get[NOW];
       
@@ -193,38 +260,38 @@ float CTRL_PID_c::PID_Calculate(float get, float set)
     }
 
     /* Is in deadband */
-    if (pidParm.deadBand != 0 && ABS(pidData_.err[NOW]) < pidParm.deadBand)
+    if (param->deadBand != 0 && abs(pidData_.err[NOW]) < param->deadBand)
       return 0.0f;
     
     /* PID calculate */
-    pidData_.pOut = pidParm.Kp * pidData_.err[NOW];
-    pidData_.iOut += pidParm.Ki * pidData_.err[NOW];
-    pidData_.dOut = pidParm.Kd * (pidData_.err[NOW] - pidData_.err[LAST]);
+    pidData_.pOut = param->Kp * pidData_.err[NOW];
+    pidData_.iOut += param->Ki * pidData_.err[NOW];
+    pidData_.dOut = param->Kd * (pidData_.err[NOW] - pidData_.err[LAST]);
 
     /* Limit integral output */
-    if (pidParm.maxIntegral != 0 && ABS(pidData_.iOut) > pidParm.maxIntegral)
-      pidData_.iOut = (pidData_.iOut > 0) ? pidParm.maxIntegral : -pidParm.maxIntegral;
+    if (param->maxIntegral != 0 && abs(pidData_.iOut) > param->maxIntegral)
+      pidData_.iOut = (pidData_.iOut > 0) ? param->maxIntegral : -param->maxIntegral;
 
     break;
 
   case PID_POSIT: // PID in position mode
     /* Get feedback & target value */
-    pidData_.get[NOW] = get - pidParm.errOffset;
-    pidData_.set[NOW] = set - pidParm.errOffset;
+    pidData_.get[NOW] = get - param->errOffset;
+    pidData_.set[NOW] = set - param->errOffset;
     pidData_.err[NOW] = pidData_.set[NOW] - pidData_.get[NOW];
 
     /* Is in deadband */
-    if (pidParm.deadBand != 0 && ABS(pidData_.err[NOW]) < pidParm.deadBand)
+    if (param->deadBand != 0 && abs(pidData_.err[NOW]) < param->deadBand)
       return 0.0f;
 
     /* PID calculate */
-    pidData_.pOut = pidParm.Kp * pidData_.err[NOW];
-    pidData_.iOut += pidParm.Ki * pidData_.err[NOW];
-    pidData_.dOut = pidParm.Kd * (pidData_.err[NOW] - pidData_.err[LAST]);
+    pidData_.pOut =  param->Kp * pidData_.err[NOW];
+    pidData_.iOut += param->Ki * pidData_.err[NOW];
+    pidData_.dOut =  param->Kd * (pidData_.err[NOW] - pidData_.err[LAST]);
 
     /* Limit integral output */
-    if (pidParm.maxIntegral != 0 && ABS(pidData_.iOut) > pidParm.maxIntegral)
-      pidData_.iOut = (pidData_.iOut > 0) ? pidParm.maxIntegral : -pidParm.maxIntegral;
+    if (param->maxIntegral != 0 && abs(pidData_.iOut) > param->maxIntegral)
+      pidData_.iOut = (pidData_.iOut > 0) ? param->maxIntegral : -param->maxIntegral;
     
     break;
 
@@ -240,8 +307,8 @@ float CTRL_PID_c::PID_Calculate(float get, float set)
   pidData_.output = pidData_.pOut + pidData_.iOut + pidData_.dOut;
 
   /* Limit output */
-  if (pidParm.maxOutput != 0 && ABS(pidData_.output) > pidParm.maxOutput)
-    pidData_.output = (pidData_.output > 0) ? pidParm.maxOutput : -pidParm.maxOutput;
+  if (param->maxOutput != 0 && abs(pidData_.output) > param->maxOutput)
+    pidData_.output = (pidData_.output > 0) ? param->maxOutput : -param->maxOutput;
 
   /* Update data record */
   pidData_.get[LLAST] = pidData_.get[LAST];

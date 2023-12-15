@@ -16,6 +16,21 @@
 namespace comm {
 
 /**
+ * @brief  Construct a new comm::COMM_UART_InitParam_s struct
+ * 
+ * @return None
+ */
+_COMM_UART_InitParam::_COMM_UART_InitParam()
+{
+  useAutoReceive = DISABLE;
+  rxBufferSize   = 2;
+  rxBufferCount  = 64;
+
+  useAutoTransmit = DISABLE;
+  txQueueLength   = 5;
+}
+
+/**
  * @brief Construct a new comm::COMM_UART_c object
  * 
  */
@@ -29,58 +44,60 @@ COMM_UART_c::COMM_UART_c()
 /**
  * @brief  Initialize the UART communication interface
  * 
- * @param  id (uint8_t) Set the communicate port ID
- * @param  hInterface (UART_HandleTypeDef *) Set the handle of the communication interface
- * @param  pStruct (COMM_UART_InitParam_s *) Set the UART specific parameters
+ * @param  initParam Pointer to the initialization parameters
  * @return None
  */
-void COMM_UART_c::InitComm(uint8_t id, void *hInterface, ...)
+void COMM_UART_c::InitComm(COMM_InitParam_s *initParam)
 {
-  /* Check id and hInterface */
-  if (id == NULL || hInterface == nullptr)
+  /* Check initParam */
+  if (initParam == nullptr)
+    return;
+
+  if (initParam->comID == NULL || initParam->hInterface == nullptr)
+    return;
+
+  if (initParam->comType != COMM_UART)
     return;
 
   Stop();
 
-  /* Get args */
-  va_list args;
-  va_start(args, hInterface);
+  /* Get parameters */
+  if (initParam_ != nullptr)
+    delete initParam_;
 
-  comID            = id;
-  hInterface_      = hInterface;
-  useAutoReceive_  = DISABLE;
-  useAutoTransmit_ = DISABLE;
+  initParam_ = new COMM_UART_InitParam_s;
+  memcpy(initParam_, initParam, sizeof(COMM_UART_InitParam_s));
 
-  auto pStruct = va_arg(args, COMM_UART_InitParam_s *);
+  auto param = (COMM_UART_InitParam_s *)initParam_;
 
-  if (pStruct->useAutoReceive == ENABLE)  // Use DMA to receive data
+  /* Initialize */
+  comID            = param->comID;
+
+  hInterface_      = param->hInterface;
+  useAutoReceive_  = param->useAutoReceive;
+  useAutoTransmit_ = param->useAutoTransmit;
+
+  if (useAutoReceive_)  // Use DMA to receive data
   {
-    useAutoReceive_ = ENABLE;
-
-    for (uint16_t i = 0; i < pStruct->rxBufferCount; i++)
+    for (uint16_t i = 0; i < param->rxBufferCount; i++)
     {
-      auto pBuffer = CreateBuffer(pStruct->rxBufferSize);
+      auto pBuffer = CreateBuffer(param->rxBufferSize);
       rxBuffer_.push_back(pBuffer);
     }
 
   }
 
-  if (pStruct->useAutoTransmit == ENABLE) // Use DMA to transmit data
-  {
-    useAutoTransmit_ = ENABLE;
-    txQueueLength_   = pStruct->txQueueLength;
-
-  }
+  if (useAutoTransmit_) // Use DMA to transmit data
+    txQueueLength_   = param->txQueueLength;
 
   /* Update iterator */
   rxBufferIt_ = rxBuffer_.begin();
   txBufferIt_ = txBuffer_.begin();
 
-  /* Regist comm port */
+  /* Regist */
   AddCommPort(this);
 
-  /* Clean up */
-  va_end(args);
+  /* Update state */
   comState = COMM_STOP;
 }
 

@@ -22,7 +22,9 @@ namespace filter {
  */
 _FL_InitParam::_FL_InitParam()
 {
+  algoType = ALGO_FL;
 
+  flType = FL_UNDEF;
 }
 
 
@@ -34,8 +36,9 @@ _FL_InitParam::_FL_InitParam()
  */
 FILTER_c::FILTER_c()
 {
+  algoType = ALGO_FL;
+
   flType  = FL_UNDEF;
-  flState = FL_RESET;
 
   initParam_ = nullptr;
 }
@@ -50,10 +53,7 @@ FILTER_c::FILTER_c()
 FILTER_c::~FILTER_c()
 {
   if (initParam_ != nullptr)
-  {
     delete initParam_;
-    initParam_ = nullptr;
-  }
 
 }
 
