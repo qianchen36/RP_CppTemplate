@@ -41,7 +41,7 @@ class MOD_CHASSIS_c : public MODULE_c
 protected:
   device::motor::MOTOR_c *mtrHandler_[4];
 
-  void CalcMotorOutput(float vx, float vy, float w, int16_t *output);
+  void CalcMotorOutput(float32_t vx, float32_t vy, float32_t w, int16_t *output);
 
 public:
   MOD_CHASSIS_c();

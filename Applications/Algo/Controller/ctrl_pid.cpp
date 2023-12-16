@@ -114,10 +114,10 @@ void CTRL_PID_c::InitAlgo(ALGO_InitParam_s *initParam)
 /**
  * @brief  Update the PID controller
  * 
- * @param  input (float *) Pointer to the input value, [0] is feedback value, [1] is target value
- * @return (float) Controller output
+ * @param  input (float32_t *) Pointer to the input value, [0] is feedback value, [1] is target value
+ * @return (float32_t) Controller output
  */
-float CTRL_PID_c::UpdateAlgo(const float *input)
+float32_t CTRL_PID_c::UpdateAlgo(const float32_t *input)
 {
   /* Check state */
   if (algoState != ALGO_IDLE)
@@ -126,8 +126,8 @@ float CTRL_PID_c::UpdateAlgo(const float *input)
   algoState = ALGO_BUSY;
 
   /* Get args */
-  float get = input[0];
-  float set = input[1];
+  float32_t get = input[0];
+  float32_t set = input[1];
 
   /* Calculate */
   auto rtv = PID_Calculate(get, set);
@@ -143,11 +143,11 @@ float CTRL_PID_c::UpdateAlgo(const float *input)
 /**
  * @brief  Update the PID controller
  * 
- * @param  input (float *) Pointer to the input value, [0] is feedback value, [1] is target value
- * @param  output (float *) Pointer to the output value
+ * @param  input (float32_t *) Pointer to the input value, [0] is feedback value, [1] is target value
+ * @param  output (float32_t *) Pointer to the output value
  * @return None
  */
-void CTRL_PID_c::UpdateAlgo(const float *input, float *output)
+void CTRL_PID_c::UpdateAlgo(const float32_t *input, float32_t *output)
 {
   /* Check state */
   if (algoState != ALGO_IDLE)
@@ -156,8 +156,8 @@ void CTRL_PID_c::UpdateAlgo(const float *input, float *output)
   algoState = ALGO_BUSY;
 
   /* Get args */
-  float get = input[0];
-  float set = input[1];
+  float32_t get = input[0];
+  float32_t set = input[1];
 
   /* Calculate */
   *output = PID_Calculate(get, set);
@@ -199,7 +199,7 @@ CTRL_PID_c *CTRL_PID_c::GetObjectHandler(void)
  * @param  set Target value
  * @return PID controller output
  */
-float CTRL_PID_c::PID_Calculate(float get, float set)
+float32_t CTRL_PID_c::PID_Calculate(float32_t get, float32_t set)
 {
   /* Check type & state */
   if (pidType == PID_UNDEF)

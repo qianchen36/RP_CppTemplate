@@ -40,11 +40,11 @@ typedef enum
 
 typedef struct
 {
-  float get[3];
-  float set[3];
-  float err[3];
-  float pOut, iOut, dOut;
-  float output;
+  float32_t get[3];
+  float32_t set[3];
+  float32_t err[3];
+  float32_t pOut, iOut, dOut;
+  float32_t output;
 
 } CTRL_PID_Data_t;
 
@@ -52,9 +52,9 @@ typedef struct _CTRL_PID_InitParam : public _CTRL_InitParam
 {
   CTRL_PID_Type_e pidType;
 
-  float Kp;
-  float Ki;
-  float Kd;
+  float32_t Kp;
+  float32_t Ki;
+  float32_t Kd;
 
   uint16_t deadBand;
   uint16_t maxOutput;
@@ -75,7 +75,7 @@ class CTRL_PID_c : public CONTROLLER_c
 protected:
   CTRL_PID_Data_t pidData_;
 
-  float PID_Calculate(float get, float set);
+  float32_t PID_Calculate(float32_t get, float32_t set);
 
 public:
   CTRL_PID_Type_e   pidType;
@@ -84,8 +84,8 @@ public:
   ~CTRL_PID_c();
 
   void InitAlgo(ALGO_InitParam_s *initParam) override;
-  float UpdateAlgo(const float *input) override;
-  void UpdateAlgo(const float *input, float *output) override;
+  float32_t UpdateAlgo(const float32_t *input) override;
+  void UpdateAlgo(const float32_t *input, float32_t *output) override;
   void ResetAlgo(void) override;
   CTRL_PID_c *GetObjectHandler(void) override;
 

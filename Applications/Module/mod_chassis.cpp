@@ -146,7 +146,7 @@ MOD_CHASSIS_c *MOD_CHASSIS_c::GetObjectHandler(void)
  * @param  output  Pointer to output current array
  * @retval None
  */
-void MOD_CHASSIS_c::CalcMotorOutput(float vx, float vy, float w, int16_t *output)
+void MOD_CHASSIS_c::CalcMotorOutput(float32_t vx, float32_t vy, float32_t w, int16_t *output)
 {
   /* Check module state */
   if (modStatus == MOD_RESET)
@@ -164,7 +164,7 @@ void MOD_CHASSIS_c::CalcMotorOutput(float vx, float vy, float w, int16_t *output
   w  *= 1.0f;
 
   /* Calculate Inverse Kinematics */
-  float targetSpd[4];
+  float32_t targetSpd[4];
 
   targetSpd[0] = - vx + vy;
   targetSpd[1] = - vx - vy;
@@ -174,13 +174,13 @@ void MOD_CHASSIS_c::CalcMotorOutput(float vx, float vy, float w, int16_t *output
   /* Limit target speed */
   if (param->useSpeedLimit)
   {
-    float scale = 1.0f;
+    float32_t scale = 1.0f;
 
     for (uint8_t i = 0; i < 4; i ++)
     {
       if (abs(targetSpd[i] + w) > maxWheelSpeed)
       {
-        float s = targetSpd[i] / (maxWheelSpeed - w);
+        float32_t s = targetSpd[i] / (maxWheelSpeed - w);
         scale = (s < scale) ? s : scale;
       }
 

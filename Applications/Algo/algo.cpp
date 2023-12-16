@@ -86,9 +86,9 @@ void ALGO_c::InitAlgo(ALGO_InitParam_s *initParam)
  * @brief  Update the Algo
  * 
  * @param  input Pointer to the Algo input
- * @return (float) Output value
+ * @return (float32_t) Output value
  */
-float ALGO_c::UpdateAlgo(const float *input)
+float32_t ALGO_c::UpdateAlgo(const float32_t *input)
 { return NULL; }
 
 
@@ -100,7 +100,7 @@ float ALGO_c::UpdateAlgo(const float *input)
  * @param  output Pointer to the Algo output
  * @return None
  */
-void ALGO_c::UpdateAlgo(const float *input, float *output)
+void ALGO_c::UpdateAlgo(const float32_t *input, float32_t *output)
 { return; }
 
 

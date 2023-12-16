@@ -63,8 +63,8 @@ public:
   void HeartbeatDevice(void) override;
   MOTOR_c *GetObjectHandler(void) override;
 
-  virtual float CalcMotorController(uint8_t id, float set);
-  virtual float CalcMotorController(uint8_t id, float get, float set);
+  virtual float32_t CalcMotorController(uint8_t id, float32_t set);
+  virtual float32_t CalcMotorController(uint8_t id, float32_t get, float32_t set);
   virtual void AddMotorController(uint8_t id, algo::controller::CONTROLLER_c *ctrl);
   virtual void DelMotorController(uint8_t id);
 };

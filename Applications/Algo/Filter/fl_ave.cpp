@@ -92,12 +92,12 @@ void FL_AVE_c::InitAlgo(ALGO_InitParam_s *initParam)
 /**
  * @brief  Update the filter
  * 
- * @param  input (const float *) Pointer to input value
- * @return (float) Output value
+ * @param  input (const float32_t *) Pointer to input value
+ * @return (float32_t) Output value
  */
-float FL_AVE_c::UpdateAlgo(const float *input)
+float32_t FL_AVE_c::UpdateAlgo(const float32_t *input)
 {
-  float output = 0.0f;
+  float32_t output = 0.0f;
 
   UpdateAlgo(input, &output);
 
@@ -109,11 +109,11 @@ float FL_AVE_c::UpdateAlgo(const float *input)
 /**
  * @brief  Update the filter
  * 
- * @param  input (const float *) Pointer to input value
- * @param  output (float *) Pointer to output value
+ * @param  input (const float32_t *) Pointer to input value
+ * @param  output (float32_t *) Pointer to output value
  * @return None
  */
-void FL_AVE_c::UpdateAlgo(const float *input, float *output)
+void FL_AVE_c::UpdateAlgo(const float32_t *input, float32_t *output)
 {
   if (algoState != ALGO_IDLE)
     return;
@@ -147,7 +147,7 @@ void FL_AVE_c::ResetAlgo(void)
   if (algoState != ALGO_IDLE)
     return;
 
-  memset(averageBuffer_, 0, averageSize_ * sizeof(float));
+  memset(averageBuffer_, 0, averageSize_ * sizeof(float32_t));
 }
 
 

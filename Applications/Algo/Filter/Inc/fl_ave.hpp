@@ -31,16 +31,16 @@ typedef struct _FL_AVE_Initparam : public _FL_InitParam
 class FL_AVE_c : public FILTER_c
 {
 protected:
-  uint8_t averageSize_;
-  float  *averageBuffer_;
+  uint8_t    averageSize_;
+  float32_t *averageBuffer_;
 
 public:
   FL_AVE_c();
   ~FL_AVE_c();
 
   void InitAlgo(ALGO_InitParam_s *initParam) override;
-  float UpdateAlgo(const float *input) override;
-  void UpdateAlgo(const float *input, float *output) override;
+  float32_t UpdateAlgo(const float32_t *input) override;
+  void UpdateAlgo(const float32_t *input, float32_t *output) override;
   void ResetAlgo(void) override;
   FL_AVE_c *GetObjectHandler(void) override;
 

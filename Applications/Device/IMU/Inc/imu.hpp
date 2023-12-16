@@ -26,8 +26,8 @@ typedef struct _IMU_InitParam : public _DEV_InitParam
 {
   IMU_Type_e imuType;
 
-  float localGravity;
-  float refreshRate;
+  float32_t localGravity;
+  float32_t refreshRate;
 
   FUNC_STATE_e useRpySolve;
 
@@ -40,12 +40,12 @@ typedef struct _IMU_InitParam : public _DEV_InitParam
 class IMU_c : public DEVICE_c
 {
 protected:
-  float g_;
-  float halfT_;
+  float32_t g_;
+  float32_t halfT_;
 
 public:
-  IMU_Type_e         imuType;
-  std::vector<float> imuData;
+  IMU_Type_e             imuType;
+  std::vector<float32_t> imuData;
 
   IMU_c();
   ~IMU_c();

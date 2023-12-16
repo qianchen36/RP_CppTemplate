@@ -120,9 +120,9 @@ MOTOR_c *MOTOR_c::GetObjectHandler(void)
  * 
  * @param  id Controller ID
  * @param  set Target value
- * @return (float) Controller output
+ * @return (float32_t) Controller output
  */
-float MOTOR_c::CalcMotorController(uint8_t id, float set)
+float32_t MOTOR_c::CalcMotorController(uint8_t id, float32_t set)
 {
   if (id == NULL || id >= MTR_CTRL_CNT)
     return 0;
@@ -167,9 +167,9 @@ float MOTOR_c::CalcMotorController(uint8_t id, float set)
  * @param  id Controller ID
  * @param  get Feedback value
  * @param  set Target value
- * @return (float) Controller output
+ * @return (float32_t) Controller output
  */
-float MOTOR_c::CalcMotorController(uint8_t id, float get, float set)
+float32_t MOTOR_c::CalcMotorController(uint8_t id, float32_t get, float32_t set)
 {
   if (id == NULL || devState == DEV_OFFLINE)
     return 0;
@@ -177,7 +177,7 @@ float MOTOR_c::CalcMotorController(uint8_t id, float get, float set)
   if (!mtrCtrlList.count(id))
     return 0;
 
-  float input[] = {get, set};
+  float32_t input[] = {get, set};
 
   return mtrCtrlList[id]->UpdateAlgo(input);
 }

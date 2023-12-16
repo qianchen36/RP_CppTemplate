@@ -17,19 +17,20 @@ namespace comm {
 
 _COMM_CAN_InitParam::_COMM_CAN_InitParam()
 {
-  comID = NULL;
-  comType = COMM_CAN;
+  comID      = NULL;
+  comType    = COMM_CAN;
   hInterface = nullptr;
 
-  FilterBank = 0;
-  FilterMode = CAN_FILTERMODE_IDMASK;
-  FilterScale = CAN_FILTERSCALE_32BIT;
-  FilterIdHigh = 0;
-  FilterIdLow = 0;
-  FilterMaskIdHigh = 0;
-  FilterMaskIdLow = 0;
+  FilterBank           = 0;
+  FilterMode           = CAN_FILTERMODE_IDMASK;
+  FilterScale          = CAN_FILTERSCALE_32BIT;
+  FilterIdHigh         = 0;
+  FilterIdLow          = 0;
+  FilterMaskIdHigh     = 0;
+  FilterMaskIdLow      = 0;
   FilterFIFOAssignment = CAN_RX_FIFO0;
-  FilterActivation = ENABLE;
+  FilterActivation     = ENABLE;
+  SlaveStartFilterBank = 14;
 }
 
 /**
