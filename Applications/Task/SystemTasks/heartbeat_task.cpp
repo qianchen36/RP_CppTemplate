@@ -16,7 +16,7 @@ namespace task {
 
 namespace sys_task {
 
-osThreadId_t heartbeatTaskHandle;
+TaskHandle_t heartbeatTaskHandle;
 
 /**
   * @brief  Function implementing the heartbeatTask thread.
@@ -31,7 +31,7 @@ extern "C" void StartHeartbeatTask(void *argument)
   {
     device::DEVICE_Heartbeat();
 
-    osDelay(10);
+    vTaskDelay(10);
   }
 
 }

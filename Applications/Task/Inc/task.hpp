@@ -13,11 +13,15 @@
 #define __TASK_HPP__
 
 #include "task_def.hpp"
+#include "board.hpp"
 
 namespace task {
 
 
 
 } // namespace task
+
+#include "system_task.hpp"
+#include "user_task.hpp"
 
 #endif // __TASK_HPP__

@@ -337,7 +337,7 @@
               <MiscControls/>
               <Define>USE_HAL_DRIVER,STM32F407xx</Define>
               <Undefine/>
-              <IncludePath>.eide\deps;Applications\Algo\Inc;Applications\Algo\Filter\Inc;Applications\Algo\Controller\Inc;Applications\Comm\Inc;Applications\Config\Inc;Applications\Device\Inc;Applications\Device\RC\Inc;Applications\Device\Motor\Inc;Applications\Device\IMU\Inc;Applications\Module\Inc;Applications\Task\Inc;Boards\Dbldeck_MasterCtrl\Core\Inc;Boards\Dbldeck_MasterCtrl\BSP\Inc;Boards\Dbldeck_MasterCtrl\FATFS\Target;Boards\Dbldeck_MasterCtrl\FATFS\App;Boards\Dbldeck_MasterCtrl\USB_DEVICE\App;Boards\Dbldeck_MasterCtrl\USB_DEVICE\Target;Boards\Dbldeck_MasterCtrl\MDK-ARM\RTE\_Dbldeck_MasterCtrl;Drivers\CMSIS\Include;Drivers\CMSIS\Device\ST\STM32F4xx\Include;Drivers\STM32F4xx_HAL_Driver\Inc;Drivers\STM32F4xx_HAL_Driver\Inc\Legacy;Middlewares\FatFs\src;Middlewares\FreeRTOS\Source\include;Middlewares\FreeRTOS\Source\CMSIS_RTOS_V2;Middlewares\FreeRTOS\Source\portable\GCC\ARM_CM4F;Middlewares\STM32_USB_Device_Library\Core\Inc;Middlewares\STM32_USB_Device_Library\Class\CDC\Inc;Middlewares\CMSIS_DSP\Include;Middlewares\CMSIS_DSP\PrivateInclude;Drivers\BMI270-Sensor-API</IncludePath>
+              <IncludePath>.eide\deps;Applications\Algo\Inc;Applications\Algo\Filter\Inc;Applications\Algo\Controller\Inc;Applications\Comm\Inc;Applications\Config\Inc;Applications\Device\Inc;Applications\Device\RC\Inc;Applications\Device\Motor\Inc;Applications\Device\IMU\Inc;Applications\Module\Inc;Applications\Task\Inc;Boards\Dbldeck_MasterCtrl\Core\Inc;Boards\Dbldeck_MasterCtrl\BSP\Inc;Boards\Dbldeck_MasterCtrl\FATFS\Target;Boards\Dbldeck_MasterCtrl\FATFS\App;Boards\Dbldeck_MasterCtrl\USB_DEVICE\App;Boards\Dbldeck_MasterCtrl\USB_DEVICE\Target;Drivers\CMSIS\Include;Drivers\CMSIS\Device\ST\STM32F4xx\Include;Drivers\STM32F4xx_HAL_Driver\Inc;Drivers\STM32F4xx_HAL_Driver\Inc\Legacy;Drivers\BMI270-Sensor-API;Middlewares\FatFs\src;Middlewares\FreeRTOS\Source\include;Middlewares\FreeRTOS\Source\portable\GCC\ARM_CM4F;Middlewares\STM32_USB_Device_Library\Core\Inc;Middlewares\STM32_USB_Device_Library\Class\CDC\Inc;Middlewares\CMSIS_DSP\Include;Middlewares\CMSIS_DSP\PrivateInclude</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -406,11 +406,6 @@
         <Group>
           <GroupName>Middlewares/FreeRTOS</GroupName>
           <Files>
-            <File>
-              <FileName>cmsis_os2.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>Middlewares/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.c</FilePath>
-            </File>
             <File>
               <FileName>croutine.c</FileName>
               <FileType>1</FileType>
@@ -927,11 +922,6 @@
               <FilePath>Boards/Dbldeck_MasterCtrl/Core/Src/dma.c</FilePath>
             </File>
             <File>
-              <FileName>freertos.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>Boards/Dbldeck_MasterCtrl/Core/Src/freertos.c</FilePath>
-            </File>
-            <File>
               <FileName>gpio.c</FileName>
               <FileType>1</FileType>
               <FilePath>Boards/Dbldeck_MasterCtrl/Core/Src/gpio.c</FilePath>
@@ -1000,6 +990,11 @@
               <FileName>board.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>Boards/Dbldeck_MasterCtrl/BSP/board.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>FreeRTOS_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>Boards/Dbldeck_MasterCtrl/BSP/FreeRTOS_port.c</FilePath>
             </File>
           </Files>
         </Group>

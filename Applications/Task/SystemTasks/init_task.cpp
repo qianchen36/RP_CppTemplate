@@ -18,6 +18,9 @@ namespace task {
 
 namespace sys_task {
 
+/* Init Task */
+TaskHandle_t initTaskHandle;
+
 /**
   * @brief  Function implementing the initTask thread.
   * 
@@ -31,9 +34,9 @@ extern "C" void StartInitTask(void *argument)
 
   /* Startup system tasks */
   #if USE_TEST_TASK == 1U
-  testTaskHandle = osThreadNew(StartTestTask, NULL, &testTask_attributes);
+  xTaskCreate(StartTestTask, "testTask", 128, NULL, 25, &testTaskHandle);
   #else
-  heartbeatTaskHandle = osThreadNew(StartHeartbeatTask, NULL, &heartbeatTask_attributes);
+  xTaskCreate(StartHeartbeatTask, "heartbeatTask", 128, NULL, 1, &heartbeatTaskHandle)
   #endif
 
   /* Startup user tasks */
@@ -42,7 +45,7 @@ extern "C" void StartInitTask(void *argument)
   #endif
 
   /* Delete the initTask */
-  osThreadExit();
+  vTaskDelete(NULL);
 }
 
 } // namespace sys_task

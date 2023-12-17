@@ -15,14 +15,14 @@ namespace task {
 
 namespace sys_task {
 
-osThreadId_t testTaskHandle;
+TaskHandle_t testTaskHandle;
 
 extern "C" void StartTestTask(void *argument)
 {
   while (1)
   {
 
-    osDelay(1);
+    vTaskDelay(1);
   }
 
 }

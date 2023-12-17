@@ -9,29 +9,12 @@
  *
  */
 
-#include "main.h"
-
-#include "cmsis_os.h"
-#include "adc.h"
-#include "can.h"
-#include "crc.h"
-#include "dma.h"
-#include "i2c.h"
-#include "rng.h"
-#include "spi.h"
-#include "tim.h"
-#include "gpio.h"
-#include "iwdg.h"
-#include "sdio.h"
-#include "usart.h"
-#include "fatfs.h"
-#include "usb_device.h"
+#include "board.hpp"
+#include "config.hpp"
 
 extern "C" {
 
-void RunTimeTick_Callback(void);
 void SystemClock_Config(void);
-void MX_FREERTOS_Init(void);
 
 /**
  * @brief  Main program
@@ -51,11 +34,11 @@ int main(void)
   MX_CAN2_Init();
   MX_USART2_UART_Init();
 
-  /* FreeRTOS Initialize */
-  osKernelInitialize();
-  MX_FREERTOS_Init();
+  /* Application Initialize */
+  config::ApplicationInitialize();
 
-  osKernelStart();  // Start thread execution
+  /* FreeRTOS Initialize */
+  vTaskStartScheduler();
 
   return 0;
 }
@@ -73,30 +56,9 @@ int main(void)
  */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-  if (htim->Instance == TIM13)
-    RunTimeTick_Callback();
-
   if (htim->Instance == TIM14)
     HAL_IncTick();
 
 }
-
-
-
-/* Timer for Generating FreeRTOS Runtime States */
-uint64_t osRunTimeTicks = 0;
-
-void configureTimerForRunTimeStats(void)
-{
-  MX_TIM13_Init();
-  osRunTimeTicks = 0;
-  HAL_TIM_Base_Start_IT(&htim13);
-}
-
-unsigned long getRunTimeCounterValue(void)
-{ return osRunTimeTicks; }
-
-void RunTimeTick_Callback(void)
-{ osRunTimeTicks++; }
 
 } // extern "C"

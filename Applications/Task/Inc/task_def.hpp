@@ -12,9 +12,6 @@
 #ifndef __TASK_DEF_HPP__
 #define __TASK_DEF_HPP__
 
-#include "main.h"
-#include "cmsis_os.h"
-
 #include "config_task.hpp"
 
 #ifndef USE_TEST_TASK

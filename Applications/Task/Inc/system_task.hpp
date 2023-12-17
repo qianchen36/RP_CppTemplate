@@ -18,25 +18,18 @@ namespace task {
 
 namespace sys_task {
 
+extern TaskHandle_t initTaskHandle;
+extern "C" void StartInitTask(void *argument);
+
 /* Heartbeat Task */
-extern osThreadId_t heartbeatTaskHandle;
+extern TaskHandle_t heartbeatTaskHandle;
 extern "C" void StartHeartbeatTask(void *argument);
-const osThreadAttr_t heartbeatTask_attributes = {
-  .name = "heartbeatTask",
-  .stack_size = 256 * 4,
-  .priority = (osPriority_t) osPriorityBelowNormal,
-};
 
 #ifdef USE_TEST_TASK
 
 /* Test Task */
-extern osThreadId_t testTaskHandle;
+extern TaskHandle_t testTaskHandle;
 extern "C" void StartTestTask(void *argument);
-const osThreadAttr_t testTask_attributes = {
-  .name = "testTask",
-  .stack_size = 1024 * 4,
-  .priority = (osPriority_t) osPriorityNormal,
-};
 
 #endif // USE_TEST_TASK
 

@@ -13,6 +13,7 @@
 #define __DEVICE_HPP__
 
 #include "device_def.hpp"
+#include "arm_math.h"
 #include "comm.hpp"
 
 #include <map>

@@ -192,6 +192,9 @@
                 "files": [
                   {
                     "path": "Boards/Dbldeck_MasterCtrl/BSP/board.cpp"
+                  },
+                  {
+                    "path": "Boards/Dbldeck_MasterCtrl/BSP/FreeRTOS_port.c"
                   }
                 ],
                 "folders": []
@@ -210,9 +213,6 @@
                   },
                   {
                     "path": "Boards/Dbldeck_MasterCtrl/Core/Src/dma.c"
-                  },
-                  {
-                    "path": "Boards/Dbldeck_MasterCtrl/Core/Src/freertos.c"
                   },
                   {
                     "path": "Boards/Dbldeck_MasterCtrl/Core/Src/gpio.c"
@@ -577,9 +577,6 @@
             "name": "FreeRTOS",
             "files": [
               {
-                "path": "Middlewares/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.c"
-              },
-              {
                 "path": "Middlewares/FreeRTOS/Source/croutine.c"
               },
               {
@@ -751,7 +748,6 @@
           "Boards/Dbldeck_MasterCtrl/FATFS/App",
           "Boards/Dbldeck_MasterCtrl/USB_DEVICE/App",
           "Boards/Dbldeck_MasterCtrl/USB_DEVICE/Target",
-          "Boards/Dbldeck_MasterCtrl/MDK-ARM/RTE/_Dbldeck_MasterCtrl",
           "Drivers/CMSIS/Include",
           "Drivers/CMSIS/Device/ST/STM32F4xx/Include",
           "Drivers/STM32F4xx_HAL_Driver/Inc",
@@ -759,7 +755,6 @@
           "Drivers/BMI270-Sensor-API",
           "Middlewares/FatFs/src",
           "Middlewares/FreeRTOS/Source/include",
-          "Middlewares/FreeRTOS/Source/CMSIS_RTOS_V2",
           "Middlewares/FreeRTOS/Source/portable/GCC/ARM_CM4F",
           "Middlewares/STM32_USB_Device_Library/Core/Inc",
           "Middlewares/STM32_USB_Device_Library/Class/CDC/Inc",
@@ -856,7 +851,6 @@
           "Boards/Dbldeck_MasterCtrl/FATFS/App",
           "Boards/Dbldeck_MasterCtrl/USB_DEVICE/App",
           "Boards/Dbldeck_MasterCtrl/USB_DEVICE/Target",
-          "Boards/Dbldeck_MasterCtrl/MDK-ARM/RTE/_Dbldeck_MasterCtrl",
           "Drivers/CMSIS/Include",
           "Drivers/CMSIS/Device/ST/STM32F4xx/Include",
           "Drivers/STM32F4xx_HAL_Driver/Inc",
@@ -864,7 +858,6 @@
           "Drivers/BMI270-Sensor-API",
           "Middlewares/FatFs/src",
           "Middlewares/FreeRTOS/Source/include",
-          "Middlewares/FreeRTOS/Source/CMSIS_RTOS_V2",
           "Middlewares/FreeRTOS/Source/portable/GCC/ARM_CM4F",
           "Middlewares/STM32_USB_Device_Library/Core/Inc",
           "Middlewares/STM32_USB_Device_Library/Class/CDC/Inc",

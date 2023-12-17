@@ -13,6 +13,13 @@
 #define __CONFIG_HPP__
 
 #include "config_def.hpp"
+
+namespace config {
+
+void ApplicationInitialize(void);
+
+} // namespace config
+
 #include "config_comm.hpp"
 #include "config_device.hpp"
 #include "config_task.hpp"

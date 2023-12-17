@@ -13,7 +13,6 @@
 #define _MODULE_DEF_HPP_
 
 #include "main.h"
-#include "cmsis_os.h"
 #include "config.hpp"
 
 namespace module {
