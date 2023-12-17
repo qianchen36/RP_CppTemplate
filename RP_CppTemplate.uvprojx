@@ -1009,17 +1009,22 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Application/Task/UserTask</GroupName>
+          <Files>
+            <File>
+              <FileName>monitor_task.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>Applications/Task/UserTasks/monitor_task.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Application/Task/SystemTask</GroupName>
           <Files>
             <File>
               <FileName>heartbeat_task.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>Applications/Task/SystemTasks/heartbeat_task.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>init_task.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>Applications/Task/SystemTasks/init_task.cpp</FilePath>
             </File>
             <File>
               <FileName>test_task.cpp</FileName>
@@ -1120,6 +1125,11 @@
               <FileName>config_device.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>Applications/Config/config_device.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>config_module.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>Applications/Config/config_module.cpp</FilePath>
             </File>
             <File>
               <FileName>config_task.cpp</FileName>
