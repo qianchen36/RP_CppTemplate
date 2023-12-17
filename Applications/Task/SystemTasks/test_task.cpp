@@ -18,8 +18,6 @@ namespace sys_task {
 /* Test task Handle */
 TaskHandle_t testTaskHandle;
 
-
-
 /**
  * @brief  Test task entry function
  * 

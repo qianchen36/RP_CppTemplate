@@ -18,8 +18,6 @@ namespace user_task {
 /* Monitor task handle */
 TaskHandle_t monitorTaskHandle;
 
-
-
 /**
  * @brief  Monitor task entry function
  * 

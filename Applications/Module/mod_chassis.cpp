@@ -104,18 +104,6 @@ void MOD_CHASSIS_c::InitModule(MOD_InitParam_t *initParam)
 
 
 /**
- * @brief  Update chassis module
- * 
- * @retval None
- */
-void MOD_CHASSIS_c::UpdateModule(void)
-{
-
-}
-
-
-
-/**
  * @brief  Heartbeat chassis module
  * 
  * @retval None

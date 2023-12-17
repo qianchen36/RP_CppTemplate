@@ -48,7 +48,6 @@ public:
   ~MOD_CHASSIS_c();
 
   void InitModule(MOD_InitParam_t *initParam) override;
-  void UpdateModule(void) override;
   void HeartbeatModule(void) override;
   MOD_CHASSIS_c *GetObjectHandler(void) override;
 

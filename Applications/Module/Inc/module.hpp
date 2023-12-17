@@ -45,7 +45,6 @@ public:
   ~MODULE_c();
 
   virtual void InitModule(MOD_InitParam_t *initParam) = 0;
-  virtual void UpdateModule(void) = 0;
   virtual void HeartbeatModule(void) = 0;
   virtual MODULE_c *GetObjectHandler(void) = 0;
 

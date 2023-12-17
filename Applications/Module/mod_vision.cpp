@@ -46,13 +46,6 @@ void MOD_VISION_c::InitModule(MOD_InitParam_t *initParam)
 
 
 
-void MOD_VISION_c::UpdateModule(void)
-{
-
-}
-
-
-
 void MOD_VISION_c::HeartbeatModule(void)
 {
 

@@ -40,7 +40,6 @@ public:
   ~MOD_VISION_c();
 
   void InitModule(MOD_InitParam_t *initParam) override;
-  void UpdateModule(void) override;
   void HeartbeatModule(void) override;
   MOD_VISION_c *GetObjectHandler(void) override;
 
