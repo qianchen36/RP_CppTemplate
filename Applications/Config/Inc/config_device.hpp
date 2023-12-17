@@ -27,4 +27,10 @@ typedef enum
 
 } DEV_ID_e;
 
+namespace config {
+
+void DeviceInitialize(void);
+
+} // namespace config
+
 #endif // __COMFIG_DEVICE_HPP__

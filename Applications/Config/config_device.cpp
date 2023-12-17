@@ -8,3 +8,21 @@
  * @copyright Copyright (c) 2023
  * 
  */
+
+#include "config_device.hpp"
+
+#include "device.hpp"
+
+namespace config {
+
+/**
+ * @brief  Device initialize function
+ * 
+ * @return None
+ */
+void DeviceInitialize(void)
+{
+
+}
+
+} // namespace config

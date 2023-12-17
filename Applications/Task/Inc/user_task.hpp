@@ -18,24 +18,9 @@ namespace task {
 
 namespace user_task {
 
-/**
- * @brief  Startup user tasks
- * 
- * @return None
- * 
- * @note   This function is called in StartInitTask() when USE_USER_TASK was defined,
- *         and it should be implemented by user.
- */
-__weak void StartupUserTasks(void)
-{
-  
-  while (1)
-  {
-    
-    vTaskDelay(10);
-  }
-  
-}
+/* Monitor Task */
+extern TaskHandle_t monitorTaskHandle;
+extern "C" void StartMonitorTask(void *argument);
 
 } // namespace user_task
 

@@ -15,6 +15,9 @@ namespace config {
 
 void ApplicationInitialize(void)
 {
+  CommInitialize();
+  DeviceInitialize();
+  ModuleInitialize();
   TaskInitialize();
 }
 

@@ -8,3 +8,21 @@
  * @copyright Copyright (c) 2023
  * 
  */
+
+#include "config_comm.hpp"
+
+#include "comm.hpp"
+
+namespace config {
+
+/**
+ * @brief  Communication initialize function
+ * 
+ * @return None
+ */
+void CommInitialize(void)
+{
+
+}
+
+} // namespace config

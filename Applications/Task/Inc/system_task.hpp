@@ -18,9 +18,6 @@ namespace task {
 
 namespace sys_task {
 
-extern TaskHandle_t initTaskHandle;
-extern "C" void StartInitTask(void *argument);
-
 /* Heartbeat Task */
 extern TaskHandle_t heartbeatTaskHandle;
 extern "C" void StartHeartbeatTask(void *argument);

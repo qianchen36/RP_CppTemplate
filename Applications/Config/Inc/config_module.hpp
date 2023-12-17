@@ -24,4 +24,10 @@ typedef enum
 
 } MOD_ID_e;
 
+namespace config {
+
+void ModuleInitialize(void);
+
+} // namespace config
+
 #endif // __CONFIG_MODULE_HPP__

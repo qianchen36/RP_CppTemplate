@@ -44,4 +44,10 @@ typedef enum
 
 } COMM_ID_e;
 
+namespace config {
+
+void CommInitialize(void);
+
+} // namespace config
+
 #endif // __CONFIG_COMM_HPP__

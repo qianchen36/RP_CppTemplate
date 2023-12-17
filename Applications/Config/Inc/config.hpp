@@ -22,6 +22,7 @@ void ApplicationInitialize(void);
 
 #include "config_comm.hpp"
 #include "config_device.hpp"
+#include "config_module.hpp"
 #include "config_task.hpp"
 
 #endif // __CONFIG_HPP__

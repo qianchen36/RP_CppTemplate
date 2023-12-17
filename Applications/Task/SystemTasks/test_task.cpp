@@ -15,8 +15,17 @@ namespace task {
 
 namespace sys_task {
 
+/* Test task Handle */
 TaskHandle_t testTaskHandle;
 
+
+
+/**
+ * @brief  Test task entry function
+ * 
+ * @param  argument Not used
+ * @return None
+ */
 extern "C" void StartTestTask(void *argument)
 {
   while (1)

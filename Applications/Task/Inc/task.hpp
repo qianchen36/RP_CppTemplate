@@ -17,8 +17,6 @@
 
 namespace task {
 
-
-
 } // namespace task
 
 #include "system_task.hpp"

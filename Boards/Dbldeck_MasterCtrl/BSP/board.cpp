@@ -34,6 +34,8 @@ int main(void)
   MX_CAN2_Init();
   MX_USART2_UART_Init();
 
+  MX_USB_DEVICE_Init();   // Must be the last
+
   /* Application Initialize */
   config::ApplicationInitialize();
 

@@ -11,25 +11,27 @@
 
 #include "system_task.hpp"
 #include "device.hpp"
+#include "module.hpp"
 
 namespace task {
 
 namespace sys_task {
 
+/* Heartbeat task handle */
 TaskHandle_t heartbeatTaskHandle;
 
 /**
-  * @brief  Function implementing the heartbeatTask thread.
+  * @brief  Heartbeat task entry function
   * 
   * @param  argument: Not used
-  * 
-  * @retval None
+  * @return None
   */
 extern "C" void StartHeartbeatTask(void *argument)
 {
   while (1)
   {
     device::DEVICE_Heartbeat();
+    module::MODULE_Heartbeat();
 
     vTaskDelay(10);
   }

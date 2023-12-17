@@ -75,6 +75,9 @@
                 "path": "Applications/Config/config_device.cpp"
               },
               {
+                "path": "Applications/Config/config_module.cpp"
+              },
+              {
                 "path": "Applications/Config/config_task.cpp"
               },
               {
@@ -162,9 +165,6 @@
                     "path": "Applications/Task/SystemTasks/heartbeat_task.cpp"
                   },
                   {
-                    "path": "Applications/Task/SystemTasks/init_task.cpp"
-                  },
-                  {
                     "path": "Applications/Task/SystemTasks/test_task.cpp"
                   }
                 ],
@@ -172,7 +172,11 @@
               },
               {
                 "name": "UserTask",
-                "files": [],
+                "files": [
+                  {
+                    "path": "Applications/Task/UserTasks/monitor_task.cpp"
+                  }
+                ],
                 "folders": []
               }
             ]

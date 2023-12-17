@@ -64,6 +64,7 @@ RC_ChData_c::~RC_ChData_c()
  */
 RC_ChData_c RC_ChData_c::operator=(const int16_t value)
 {
+  /* Update channel state */
   switch (chType)
   {
   case RC_CH_BUTTON:    // Button
@@ -98,6 +99,7 @@ RC_ChData_c RC_ChData_c::operator=(const int16_t value)
     break;
   }
 
+  /* Update channel value */
   chValue = value;
 
   return *this;

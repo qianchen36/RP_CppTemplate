@@ -14,8 +14,8 @@
 
 #include "config_def.hpp"
 
-#define USE_TEST_TASK 1U
-#define USE_USER_TASK 0U
+#define USE_TEST_TASK 0U
+#define USE_USER_TASK 1U
 
 namespace config {
 
