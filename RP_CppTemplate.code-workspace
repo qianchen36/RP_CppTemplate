@@ -59,7 +59,10 @@
             "cctype": "cpp",
             "cwchar": "cpp",
             "cwctype": "cpp",
-            "list": "cpp"
+            "list": "cpp",
+            "iterator": "cpp",
+            "xtree": "cpp",
+            "xutility": "cpp"
         },
         "[yaml]": {
             "editor.insertSpaces": true,

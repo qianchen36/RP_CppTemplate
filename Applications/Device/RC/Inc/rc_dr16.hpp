@@ -5,7 +5,7 @@
  * @version 1.0
  * @date    2023-11-25
  * 
- * @copyright Copyright (c) 2023
+ * @copyright SZU-RobotPilots Copyright (c) 2023
  * 
  */
 
@@ -34,19 +34,28 @@ typedef enum
   DR16_CH_TW,
   DR16_CH_S1,
   DR16_CH_S2,
-  DR16_CH_MOUSE_X,
-  DR16_CH_MOUSE_Y,
-  DR16_CH_MOUSE_Z,
-  DR16_CH_MOUSE_LEFT,
-  DR16_CH_MOUSE_RIGHT,
+
+  DR16_CH_MOUSE_VX,
+  DR16_CH_MOUSE_VY,
+  DR16_CH_MOUSE_VZ,
+  DR16_CH_MOUSE_L,
+  DR16_CH_MOUSE_R,
   DR16_CH_KEY_W,
   DR16_CH_KEY_S,
   DR16_CH_KEY_A,
   DR16_CH_KEY_D,
+  DR16_CH_KEY_SHIFT,
+  DR16_CH_KEY_CTRL,
   DR16_CH_KEY_Q,
   DR16_CH_KEY_E,
-  DR16_CH_KEY_CTRL,
-  DR16_CH_KEY_SHIFT,
+  DR16_CH_KEY_R,
+  DR16_CH_KEY_F,
+  DR16_CH_KEY_G,
+  DR16_CH_KEY_Z,
+  DR16_CH_KEY_X,
+  DR16_CH_KEY_C,
+  DR16_CH_KEY_V,
+  DR16_CH_KEY_B,
 
   DR16_CH_NUM,
 

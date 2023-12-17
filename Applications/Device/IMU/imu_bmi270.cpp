@@ -5,7 +5,7 @@
  * @version 1.0
  * @date    2023-12-14
  * 
- * @copyright Copyright (c) 2023
+ * @copyright SZU-RobotPilots Copyright (c) 2023
  * 
  */
 

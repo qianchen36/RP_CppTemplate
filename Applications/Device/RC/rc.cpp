@@ -5,7 +5,7 @@
  * @version 1.0
  * @date    2023-11-25
  * 
- * @copyright Copyright (c) 2023
+ * @copyright SZU-RobotPilots Copyright (c) 2023
  * 
  */
 
@@ -28,29 +28,91 @@ _RC_InitParam::_RC_InitParam()
 
 
 /**
- * @brief  Operator= overload for RC_ChData_c
+ * @brief  Construct a new device::rc::RC_ChData_c object
  * 
- * @param  chValue RC channel value
- * @return (bool) Equal or not
+ * @return None
  */
-int16_t RC_ChData_c::operator=(const int16_t chValue)
-{ return (chValue == this->chValue); }
+RC_ChData_c::RC_ChData_c()
+{
+  chType  = RC_CH_UNDEF;
+  chState = CH_RESET;
+  chValue = 0;
+
+  cnt_    = 0;
+  cntMax_ = 100;
+}
 
 
 
 /**
- * @brief  Update the RC channel state
+ * @brief  Destroy the device::rc::RC_ChData_c object
  * 
- * @param  current RC channel current value
- * @return (RC_ChStatus_e) RC channel state 
+ * @return None
  */
-RC_ChStatus_e RC_ChData_c::UpdateChState(int16_t current)
+RC_ChData_c::~RC_ChData_c()
 {
-  if (chType == RC_CH_UNDEF)
-    return CH_RESET;
 
-  return CH_RESET;
 }
+
+
+
+/**
+ * @brief  Operator= overload for RC_ChData_c
+ * 
+ * @param  value RC channel value
+ * @return (RC_ChData_c) RC channel data
+ */
+RC_ChData_c RC_ChData_c::operator=(const int16_t value)
+{
+  switch (chType)
+  {
+  case RC_CH_BUTTON:    // Button
+    if (value)
+    {
+      ++cnt_  = (cnt_ >= cntMax_) ? cntMax_ : cnt_;
+      chState = (cnt_ >= cntMax_) ? CH_LONG_PRESSED : CH_PRESSED;
+    }
+    else
+    {
+      cnt_    = 0;
+      chState = CH_RESET;
+    }
+    
+    break;
+
+  case RC_CH_SWITCH:    // Switch
+    chState = CH_RESET;
+    break;
+
+  case RC_CH_SLIDER:    // Slider
+    chState = CH_RESET;
+    break;
+
+  case RC_CH_JOYSTICK:  // Joystick
+    chState = value >  50 ? CH_UP : CH_RESET;
+    chState = value < -50 ? CH_DN : CH_RESET;
+    break;
+  
+  default:
+    chState = CH_RESET;
+    break;
+  }
+
+  chValue = value;
+
+  return *this;
+}
+
+
+
+/**
+ * @brief  Operator== overload for RC_ChData_c
+ * 
+ * @param  value RC channel value
+ * @return (bool) True if equal
+ */
+bool RC_ChData_c::operator==(const int16_t value)
+{ return chValue == value; }
 
 
 
