@@ -69,7 +69,7 @@ RC_ChData_c RC_ChData_c::operator=(const int16_t value)
   case RC_CH_BUTTON:    // Button
     if (value)
     {
-      ++cnt_  = (cnt_ >= cntMax_) ? cntMax_ : cnt_;
+      cnt_    = (cnt_ >= cntMax_) ? cntMax_ : cnt_ + 1;
       chState = (cnt_ >= cntMax_) ? CH_LONG_PRESSED : CH_PRESSED;
     }
     else
