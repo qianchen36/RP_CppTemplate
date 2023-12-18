@@ -24,6 +24,8 @@ namespace comm {
  */
 _COMM_UART_InitParam::_COMM_UART_InitParam()
 {
+  comType = COMM_UART;
+
   useAutoReceive = DISABLE;
   rxBufferSize   = 2;
   rxBufferCount  = 64;
