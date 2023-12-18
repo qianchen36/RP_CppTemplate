@@ -337,7 +337,7 @@
               <MiscControls/>
               <Define>USE_HAL_DRIVER,STM32F407xx</Define>
               <Undefine/>
-              <IncludePath>.eide\deps;Applications\Algo\Inc;Applications\Algo\Filter\Inc;Applications\Algo\Controller\Inc;Applications\Comm\Inc;Applications\Config\Inc;Applications\Device\Inc;Applications\Device\RC\Inc;Applications\Device\Motor\Inc;Applications\Device\IMU\Inc;Applications\Module\Inc;Applications\Task\Inc;Boards\Dbldeck_MasterCtrl\Core\Inc;Boards\Dbldeck_MasterCtrl\BSP\Inc;Boards\Dbldeck_MasterCtrl\FATFS\Target;Boards\Dbldeck_MasterCtrl\FATFS\App;Boards\Dbldeck_MasterCtrl\USB_DEVICE\App;Boards\Dbldeck_MasterCtrl\USB_DEVICE\Target;Drivers\CMSIS\Include;Drivers\CMSIS\Device\ST\STM32F4xx\Include;Drivers\STM32F4xx_HAL_Driver\Inc;Drivers\STM32F4xx_HAL_Driver\Inc\Legacy;Drivers\BMI270-Sensor-API;Middlewares\FatFs\src;Middlewares\FreeRTOS\Source\include;Middlewares\FreeRTOS\Source\portable\GCC\ARM_CM4F;Middlewares\STM32_USB_Device_Library\Core\Inc;Middlewares\STM32_USB_Device_Library\Class\CDC\Inc;Middlewares\CMSIS_DSP\Include;Middlewares\CMSIS_DSP\PrivateInclude</IncludePath>
+              <IncludePath>.eide\deps;Applications\Config\Inc;Applications\Algo\Inc;Applications\Algo\Filter\Inc;Applications\Algo\Controller\Inc;Applications\Comm\Inc;Applications\Device\Inc;Applications\Device\RC\Inc;Applications\Device\Motor\Inc;Applications\Device\IMU\Inc;Applications\Module\Inc;Applications\System\Inc;Applications\System\Notify\Inc;Applications\System\Task\Inc;Boards\Dbldeck_MasterCtrl\Core\Inc;Boards\Dbldeck_MasterCtrl\BSP\Inc;Boards\Dbldeck_MasterCtrl\FATFS\Target;Boards\Dbldeck_MasterCtrl\FATFS\App;Boards\Dbldeck_MasterCtrl\USB_DEVICE\App;Boards\Dbldeck_MasterCtrl\USB_DEVICE\Target;Drivers\CMSIS\Include;Drivers\CMSIS\Device\ST\STM32F4xx\Include;Drivers\STM32F4xx_HAL_Driver\Inc;Drivers\STM32F4xx_HAL_Driver\Inc\Legacy;Drivers\BMI270-Sensor-API;Middlewares\FatFs\src;Middlewares\FreeRTOS\Source\include;Middlewares\FreeRTOS\Source\portable\GCC\ARM_CM4F;Middlewares\STM32_USB_Device_Library\Core\Inc;Middlewares\STM32_USB_Device_Library\Class\CDC\Inc;Middlewares\CMSIS_DSP\Include;Middlewares\CMSIS_DSP\PrivateInclude</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -999,37 +999,42 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Application/Task</GroupName>
+          <GroupName>Application/System</GroupName>
           <Files>
             <File>
-              <FileName>task.cpp</FileName>
+              <FileName>system.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>Applications/Task/task.cpp</FilePath>
+              <FilePath>Applications/System/system.cpp</FilePath>
             </File>
           </Files>
         </Group>
         <Group>
-          <GroupName>Application/Task/UserTask</GroupName>
-          <Files>
-            <File>
-              <FileName>monitor_task.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>Applications/Task/UserTasks/monitor_task.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Application/Task/SystemTask</GroupName>
+          <GroupName>Application/System/Task</GroupName>
           <Files>
             <File>
               <FileName>heartbeat_task.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>Applications/Task/SystemTasks/heartbeat_task.cpp</FilePath>
+              <FilePath>Applications/System/Task/heartbeat_task.cpp</FilePath>
             </File>
             <File>
-              <FileName>test_task.cpp</FileName>
+              <FileName>monitor_task.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>Applications/Task/SystemTasks/test_task.cpp</FilePath>
+              <FilePath>Applications/System/Task/monitor_task.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>task.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>Applications/System/Task/task.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Application/System/Notify</GroupName>
+          <Files>
+            <File>
+              <FileName>notify.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>Applications/System/Notify/notify.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1132,9 +1137,9 @@
               <FilePath>Applications/Config/config_module.cpp</FilePath>
             </File>
             <File>
-              <FileName>config_task.cpp</FileName>
+              <FileName>config_system.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>Applications/Config/config_task.cpp</FilePath>
+              <FilePath>Applications/Config/config_system.cpp</FilePath>
             </File>
             <File>
               <FileName>config.cpp</FileName>
