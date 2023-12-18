@@ -15,6 +15,8 @@
 #include "main.h"
 #include "config.hpp"
 
+namespace rp {
+
 namespace device {
 
 namespace motor {
@@ -82,5 +84,7 @@ typedef struct
 } // namespace motor
 
 } // namespace device
+
+} // namespace rp
 
 #endif // __MOTOR_DEF_HPP__

@@ -11,6 +11,8 @@
 
 #include "imu.hpp"
 
+namespace rp {
+
 namespace device {
   
 namespace imu {
@@ -84,3 +86,5 @@ IMU_c *IMU_c::GetObjectHandler(void)
 } // namespace imu
 
 } // namespace device
+
+} // namespace rp

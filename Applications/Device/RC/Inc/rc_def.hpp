@@ -15,6 +15,8 @@
 #include "main.h"
 #include "config.hpp"
 
+namespace rp {
+
 namespace device {
 
 namespace rc {
@@ -53,5 +55,7 @@ typedef enum
 } // namespace rc
 
 } // namespace device
+
+} // namespace rp
 
 #endif // __RC_DEF_HPP__

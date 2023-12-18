@@ -11,6 +11,8 @@
 
 #include "rc_dr16.hpp"
 
+namespace rp {
+
 namespace device {
 
 namespace rc {
@@ -198,3 +200,5 @@ void RC_DR16_c::UartNode_ReceiveCallback(uint8_t *pData, uint16_t len)
 } // namespace rc
 
 } // namespace device
+
+} // namespace rp

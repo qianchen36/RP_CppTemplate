@@ -15,6 +15,8 @@
 #include "main.h"
 #include "config.hpp"
 
+namespace rp {
+
 namespace module {
 
 typedef enum
@@ -29,5 +31,7 @@ typedef enum
 } MODULE_Status_e;
 
 } // namespace module
+
+} // namespace rp
 
 #endif // _MODULE_DEF_HPP_

@@ -11,7 +11,7 @@
 
 #include "motor.hpp"
 
-#define ABS(x) ((x > 0) ? (x) : (-x))
+namespace rp {
 
 namespace device {
 
@@ -311,7 +311,7 @@ int32_t MOTOR_c::Angle2Posit(int16_t curAngle, int16_t lstAngle)
   int32_t posit = mtrData[MTR_DATA_POSIT] + error;
 
   /* Check zero crossing */
-  if (ABS(error) > param->encoderResolution / 2)
+  if (abs(error) > param->encoderResolution / 2)
   {
     if (error > 0)
       posit -= param->encoderResolution;
@@ -326,3 +326,5 @@ int32_t MOTOR_c::Angle2Posit(int16_t curAngle, int16_t lstAngle)
 } // namespace motor
 
 } // namespace device
+
+} // namespace rp

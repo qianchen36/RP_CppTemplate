@@ -12,6 +12,8 @@
 #ifndef __ALGO_DEF_HPP__
 #define __ALGO_DEF_HPP__
 
+namespace rp {
+
 namespace algo {
 
 typedef enum
@@ -35,5 +37,7 @@ typedef enum
 } ALGO_Status_e;
 
 } // namespace algo
+
+} // namespace rp
 
 #endif // __ALGO_DEF_HPP__

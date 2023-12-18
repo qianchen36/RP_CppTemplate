@@ -18,6 +18,8 @@
 #include <map>
 #include <vector>
 
+namespace rp {
+
 namespace device {
 
 namespace rc {
@@ -74,6 +76,8 @@ public:
 } // namespace rc
 
 } // namespace device
+
+} // namespace rp
 
 /* Sub include */
 #include "rc_dr16.hpp"

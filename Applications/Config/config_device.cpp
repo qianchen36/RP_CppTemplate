@@ -13,6 +13,8 @@
 
 #include "device.hpp"
 
+namespace rp {
+
 namespace config {
 
 /**
@@ -26,3 +28,5 @@ void DeviceInitialize(void)
 }
 
 } // namespace config
+
+} // namespace rp

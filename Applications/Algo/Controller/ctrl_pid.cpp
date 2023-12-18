@@ -13,6 +13,8 @@
 
 #include <stdarg.h>
 
+namespace rp {
+
 namespace algo {
 
 namespace controller {
@@ -324,3 +326,5 @@ float32_t CTRL_PID_c::PID_Calculate(float32_t get, float32_t set)
 } // namespace controller
 
 } // namespace algo
+
+} // namespace rp

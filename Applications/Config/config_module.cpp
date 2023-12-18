@@ -13,6 +13,8 @@
 
 #include "module.hpp"
 
+namespace rp {
+
 namespace config {
 
 /**
@@ -26,3 +28,5 @@ void ModuleInitialize(void)
 }
 
 } // namespace config
+
+} // namespace rp

@@ -13,6 +13,8 @@
 
 #include <memory>
 
+namespace rp {
+
 namespace algo {
 
 namespace filter {
@@ -163,3 +165,5 @@ FL_AVE_c *FL_AVE_c::GetObjectHandler(void)
 } // namespace filter
 
 } // namespace algo
+
+} // namespace rp

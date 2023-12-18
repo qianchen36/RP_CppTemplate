@@ -13,6 +13,8 @@
 
 #include <stdarg.h>
 
+namespace rp {
+
 namespace comm {
 
 _COMM_SPI_InitParam::_COMM_SPI_InitParam()
@@ -186,3 +188,5 @@ void COMM_SPI_c::SetNssPin(COMM_SPI_NssStatus_e nssState)
 }
 
 } // namespace comm
+
+} // namespace rp

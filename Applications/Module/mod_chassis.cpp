@@ -11,6 +11,8 @@
 
 #include "mod_chassis.hpp"
 
+namespace rp {
+
 namespace module {
 
 /* Export chassis module */
@@ -200,3 +202,5 @@ void MOD_CHASSIS_c::CalcMotorOutput(float32_t vx, float32_t vy, float32_t w, int
 } // namespace chassis
 
 } // namespace module
+
+} // namespace rp

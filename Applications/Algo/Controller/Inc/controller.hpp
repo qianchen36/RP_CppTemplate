@@ -15,6 +15,8 @@
 #include "controller_def.hpp"
 #include "algo.hpp"
 
+namespace rp {
+
 namespace algo {
 
 namespace controller {
@@ -42,5 +44,7 @@ public:
 } // namespace controller
 
 } // namespace algo
+
+} // namespace rp
 
 #endif // __CONTROLLER_HPP__

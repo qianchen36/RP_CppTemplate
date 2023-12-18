@@ -15,6 +15,8 @@
 #include "imu.hpp"
 #include "bmi270.h"
 
+namespace rp {
+
 namespace device {
 
 namespace imu {
@@ -46,5 +48,7 @@ public:
 } // namespace imu
 
 } // namespace device
+
+} // namespace rp
 
 #endif // __IMU_BMI270_HPP__

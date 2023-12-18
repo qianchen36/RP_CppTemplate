@@ -12,6 +12,8 @@
 #ifndef __CONTROLLER_DEF_HPP__
 #define __CONTROLLER_DEF_HPP__
 
+namespace rp {
+
 namespace algo {
 
 namespace controller {
@@ -27,5 +29,7 @@ typedef enum
 } // namespace controller
 
 } // namespace algo
+
+} // namespace rp
 
 #endif // __CONTROLLER_DEF_HPP__

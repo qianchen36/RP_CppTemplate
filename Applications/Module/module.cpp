@@ -11,6 +11,8 @@
 
 #include "module.hpp"
 
+namespace rp {
+
 namespace module {
 
 std::map<uint8_t, MODULE_c *> ModuleList;
@@ -71,3 +73,5 @@ void MODULE_Heartbeat(void)
 }
 
 } // namespace module
+
+} // namespace rp

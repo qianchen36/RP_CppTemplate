@@ -15,6 +15,8 @@
 #include "algo_def.hpp"
 #include "arm_math.h"
 
+namespace rp {
+
 namespace algo {
 
 typedef struct _ALGO_InitParam
@@ -49,5 +51,7 @@ public:
 };
 
 } // namespace algo
+
+} // namespace rp
 
 #endif // __ALGO_HPP__

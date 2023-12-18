@@ -11,6 +11,8 @@
 
 #include "mtr_gm6020.hpp"
 
+namespace rp {
+
 namespace device {
 
 namespace motor {
@@ -143,3 +145,5 @@ void MTR_GM6020_c::CanNode_ReceiveCallback(comm::COMM_CAN_DataPack_s *dataPack)
 } // namespace motor
 
 } // namespace device
+
+} // namespace rp

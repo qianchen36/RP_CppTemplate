@@ -14,6 +14,8 @@
 
 #include "filter.hpp"
 
+namespace rp {
+
 namespace algo {
 
 namespace filter {
@@ -49,5 +51,7 @@ public:
 } // namespace filter
 
 } // namespace algo
+
+} // namespace rp
 
 #endif // __FL_AVE_HPP__

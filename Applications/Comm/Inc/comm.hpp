@@ -16,6 +16,8 @@
 
 #include <map>
 
+namespace rp {
+
 namespace comm {
 
 typedef struct _COMM_InitParam
@@ -58,6 +60,8 @@ public:
 extern std::map<uint8_t, COMM_c *> CommList;
 
 } // namespace comm
+
+} // namespace rp
 
 /* Sub include */
 #include "comm_can.hpp"

@@ -37,10 +37,7 @@ int main(void)
   MX_USB_DEVICE_Init();   // Must be the last
 
   /* Application Initialize */
-  config::ApplicationInitialize();
-
-  /* FreeRTOS Initialize */
-  vTaskStartScheduler();
+  rp::config::ApplicationInitialize();
 
   return 0;
 }

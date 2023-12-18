@@ -15,6 +15,8 @@
 #include "comm.hpp"
 #include "spi.h"
 
+namespace rp {
+
 namespace comm {
 
 typedef enum
@@ -53,6 +55,8 @@ public:
 
 };
 
-}
+} // namespace comm
+
+} // namespace rp
 
 #endif // __COMM_SPI_HPP__

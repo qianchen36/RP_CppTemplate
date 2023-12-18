@@ -13,6 +13,8 @@
 
 #include <stdarg.h>
 
+namespace rp {
+
 namespace comm {
 
 /**
@@ -387,6 +389,8 @@ void COMM_UART_c::DeleteBuffer(COMM_UART_Buffer_s *pBuffer)
 
 } // namespace comm
 
+} // namespace rp
+
 
 
 extern "C" {
@@ -400,11 +404,11 @@ extern "C" {
  */
 void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
 {
-  for (auto it : comm::CommList)
+  for (auto it : rp::comm::CommList)
   {
     if (it.second->GetInterfaceHandler() == huart)
     {
-      auto *pComm = (comm::COMM_UART_c *)it.second;
+      auto *pComm = (rp::comm::COMM_UART_c *)it.second;
       pComm->UartAutoReceiveCallback(huart, Size);
 
       break;
@@ -424,11 +428,11 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
  */
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
 {
-  for (auto it : comm::CommList)
+  for (auto it : rp::comm::CommList)
   {
     if (it.second->GetInterfaceHandler() == huart)
     {
-      auto *pComm = (comm::COMM_UART_c *)it.second;
+      auto *pComm = (rp::comm::COMM_UART_c *)it.second;
       pComm->UartAutoTransmitCallback(huart);
 
       break;

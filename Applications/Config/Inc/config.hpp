@@ -14,15 +14,19 @@
 
 #include "config_def.hpp"
 
+namespace rp {
+
 namespace config {
 
 void ApplicationInitialize(void);
 
 } // namespace config
 
+} // namespace rp
+
 #include "config_comm.hpp"
 #include "config_device.hpp"
 #include "config_module.hpp"
-#include "config_task.hpp"
+#include "config_system.hpp"
 
 #endif // __CONFIG_HPP__

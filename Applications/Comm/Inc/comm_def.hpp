@@ -15,6 +15,8 @@
 #include "main.h"
 #include "config.hpp"
 
+namespace rp {
+
 namespace comm {
 
 typedef enum
@@ -44,5 +46,7 @@ typedef enum
 } COMM_Type_e;
 
 } // namespace comm
+
+} // namespace rp
 
 #endif // __COMM_DEF_HPP__

@@ -18,6 +18,8 @@
 
 #include <map>
 
+namespace rp {
+
 namespace device {
 
 typedef struct _DEV_InitParam
@@ -64,6 +66,8 @@ extern std::map<uint8_t, DEVICE_c *> DeviceList;
 void DEVICE_Heartbeat(void);
 
 } // namespace device
+
+} // namespace rp
 
 /* Sub include */
 #include "rc.hpp"

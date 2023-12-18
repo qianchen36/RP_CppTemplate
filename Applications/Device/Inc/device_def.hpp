@@ -14,6 +14,8 @@
 
 #include "main.h"
 
+namespace rp {
+
 namespace device {
 
 typedef enum
@@ -38,5 +40,7 @@ typedef enum
 } DEVICE_Type_e;
 
 } // namespace device
+
+} // namespace rp
 
 #endif // __DEVICE_DEF_HPP__

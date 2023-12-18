@@ -15,6 +15,8 @@
 #include "main.h"
 #include "config.hpp"
 
+namespace rp {
+
 namespace algo {
 
 namespace filter {
@@ -31,5 +33,7 @@ typedef enum
 } // namespace filter
 
 } // namespace algo
+
+} // namespace rp
 
 #endif // __FILTER_DEF_HPP__

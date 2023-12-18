@@ -15,6 +15,8 @@
 #include "rc.hpp"
 #include "comm_uart.hpp"
 
+namespace rp {
+
 namespace device {
 
 namespace rc {
@@ -79,5 +81,7 @@ public:
 } // namespace rc
 
 } // namespace device
+
+} // namespace rp
 
 #endif // __RC_DR16_HPP__

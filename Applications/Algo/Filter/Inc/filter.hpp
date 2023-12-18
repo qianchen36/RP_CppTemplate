@@ -15,6 +15,8 @@
 #include "filter_def.hpp"
 #include "algo.hpp"
 
+namespace rp {
+
 namespace algo {
 
 namespace filter {
@@ -47,5 +49,7 @@ public:
 } // namespace filter
 
 } // namespace algo
+
+} // namespace rp
 
 #endif // __FILTER_HPP__

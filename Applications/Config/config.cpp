@@ -11,6 +11,8 @@
 
 #include "config.hpp"
 
+namespace rp {
+
 namespace config {
 
 void ApplicationInitialize(void)
@@ -18,7 +20,9 @@ void ApplicationInitialize(void)
   CommInitialize();
   DeviceInitialize();
   ModuleInitialize();
-  TaskInitialize();
+  SystemInitialize();
 }
 
 } // namespace config
+
+} // namespace rp

@@ -11,6 +11,8 @@
 
 #include "device.hpp"
 
+namespace rp {
+
 namespace device {
 
 /* Devices List */
@@ -202,3 +204,5 @@ void DEVICE_Heartbeat(void)
 }
 
 } // namespace device
+
+} // namespace rp

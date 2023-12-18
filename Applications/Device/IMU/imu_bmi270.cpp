@@ -11,6 +11,8 @@
 
 #include "imu_bmi270.hpp"
 
+namespace rp {
+
 namespace device {
 
 namespace imu {
@@ -20,3 +22,5 @@ namespace imu {
 } // namespace imu
 
 } // namespace device
+
+} // namespace rp

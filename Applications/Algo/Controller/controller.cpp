@@ -13,6 +13,8 @@
 
 #include <stdarg.h>
 
+namespace rp {
+
 namespace algo {
 
 namespace controller {
@@ -70,3 +72,5 @@ CONTROLLER_c *CONTROLLER_c::GetObjectHandler(void)
 } // namespace controller
 
 } // namespace algo
+
+} // namespace rp

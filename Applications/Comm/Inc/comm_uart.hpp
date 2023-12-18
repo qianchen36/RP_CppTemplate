@@ -19,6 +19,8 @@
 #include <vector>
 #include <iterator>
 
+namespace rp {
+
 namespace comm {
 
 typedef struct _COMM_UART_InitParam : public _COMM_InitParam
@@ -82,5 +84,7 @@ public:
 };
 
 } // namespace comm
+
+} // namespace rp
 
 #endif // __COMM_UART_HPP__

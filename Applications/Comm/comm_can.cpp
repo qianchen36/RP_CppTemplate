@@ -13,6 +13,8 @@
 
 #include <stdarg.h>
 
+namespace rp {
+
 namespace comm {
 
 _COMM_CAN_InitParam::_COMM_CAN_InitParam()
@@ -271,6 +273,8 @@ void COMM_CAN_c::ConfigFilter(CAN_FilterTypeDef *sFilterConfig)
 
 } // namespace comm
 
+} // namespace rp
+
 
 
 extern "C" {
@@ -283,11 +287,11 @@ extern "C" {
  */
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 {
-  for (auto it : comm::CommList)
+  for (auto it : rp::comm::CommList)
   {
     if (it.second->GetInterfaceHandler() == hcan)
     {
-      it.second->Receive(comm::COMM_CAN, hcan, CAN_RX_FIFO0);
+      it.second->Receive(rp::comm::COMM_CAN, hcan, CAN_RX_FIFO0);
 
       break;
     }
@@ -306,11 +310,11 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
  */
 void HAL_CAN_RxFifo1MsgPendingCallback(CAN_HandleTypeDef *hcan)
 {
-  for (auto it : comm::CommList)
+  for (auto it : rp::comm::CommList)
   {
     if (it.second->GetInterfaceHandler() == hcan)
     {
-      it.second->Receive(comm::COMM_CAN, hcan, CAN_RX_FIFO1);
+      it.second->Receive(rp::comm::COMM_CAN, hcan, CAN_RX_FIFO1);
 
       break;
     }

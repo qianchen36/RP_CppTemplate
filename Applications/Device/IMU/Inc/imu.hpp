@@ -18,6 +18,8 @@
 #include <map>
 #include <vector>
 
+namespace rp {
+
 namespace device {
 
 namespace imu {
@@ -58,5 +60,7 @@ public:
 } // namespace imu
 
 } // namespace device
+
+} // namespace rp
 
 #endif // __IMU_HPP__

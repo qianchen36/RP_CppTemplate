@@ -16,6 +16,8 @@
 
 #include "motor.hpp"
 
+namespace rp {
+
 namespace module {
 
 namespace chassis {
@@ -58,5 +60,7 @@ public:
 extern chassis::MOD_CHASSIS_c MOD_Chassis;
 
 } // namespace module
+
+} // namespace rp
 
 #endif // _MOD_CHASSIS_HPP_

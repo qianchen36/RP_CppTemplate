@@ -19,6 +19,8 @@
 #include <map>
 #include <vector>
 
+namespace rp {
+
 namespace device {
 
 namespace motor {
@@ -74,6 +76,8 @@ extern std::map<uint8_t, MOTOR_c *> MotorList;
 } // namespace motor
 
 } // namespace device
+
+} // namespace rp
 
 /* Sub include */
 #include "mtr_gm6020.hpp"

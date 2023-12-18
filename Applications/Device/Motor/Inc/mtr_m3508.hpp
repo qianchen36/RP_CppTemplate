@@ -15,6 +15,8 @@
 #include "motor.hpp"
 #include "comm_can.hpp"
 
+namespace rp {
+
 namespace device {
 
 namespace motor {
@@ -44,5 +46,7 @@ public:
 } // namespace motor
 
 } // namespace device
+
+} // namespace rp
 
 #endif // __MTR_M3508_HPP__

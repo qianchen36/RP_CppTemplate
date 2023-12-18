@@ -11,6 +11,8 @@
 
 #include "rc.hpp"
 
+namespace rp {
+
 namespace device {
 
 namespace rc {
@@ -155,3 +157,5 @@ RC_c *RC_c::GetObjectHandler(void)
 } // namespace rc
 
 } // namespace device
+
+} // namespace rp

@@ -16,6 +16,8 @@
 
 #include <map>
 
+namespace rp {
+
 namespace module {
 
 typedef struct _MOD_InitParam
@@ -55,6 +57,8 @@ extern std::map<uint8_t, MODULE_c *> ModuleList;
 void MODULE_Heartbeat(void);
 
 } // namespace module
+
+} // namespace rp
 
 /* Sub include */
 #include "mod_chassis.hpp"

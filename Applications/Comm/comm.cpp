@@ -11,6 +11,8 @@
 
 #include "comm.hpp"
 
+namespace rp {
+
 namespace comm {
 
 /* Communication Port List */
@@ -151,3 +153,5 @@ void COMM_c::DelCommPort(COMM_c *comm)
 }
 
 } // namespace comm
+
+} // namespace rp

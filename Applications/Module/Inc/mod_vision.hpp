@@ -16,6 +16,8 @@
 
 #include "comm.hpp"
 
+namespace rp {
+
 namespace module {
 
 namespace vision {
@@ -50,5 +52,7 @@ public:
 extern vision::MOD_VISION_c MOD_Vision;
 
 } // namespace module
+
+} // namespace rp
 
 #endif // _MOD_VISION_HPP_

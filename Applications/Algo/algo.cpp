@@ -11,6 +11,8 @@
 
 #include "algo.hpp"
 
+namespace rp {
+
 namespace algo {
 
 /**
@@ -124,3 +126,5 @@ ALGO_c *ALGO_c::GetObjectHandler(void)
 { return this; }
 
 } // namespace algo
+
+} // namespace rp

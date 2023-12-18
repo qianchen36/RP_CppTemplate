@@ -78,7 +78,7 @@
                 "path": "Applications/Config/config_module.cpp"
               },
               {
-                "path": "Applications/Config/config_task.cpp"
+                "path": "Applications/Config/config_system.cpp"
               },
               {
                 "path": "Applications/Config/config.cpp"
@@ -151,30 +151,33 @@
             "folders": []
           },
           {
-            "name": "Task",
+            "name": "System",
             "files": [
               {
-                "path": "Applications/Task/task.cpp"
+                "path": "Applications/System/system.cpp"
               }
             ],
             "folders": [
               {
-                "name": "SystemTask",
+                "name": "Notify",
                 "files": [
                   {
-                    "path": "Applications/Task/SystemTasks/heartbeat_task.cpp"
-                  },
-                  {
-                    "path": "Applications/Task/SystemTasks/test_task.cpp"
+                    "path": "Applications/System/Notify/notify.cpp"
                   }
                 ],
                 "folders": []
               },
               {
-                "name": "UserTask",
+                "name": "Task",
                 "files": [
                   {
-                    "path": "Applications/Task/UserTasks/monitor_task.cpp"
+                    "path": "Applications/System/Task/heartbeat_task.cpp"
+                  },
+                  {
+                    "path": "Applications/System/Task/monitor_task.cpp"
+                  },
+                  {
+                    "path": "Applications/System/Task/task.cpp"
                   }
                 ],
                 "folders": []
@@ -735,17 +738,19 @@
         "name": "default",
         "incList": [
           ".eide/deps",
+          "Applications/Config/Inc",
           "Applications/Algo/Inc",
           "Applications/Algo/Filter/Inc",
           "Applications/Algo/Controller/Inc",
           "Applications/Comm/Inc",
-          "Applications/Config/Inc",
           "Applications/Device/Inc",
           "Applications/Device/RC/Inc",
           "Applications/Device/Motor/Inc",
           "Applications/Device/IMU/Inc",
           "Applications/Module/Inc",
-          "Applications/Task/Inc",
+          "Applications/System/Inc",
+          "Applications/System/Notify/Inc",
+          "Applications/System/Task/Inc",
           "Boards/Dbldeck_MasterCtrl/Core/Inc",
           "Boards/Dbldeck_MasterCtrl/BSP/Inc",
           "Boards/Dbldeck_MasterCtrl/FATFS/Target",

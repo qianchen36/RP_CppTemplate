@@ -1,26 +1,27 @@
 /**
- * @file    config_task.hpp
+ * @file    config_system.hpp
  * @author  Morthine Xiang (xiang@morthine.com)
  * @brief 
  * @version 1.0
- * @date    2023-11-13
+ * @date    2023-12-18
  * 
  * @copyright SZU-RobotPilots Copyright (c) 2023
  * 
  */
 
-#ifndef __CONFIG_TASK_HPP__
-#define __CONFIG_TASK_HPP__
+#ifndef __CONFIG_SYSTEM_HPP__
+#define __CONFIG_SYSTEM_HPP__
 
 #include "config_def.hpp"
 
-#define USE_TEST_TASK 0U
-#define USE_USER_TASK 1U
+namespace rp {
 
 namespace config {
 
-void TaskInitialize(void);
+void SystemInitialize(void);
 
 } // namespace config
 
-#endif // __CONFIG_TASK_HPP__
+} // namespace rp
+
+#endif // __CONFIG_SYSTEM_HPP__

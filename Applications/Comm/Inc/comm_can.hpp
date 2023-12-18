@@ -15,6 +15,8 @@
 #include "comm.hpp"
 #include "can.h"
 
+namespace rp {
+
 namespace comm {
 
 typedef struct
@@ -69,5 +71,7 @@ public:
 };
 
 } // namespace comm
+
+} // namespace rp
 
 #endif // __COMM_CAN_HPP__

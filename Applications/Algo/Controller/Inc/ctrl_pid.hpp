@@ -14,6 +14,8 @@
 
 #include "controller.hpp"
 
+namespace rp {
+
 namespace algo {
 
 namespace controller {
@@ -94,5 +96,7 @@ public:
 } // namespace controller
 
 } // namespace algo
+
+} // namespace rp
 
 #endif // __CTRL_PID_HPP__

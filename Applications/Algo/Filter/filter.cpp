@@ -11,6 +11,8 @@
 
 #include "filter.hpp"
 
+namespace rp {
+
 namespace algo {
 
 namespace filter {
@@ -70,3 +72,5 @@ FILTER_c *FILTER_c::GetObjectHandler(void)
 } // namespace filter
 
 } // namespace algo
+
+} // namespace rp

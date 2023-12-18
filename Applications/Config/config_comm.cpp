@@ -13,6 +13,8 @@
 
 #include "comm.hpp"
 
+namespace rp {
+
 namespace config {
 
 /**
@@ -26,3 +28,5 @@ void CommInitialize(void)
 }
 
 } // namespace config
+
+} // namespace rp

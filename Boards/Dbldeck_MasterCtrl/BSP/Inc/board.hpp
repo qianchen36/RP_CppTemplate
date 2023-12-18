@@ -14,9 +14,6 @@
 
 #include "main.h"
 
-#include "FreeRTOS.h"
-#include "task.h"
-
 #include "adc.h"
 #include "can.h"
 #include "crc.h"

@@ -10,6 +10,7 @@
  */
 
 #include "board.hpp"
+#include "FreeRTOS.h"
 
 /* Static allocation support */
 #if (configSUPPORT_STATIC_ALLOCATION == 1)

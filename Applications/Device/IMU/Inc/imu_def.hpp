@@ -15,6 +15,8 @@
 #include "main.h"
 #include "config.hpp"
 
+namespace rp {
+
 namespace device {
 
 namespace imu {
@@ -48,5 +50,7 @@ typedef enum
 } // namespace imu
 
 } // namespace device
+
+} // namespace rp
 
 #endif // __IMU_DEF_HPP__

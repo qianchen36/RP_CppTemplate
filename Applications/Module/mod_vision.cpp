@@ -11,6 +11,8 @@
 
 #include "mod_vision.hpp"
 
+namespace rp {
+
 namespace module {
 
 /* Export vision module */
@@ -59,3 +61,5 @@ MOD_VISION_c *MOD_VISION_c::GetObjectHandler(void)
 } // namespace vision
 
 } // namespace module
+
+} // namespace rp
