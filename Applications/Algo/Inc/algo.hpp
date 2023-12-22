@@ -54,4 +54,8 @@ public:
 
 } // namespace rp
 
+/* Sub include */
+#include "controller.hpp"
+#include "filter.hpp"
+
 #endif // __ALGO_HPP__

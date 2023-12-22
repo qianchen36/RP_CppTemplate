@@ -52,4 +52,7 @@ public:
 
 } // namespace rp
 
+/* Sub include */
+#include "fl_ave.hpp"
+
 #endif // __FILTER_HPP__
