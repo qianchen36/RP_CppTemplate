@@ -28,7 +28,9 @@ TaskHandle_t monitorTaskHandle;
  */
 extern "C" void StartMonitorTask(void *argument)
 {
+  /* Task init */
 
+  /* Task loop */
   while (1)
   {
 
