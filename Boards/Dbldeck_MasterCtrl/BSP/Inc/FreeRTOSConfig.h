@@ -34,7 +34,7 @@
 #define configUSE_TICK_HOOK                      0
 #define configCPU_CLOCK_HZ                       ( SystemCoreClock )
 #define configTICK_RATE_HZ                       ((TickType_t)1000)
-#define configMAX_PRIORITIES                     ( 56 )
+#define configMAX_PRIORITIES                     ( 32 )
 #define configMINIMAL_STACK_SIZE                 ((uint16_t)128)
 #define configTOTAL_HEAP_SIZE                    ((size_t)16384)
 #define configMAX_TASK_NAME_LEN                  ( 16 )
@@ -46,7 +46,7 @@
 #define configQUEUE_REGISTRY_SIZE                8
 #define configUSE_RECURSIVE_MUTEXES              1
 #define configUSE_COUNTING_SEMAPHORES            1
-#define configUSE_PORT_OPTIMISED_TASK_SELECTION  0
+#define configUSE_PORT_OPTIMISED_TASK_SELECTION  1
 #define configRECORD_STACK_HIGH_ADDRESS          1
 
 /* Defaults to size_t for backward compatibility, but can be changed
@@ -106,18 +106,13 @@ See http://www.FreeRTOS.org/RTOS-Cortex-M3-M4.html. */
 
 /* Normal assert() semantics without relying on the provision of an assert.h
 header file. */
-/* USER CODE BEGIN 1 */
 #define configASSERT( x ) if ((x) == 0) {taskDISABLE_INTERRUPTS(); for( ;; );}
-/* USER CODE END 1 */
 
 /* Definitions that map the FreeRTOS port interrupt handlers to their CMSIS
 standard names. */
-#define vPortSVCHandler    SVC_Handler
-#define xPortPendSVHandler PendSV_Handler
-
-/* IMPORTANT: After 10.3.1 update, Systick_Handler comes from NVIC (if SYS timebase = systick), otherwise from cmsis_os2.c */
-
-#define USE_CUSTOM_SYSTICK_HANDLER_IMPLEMENTATION 0
+#define vPortSVCHandler     SVC_Handler
+#define xPortPendSVHandler  PendSV_Handler
+#define xPortSysTickHandler SysTick_Handler
 
 /* Definitions needed when configGENERATE_RUN_TIME_STATS is on */
 #define portCONFIGURE_TIMER_FOR_RUN_TIME_STATS configureTimerForRunTimeStats
