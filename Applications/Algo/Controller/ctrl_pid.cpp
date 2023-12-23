@@ -107,6 +107,9 @@ void CTRL_PID_c::InitAlgo(ALGO_InitParam_s *initParam)
 
   auto param = (CTRL_PID_InitParam_s *)initParam_;
 
+  /* Initialize */
+  pidType = param->pidType;
+
   /* Clean up */
   algoState = ALGO_IDLE;
 }

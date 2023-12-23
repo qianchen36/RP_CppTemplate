@@ -92,7 +92,7 @@ void COMM_UART_c::InitComm(COMM_InitParam_s *initParam)
   }
 
   if (useAutoTransmit_) // Use DMA to transmit data
-    txQueueLength_   = param->txQueueLength;
+    txQueueLength_ = param->txQueueLength;
 
   /* Update iterator */
   rxBufferIt_ = rxBuffer_.begin();

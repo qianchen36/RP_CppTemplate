@@ -24,6 +24,8 @@ namespace rc {
  */
 _RC_InitParam::_RC_InitParam()
 {
+  devType = DEV_RC;
+
   rcType = RC_UNDEF;
 }
 

@@ -36,7 +36,7 @@ ALGO_c::ALGO_c()
 {
   algoType     = ALGO_UNDEF;
   algoState    = ALGO_RESET;
-  algoTickRate = NULL;
+  algoTickRate = 1000;
 
   initParam_ = nullptr;
 }
