@@ -262,6 +262,9 @@
                   },
                   {
                     "path": "Boards/Dbldeck_MasterCtrl/Core/Src/usart.c"
+                  },
+                  {
+                    "path": "Boards/Dbldeck_MasterCtrl/Core/Src/system_stm32f4xx.c"
                   }
                 ],
                 "folders": []
@@ -354,15 +357,6 @@
               },
               {
                 "path": "Drivers/BMI270-Sensor-API/bmi270.c"
-              }
-            ],
-            "folders": []
-          },
-          {
-            "name": "CMSIS",
-            "files": [
-              {
-                "path": "Boards/Dbldeck_MasterCtrl/Core/Src/system_stm32f4xx.c"
               }
             ],
             "folders": []
