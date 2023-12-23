@@ -47,4 +47,7 @@ public:
 
 } // namespace rp
 
+/* Sub include */
+#include "ctrl_pid.hpp"
+
 #endif // __CONTROLLER_HPP__

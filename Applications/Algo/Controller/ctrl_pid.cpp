@@ -221,17 +221,21 @@ float32_t CTRL_PID_c::PID_Calculate(float32_t get, float32_t set)
     pidData_.err[NOW] = pidData_.set[NOW] - pidData_.get[NOW];
 
     /* Is in deadband */
-    if (param->deadBand != 0 && abs(pidData_.err[NOW]) < param->deadBand)
+    if ((param->deadBand != 0) && (abs(pidData_.err[NOW]) < param->deadBand))
       return 0.0f;
 
-    /* PID calculate */
-    pidData_.pOut = param->Kp * pidData_.err[NOW];
-    pidData_.iOut += param->Ki * pidData_.err[NOW];
-    pidData_.dOut = param->Kd * (pidData_.err[NOW] - pidData_.err[LAST]);
+    /* Calculate integral & derivative */
+    pidData_.integral  += pidData_.err[NOW];
+    pidData_.derivative = pidData_.err[NOW] - pidData_.err[LAST];
 
     /* Limit integral output */
-    if (param->maxIntegral != 0 && abs(pidData_.iOut) > param->maxIntegral)
+    if ((param->maxIntegral != 0) && (abs(pidData_.integral) > param->maxIntegral))
       pidData_.iOut = (pidData_.iOut > 0) ? param->maxIntegral : -param->maxIntegral;
+
+    /* Calculate PID output */
+    pidData_.pOut  = param->Kp * pidData_.err[NOW];
+    pidData_.iOut += param->Ki * pidData_.integral;
+    pidData_.dOut  = param->Kd * pidData_.derivative;
 
     break;
 
@@ -265,17 +269,21 @@ float32_t CTRL_PID_c::PID_Calculate(float32_t get, float32_t set)
     }
 
     /* Is in deadband */
-    if (param->deadBand != 0 && abs(pidData_.err[NOW]) < param->deadBand)
+    if ((param->deadBand != 0) && (abs(pidData_.err[NOW]) < param->deadBand))
       return 0.0f;
-    
-    /* PID calculate */
-    pidData_.pOut = param->Kp * pidData_.err[NOW];
-    pidData_.iOut += param->Ki * pidData_.err[NOW];
-    pidData_.dOut = param->Kd * (pidData_.err[NOW] - pidData_.err[LAST]);
+
+    /* Calculate integral & derivative */
+    pidData_.integral  += pidData_.err[NOW];
+    pidData_.derivative = pidData_.err[NOW] - pidData_.err[LAST];
 
     /* Limit integral output */
-    if (param->maxIntegral != 0 && abs(pidData_.iOut) > param->maxIntegral)
+    if ((param->maxIntegral != 0) && (abs(pidData_.integral) > param->maxIntegral))
       pidData_.iOut = (pidData_.iOut > 0) ? param->maxIntegral : -param->maxIntegral;
+
+    /* Calculate PID output */
+    pidData_.pOut  = param->Kp * pidData_.err[NOW];
+    pidData_.iOut += param->Ki * pidData_.integral;
+    pidData_.dOut  = param->Kd * pidData_.derivative;
 
     break;
 
@@ -286,17 +294,21 @@ float32_t CTRL_PID_c::PID_Calculate(float32_t get, float32_t set)
     pidData_.err[NOW] = pidData_.set[NOW] - pidData_.get[NOW];
 
     /* Is in deadband */
-    if (param->deadBand != 0 && abs(pidData_.err[NOW]) < param->deadBand)
+    if ((param->deadBand != 0) && (abs(pidData_.err[NOW]) < param->deadBand))
       return 0.0f;
 
-    /* PID calculate */
-    pidData_.pOut =  param->Kp * pidData_.err[NOW];
-    pidData_.iOut += param->Ki * pidData_.err[NOW];
-    pidData_.dOut =  param->Kd * (pidData_.err[NOW] - pidData_.err[LAST]);
+    /* Calculate integral & derivative */
+    pidData_.integral  += pidData_.err[NOW];
+    pidData_.derivative = pidData_.err[NOW] - pidData_.err[LAST];
 
     /* Limit integral output */
-    if (param->maxIntegral != 0 && abs(pidData_.iOut) > param->maxIntegral)
+    if ((param->maxIntegral != 0) && (abs(pidData_.integral) > param->maxIntegral))
       pidData_.iOut = (pidData_.iOut > 0) ? param->maxIntegral : -param->maxIntegral;
+
+    /* Calculate PID output */
+    pidData_.pOut  = param->Kp * pidData_.err[NOW];
+    pidData_.iOut += param->Ki * pidData_.integral;
+    pidData_.dOut  = param->Kd * pidData_.derivative;
     
     break;
 
@@ -312,7 +324,7 @@ float32_t CTRL_PID_c::PID_Calculate(float32_t get, float32_t set)
   pidData_.output = pidData_.pOut + pidData_.iOut + pidData_.dOut;
 
   /* Limit output */
-  if (param->maxOutput != 0 && abs(pidData_.output) > param->maxOutput)
+  if ((param->maxOutput != 0) && (abs(pidData_.output) > param->maxOutput))
     pidData_.output = (pidData_.output > 0) ? param->maxOutput : -param->maxOutput;
 
   /* Update data record */

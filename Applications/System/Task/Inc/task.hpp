@@ -20,13 +20,21 @@ namespace system {
 
 namespace task {
 
-/* Heartbeat task */
-extern TaskHandle_t heartbeatTaskHandle;
-extern "C" void StartHeartbeatTask(void *argument);
-
 /* Monitor task */
 extern TaskHandle_t monitorTaskHandle;
 extern "C" void StartMonitorTask(void *argument);
+
+/* Reset task */
+extern TaskHandle_t resetTaskHandle;
+extern "C" void StartResetTask(void *argument);
+
+/* Control task */
+extern TaskHandle_t controlTaskHandle;
+extern "C" void StartControlTask(void *argument);
+
+/* Heartbeat task */
+extern TaskHandle_t heartbeatTaskHandle;
+extern "C" void StartHeartbeatTask(void *argument);
 
 } // namespace task
 

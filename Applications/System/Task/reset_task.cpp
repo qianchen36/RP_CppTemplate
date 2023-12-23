@@ -1,9 +1,9 @@
 /**
- * @file    monitor_task.cpp
+ * @file    reset_task.cpp
  * @author  Morthine Xiang (xiang@morthine.com)
  * @brief 
  * @version 1.0
- * @date    2023-12-18
+ * @date    2023-12-22
  * 
  * @copyright SZU-RobotPilots Copyright (c) 2023
  * 
@@ -17,25 +17,26 @@ namespace system {
 
 namespace task {
 
-/* Monitor task handle */
-TaskHandle_t monitorTaskHandle;
+/* Reset task handle */
+TaskHandle_t resetTaskHandle;
 
 /**
- * @brief  Monitor task entry function
+ * @brief  Reset task entry function
  * 
  * @param  argument Not used
  * @return None
  */
-extern "C" void StartMonitorTask(void *argument)
+void StartResetTask(void *argument)
 {
   /* Task init */
 
   /* Task loop */
   while (1)
   {
-
+    
     vTaskDelay(1);
   }
+
 }
 
 } // namespace task

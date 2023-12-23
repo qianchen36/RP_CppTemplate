@@ -171,10 +171,16 @@
                 "name": "Task",
                 "files": [
                   {
+                    "path": "Applications/System/Task/control_task.cpp"
+                  },
+                  {
                     "path": "Applications/System/Task/heartbeat_task.cpp"
                   },
                   {
                     "path": "Applications/System/Task/monitor_task.cpp"
+                  },
+                  {
+                    "path": "Applications/System/Task/reset_task.cpp"
                   },
                   {
                     "path": "Applications/System/Task/task.cpp"

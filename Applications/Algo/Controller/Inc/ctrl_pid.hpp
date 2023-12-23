@@ -45,6 +45,7 @@ typedef struct
   float32_t get[3];
   float32_t set[3];
   float32_t err[3];
+  float32_t integral, derivative;
   float32_t pOut, iOut, dOut;
   float32_t output;
 
