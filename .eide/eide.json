@@ -159,15 +159,6 @@
             ],
             "folders": [
               {
-                "name": "Notify",
-                "files": [
-                  {
-                    "path": "Applications/System/Notify/notify.cpp"
-                  }
-                ],
-                "folders": []
-              },
-              {
                 "name": "Task",
                 "files": [
                   {

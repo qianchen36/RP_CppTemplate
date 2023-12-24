@@ -27,7 +27,7 @@ namespace system {
 
 } // namespace rp
 
-#include "notify.hpp"
+/* Sub include */
 #include "task.hpp"
 
 #endif // __SYSTEM_HPP__
