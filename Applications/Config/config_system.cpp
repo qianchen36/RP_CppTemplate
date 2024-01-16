@@ -26,7 +26,7 @@ void SystemInitialize(void)
   /* Creat tasks */
   xTaskCreate(system::task::StartMonitorTask,
               "Monitor Task",
-              512, NULL, 30,
+              256, NULL, 30,
               &system::task::monitorTaskHandle);
 
   xTaskCreate(system::task::StartResetTask,

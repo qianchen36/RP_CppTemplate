@@ -249,13 +249,13 @@
                     "path": "Boards/Dbldeck_MasterCtrl/Core/Src/stm32f4xx_it.c"
                   },
                   {
+                    "path": "Boards/Dbldeck_MasterCtrl/Core/Src/system_stm32f4xx.c"
+                  },
+                  {
                     "path": "Boards/Dbldeck_MasterCtrl/Core/Src/tim.c"
                   },
                   {
                     "path": "Boards/Dbldeck_MasterCtrl/Core/Src/usart.c"
-                  },
-                  {
-                    "path": "Boards/Dbldeck_MasterCtrl/Core/Src/system_stm32f4xx.c"
                   }
                 ],
                 "folders": []
@@ -639,7 +639,7 @@
         "cpuType": "Cortex-M4",
         "floatingPointHardware": "single",
         "useCustomScatterFile": false,
-        "scatterFilePath": "<YOUR_SCATTER_FILE>.sct",
+        "scatterFilePath": "Boards\\Dbldeck_MasterCtrl\\BSP\\Dbldeck_MasterCtrl.stc",
         "storageLayout": {
           "RAM": [
             {

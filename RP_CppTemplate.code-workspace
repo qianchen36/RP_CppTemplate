@@ -62,7 +62,10 @@
             "list": "cpp",
             "iterator": "cpp",
             "xtree": "cpp",
-            "xutility": "cpp"
+            "xutility": "cpp",
+            "concepts": "c",
+            "utility": "c",
+            "xmemory": "c"
         },
         "[yaml]": {
             "editor.insertSpaces": true,

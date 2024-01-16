@@ -12,6 +12,14 @@
 #include "board.hpp"
 #include "FreeRTOS.h"
 
+/* Preallocate ucHeap */
+#if (configAPPLICATION_ALLOCATED_HEAP == 1)
+  /* Allocate the FreeRTOS Heap at CCM for performance optimization */
+  uint8_t *ucHeap = (uint8_t *)0x10000000;
+#endif
+
+
+
 /* Static allocation support */
 #if (configSUPPORT_STATIC_ALLOCATION == 1)
 
