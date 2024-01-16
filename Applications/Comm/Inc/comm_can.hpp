@@ -13,7 +13,7 @@
 #define __COMM_CAN_HPP__
 
 #include "comm.hpp"
-#include "can.h"
+#include "stm32f4xx_hal_can.h"
 
 namespace rp {
 

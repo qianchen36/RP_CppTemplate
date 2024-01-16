@@ -13,7 +13,7 @@
 #define __COMM_SPI_HPP__
 
 #include "comm.hpp"
-#include "spi.h"
+#include "stm32f4xx_hal_spi.h"
 
 namespace rp {
 

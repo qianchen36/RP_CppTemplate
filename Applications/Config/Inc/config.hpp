@@ -13,6 +13,7 @@
 #define __CONFIG_HPP__
 
 #include "config_def.hpp"
+#include "board.hpp"
 
 namespace rp {
 

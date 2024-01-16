@@ -13,7 +13,7 @@
 #define __COMM_UART_HPP__
 
 #include "comm.hpp"
-#include "usart.h"
+#include "stm32f4xx_hal_uart.h"
 
 #include <list>
 #include <vector>

@@ -12,6 +12,8 @@
 #ifndef __CONTROLLER_DEF_HPP__
 #define __CONTROLLER_DEF_HPP__
 
+#include "config.hpp"
+
 namespace rp {
 
 namespace algo {

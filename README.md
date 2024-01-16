@@ -3,11 +3,11 @@
 Object-oriented develop library for RoboMaster EC.
 
 ### About
-This template is designed from System-Level, which means you need a Board-Level support library to provide BSP_APIs needed by this template.
+This template is designed from System-Level, which means you need a Board-Level support library to initialize hardwares and provide HAL APIs.
 
-There is a BSP examples in `Boards/GimbalController` folder, using STM32CubeMX for fast develop.
+There is a BSP examples in `Boards/Dbldeck_MasterCtrl` folder, using STM32CubeMX for fast develop.
 
-### Project View
+### Project Paths
 - `Applications/` Library files
 
 - `Boards/` Board-Level support library (BSP)
@@ -16,15 +16,15 @@ There is a BSP examples in `Boards/GimbalController` folder, using STM32CubeMX f
 
 - `Middlewares/` Middlewares' library (FreeRTOS, CMSIS-DSP, ...)
 
-### Library View
-- `Applications/Config/` Library configurations
+### Application Paths
+- `Applications/Config/` Application configurations
 
 - `Applications/Algo/` Build-in algorithms
 
-- `Applications/Comm/` Communication support
+- `Applications/Comm/` Communicate abstract
 
-- `Applications/Device/` Device abstarct
+- `Applications/Device/` Device abstract
 
-- `Applications/Module/` Module abstarct
+- `Applications/Module/` Module abstract
 
-- `Applications/UserTask/` User defined tasks for FreeRTOS
+- `Applications/System/` System abstract

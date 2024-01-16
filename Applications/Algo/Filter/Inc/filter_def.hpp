@@ -12,7 +12,6 @@
 #ifndef __FILTER_DEF_HPP__
 #define __FILTER_DEF_HPP__
 
-#include "main.h"
 #include "config.hpp"
 
 namespace rp {

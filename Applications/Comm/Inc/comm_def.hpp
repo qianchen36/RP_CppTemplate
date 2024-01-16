@@ -12,7 +12,6 @@
 #ifndef __COMM_DEF_HPP__
 #define __COMM_DEF_HPP__
 
-#include "main.h"
 #include "config.hpp"
 
 namespace rp {
