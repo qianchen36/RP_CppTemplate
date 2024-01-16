@@ -294,9 +294,6 @@
                 "name": "MDK-ARM",
                 "files": [
                   {
-                    "path": "Boards/Dbldeck_MasterCtrl/MDK-ARM/armlib_lock_glue.c"
-                  },
-                  {
                     "path": "Boards/Dbldeck_MasterCtrl/MDK-ARM/startup_stm32f407xx.s"
                   }
                 ],
@@ -662,7 +659,7 @@
                 "startAddr": "0x10000000",
                 "size": "0x00010000"
               },
-              "isChecked": true,
+              "isChecked": false,
               "noInit": false
             }
           ],
