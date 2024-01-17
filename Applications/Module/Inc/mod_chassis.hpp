@@ -24,7 +24,10 @@ namespace chassis {
 
 typedef struct _MOD_CHAS_InitParam : public _MOD_InitParam
 {
-  device::motor::MOTOR_c *mtrHandler[4];
+  device::motor::MOTOR_c *hChasMtr_LF;
+  device::motor::MOTOR_c *hChasMtr_RF;
+  device::motor::MOTOR_c *hChasMtr_LB;
+  device::motor::MOTOR_c *hChasMtr_RB;
 
   FUNC_STATE_e useSpeedLimit;
   int16_t      maxWheelSpeed;
@@ -41,7 +44,10 @@ typedef struct _MOD_CHAS_InitParam : public _MOD_InitParam
 class MOD_CHASSIS_c : public MODULE_c
 {
 protected:
-  device::motor::MOTOR_c *mtrHandler_[4];
+  device::motor::MOTOR_c *hChasMtr_LF_;
+  device::motor::MOTOR_c *hChasMtr_RF_;
+  device::motor::MOTOR_c *hChasMtr_LB_;
+  device::motor::MOTOR_c *hChasMtr_RB_;
 
   void CalcMotorOutput(float32_t vx, float32_t vy, float32_t w, int16_t *output);
 

@@ -41,7 +41,7 @@ protected:
 
 public:
   uint8_t         modId;
-  MODULE_Status_e modStatus;
+  MODULE_Status_e modState;
 
   MODULE_c();
   ~MODULE_c();

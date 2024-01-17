@@ -27,13 +27,13 @@ namespace chassis {
  */
 _MOD_CHAS_InitParam::_MOD_CHAS_InitParam()
 {
-  mtrHandler[0]   = nullptr;
-  mtrHandler[1]   = nullptr;
-  mtrHandler[2]   = nullptr;
-  mtrHandler[3]   = nullptr;
+  hChasMtr_LF = nullptr;
+  hChasMtr_RF = nullptr;
+  hChasMtr_LB = nullptr;
+  hChasMtr_RB = nullptr;
 
-  useSpeedLimit   = DISABLE;
-  maxWheelSpeed   = 5000;
+  useSpeedLimit = DISABLE;
+  maxWheelSpeed = 5000;
 
   useCurrentLimit = DISABLE;
   maxWheelCurrent = 5000;
@@ -48,10 +48,10 @@ _MOD_CHAS_InitParam::_MOD_CHAS_InitParam()
  */
 MOD_CHASSIS_c::MOD_CHASSIS_c()
 {
-  mtrHandler_[0] = nullptr;
-  mtrHandler_[1] = nullptr;
-  mtrHandler_[2] = nullptr;
-  mtrHandler_[3] = nullptr;
+  hChasMtr_LB_ = nullptr;
+  hChasMtr_LF_ = nullptr;
+  hChasMtr_RB_ = nullptr;
+  hChasMtr_RF_ = nullptr;
 }
 
 
@@ -94,13 +94,13 @@ void MOD_CHASSIS_c::InitModule(MOD_InitParam_t *initParam)
   /* Initialize */
   modId = param->modId;
 
-  mtrHandler_[0] = param->mtrHandler[0];
-  mtrHandler_[1] = param->mtrHandler[1];
-  mtrHandler_[2] = param->mtrHandler[2];
-  mtrHandler_[3] = param->mtrHandler[3];
+  hChasMtr_LB_ = param->hChasMtr_LB;
+  hChasMtr_LF_ = param->hChasMtr_LF;
+  hChasMtr_RB_ = param->hChasMtr_RB;
+  hChasMtr_RF_ = param->hChasMtr_RF;
 
   /* Update statue */
-  modStatus = MOD_OFFLINE;
+  modState = MOD_OFFLINE;
 }
 
 
@@ -112,6 +112,29 @@ void MOD_CHASSIS_c::InitModule(MOD_InitParam_t *initParam)
  */
 void MOD_CHASSIS_c::HeartbeatModule(void)
 {
+  uint8_t mtrStateCnt = 0;
+
+  /* Check motor state */
+  mtrStateCnt += hChasMtr_LB_->devState;
+  mtrStateCnt += hChasMtr_LF_->devState;
+  mtrStateCnt += hChasMtr_RB_->devState;
+  mtrStateCnt += hChasMtr_RF_->devState;
+
+  /* Update module state */
+  switch (mtrStateCnt)
+  {
+  case 4:
+    modState = MOD_OFFLINE;
+    break;
+
+  case 8:
+    modState = MOD_ONLINE;
+    break;
+  
+  default:
+    modState = MOD_ERROR;
+    break;
+  }
 
 }
 
@@ -139,7 +162,7 @@ MOD_CHASSIS_c *MOD_CHASSIS_c::GetObjectHandler(void)
 void MOD_CHASSIS_c::CalcMotorOutput(float32_t vx, float32_t vy, float32_t w, int16_t *output)
 {
   /* Check module state */
-  if (modStatus == MOD_RESET)
+  if (modState == MOD_RESET)
     return;
 
   /* Get params */
@@ -182,10 +205,10 @@ void MOD_CHASSIS_c::CalcMotorOutput(float32_t vx, float32_t vy, float32_t w, int
   }
 
   /* Calculate output current */
-  output[0] = mtrHandler_[0]->CalcMotorController(device::motor::MTR_CTRL_SPEED, targetSpd[0]);
-  output[1] = mtrHandler_[1]->CalcMotorController(device::motor::MTR_CTRL_SPEED, targetSpd[1]);
-  output[2] = mtrHandler_[2]->CalcMotorController(device::motor::MTR_CTRL_SPEED, targetSpd[2]);
-  output[3] = mtrHandler_[3]->CalcMotorController(device::motor::MTR_CTRL_SPEED, targetSpd[3]);
+  output[0] = hChasMtr_LF_->CalcMotorController(device::motor::MTR_CTRL_SPEED, targetSpd[0]);
+  output[1] = hChasMtr_RF_->CalcMotorController(device::motor::MTR_CTRL_SPEED, targetSpd[1]);
+  output[2] = hChasMtr_LB_->CalcMotorController(device::motor::MTR_CTRL_SPEED, targetSpd[2]);
+  output[3] = hChasMtr_RB_->CalcMotorController(device::motor::MTR_CTRL_SPEED, targetSpd[3]);
 
   /* Limit output current */
   if (param->useCurrentLimit)

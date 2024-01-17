@@ -25,23 +25,19 @@ void SystemInitialize(void)
 {
   /* Creat tasks */
   xTaskCreate(system::task::StartMonitorTask,
-              "Monitor Task",
-              256, NULL, 30,
+              "Monitor Task", 256, NULL, 30,
               &system::task::monitorTaskHandle);
 
   xTaskCreate(system::task::StartResetTask,
-              "Reset Task",
-              512, NULL, 20,
+              "Reset Task", 512, NULL, 20,
               &system::task::resetTaskHandle);
 
   xTaskCreate(system::task::StartControlTask,
-              "Control Task",
-              512, NULL, 10,
+              "Control Task", 512, NULL, 10,
               &system::task::controlTaskHandle);
 
   xTaskCreate(system::task::StartHeartbeatTask,
-              "Heartbeat Task",
-              256, NULL, 16,
+              "Heartbeat Task", 256, NULL, 16,
               &system::task::heartbeatTaskHandle);
 
   /* FreeRTOS Initialize */

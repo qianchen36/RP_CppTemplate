@@ -27,7 +27,7 @@ _MOD_InitParam::_MOD_InitParam()
 MODULE_c::MODULE_c()
 {
   modId     = NULL;
-  modStatus = MOD_RESET;
+  modState = MOD_RESET;
 
   initParam_         = nullptr;
   lastHeartbeatTime_ = NULL;
