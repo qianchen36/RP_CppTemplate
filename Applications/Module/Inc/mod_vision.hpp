@@ -9,8 +9,8 @@
  * 
  */
 
-#ifndef _MOD_VISION_HPP_
-#define _MOD_VISION_HPP_
+#ifndef __MOD_VISION_HPP__
+#define __MOD_VISION_HPP__
 
 #include "module.hpp"
 
@@ -55,4 +55,4 @@ extern vision::MOD_VISION_c MOD_Vision;
 
 } // namespace rp
 
-#endif // _MOD_VISION_HPP_
+#endif // __MOD_VISION_HPP__

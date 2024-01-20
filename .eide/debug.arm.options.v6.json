@@ -11,7 +11,8 @@
         "language-cpp": "c++11",
         "warnings": "ac5-like-warnings",
         "short-enums#wchar": true,
-        "link-time-optimization": true
+        "link-time-optimization": true,
+        "CXX_FLAGS": "-std=c++17"
     },
     "asm-compiler": {
         "$use": "asm-auto"

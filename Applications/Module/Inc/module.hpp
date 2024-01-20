@@ -9,8 +9,8 @@
  * 
  */
 
-#ifndef _MODULE_HPP_
-#define _MODULE_HPP_
+#ifndef __MODULE_HPP__
+#define __MODULE_HPP__
 
 #include "module_def.hpp"
 
@@ -63,4 +63,4 @@ void MODULE_Heartbeat(void);
 /* Sub include */
 #include "mod_chassis.hpp"
 
-#endif // _MODULE_HPP_
+#endif // __MODULE_HPP__

@@ -9,8 +9,8 @@
  * 
  */
 
-#ifndef _MOD_CHASSIS_HPP_
-#define _MOD_CHASSIS_HPP_
+#ifndef __MOD_CHASSIS_HPP__
+#define __MOD_CHASSIS_HPP__
 
 #include "module.hpp"
 
@@ -69,4 +69,4 @@ extern chassis::MOD_CHASSIS_c MOD_Chassis;
 
 } // namespace rp
 
-#endif // _MOD_CHASSIS_HPP_
+#endif // __MOD_CHASSIS_HPP__

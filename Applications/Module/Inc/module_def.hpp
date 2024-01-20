@@ -9,8 +9,8 @@
  * 
  */
 
-#ifndef _MODULE_DEF_HPP_
-#define _MODULE_DEF_HPP_
+#ifndef __MODULE_DEF_HPP__
+#define __MODULE_DEF_HPP__
 
 #include "main.h"
 #include "config.hpp"
@@ -34,4 +34,4 @@ typedef enum
 
 } // namespace rp
 
-#endif // _MODULE_DEF_HPP_
+#endif // __MODULE_DEF_HPP__
