@@ -95,6 +95,7 @@ void DEV_JUDGE_c::InitDevice(DEV_InitParam_s *initParam)
   auto param = (DEV_JUDGE_InitParam_s *)initParam_;
   devID      = param->devID;
   hComm_     = param->hComm;
+  frameList.clear();
 
   /* Regist */
   AddDevice(this);
@@ -162,13 +163,10 @@ void DEV_JUDGE_c::UartNode_ReceiveCallback(uint8_t *pData, uint16_t len)
   if (!algo::CRC16_Verify(pData, sizeof(DEV_JUDGE_FrameHeader_s) + header->LEN + 2)) return;
 
   /* Get frame */
-  DEV_JUDGE_Frame_s frame;
-  frame.seq   = header->SEQ;
-  frame.cmdID = header->CMDID;
-  frame.data.assign(pData + sizeof(DEV_JUDGE_FrameHeader_s), pData + sizeof(DEV_JUDGE_FrameHeader_s) + header->LEN);
-
-  frameList.push_back(frame);
-  while (frameList.size() > 10) frameList.pop_front();  // Limit frame list size
+  frameList[header->CMDID].seq       = header->SEQ;
+  frameList[header->CMDID].cmdID     = header->CMDID;
+  frameList[header->CMDID].timeStamp = HAL_GetTick();
+  frameList[header->CMDID].data.assign(pData + sizeof(DEV_JUDGE_FrameHeader_s), pData + sizeof(DEV_JUDGE_FrameHeader_s) + header->LEN);
 
   /* Update status */
   lastHartbeatTime_ = HAL_GetTick();

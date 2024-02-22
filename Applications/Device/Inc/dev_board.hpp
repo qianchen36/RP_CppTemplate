@@ -30,7 +30,7 @@ typedef struct _DEV_BOARD_InitParam : public _DEV_InitParam
 typedef struct _DEV_BOARD_Frame
 {
   uint8_t  id;
-  uint32_t timestamp;
+  uint32_t timeStamp;
   std::vector<uint8_t> data;
 
 } DEV_BOARD_Frame_s;
@@ -42,7 +42,7 @@ private:
   void UartNode_ReceiveCallback(uint8_t *pData, uint16_t len) override;
 
 public:
-  std::list<DEV_BOARD_Frame_s> frameList;
+  std::map<uint8_t, DEV_BOARD_Frame_s> frameList;
 
   DEV_BOARD_c();
   ~DEV_BOARD_c();

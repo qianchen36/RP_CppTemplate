@@ -28,8 +28,9 @@ typedef struct _DEV_JUDGE_InitParam : public _DEV_InitParam
 /* Judge communicat frame */
 typedef struct _DEV_JUDGE_Frame
 {
-  uint8_t              seq;
-  uint16_t             cmdID;
+  uint8_t  seq;
+  uint16_t cmdID;
+  uint32_t timeStamp;
   std::vector<uint8_t> data;
 
 } DEV_JUDGE_Frame_s;
@@ -41,7 +42,7 @@ private:
   void UartNode_ReceiveCallback(uint8_t *pData, uint16_t len) override;
 
 public:
-  std::list<DEV_JUDGE_Frame_s> frameList;
+  std::map<uint16_t, DEV_JUDGE_Frame_s> frameList;
 
   DEV_JUDGE_c();
   ~DEV_JUDGE_c();
