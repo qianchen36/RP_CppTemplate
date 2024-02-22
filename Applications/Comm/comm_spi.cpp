@@ -11,7 +11,7 @@
 
 #include "comm_spi.hpp"
 
-#include <stdarg.h>
+#include <cstdarg>
 
 namespace rp {
 
@@ -57,17 +57,15 @@ void COMM_SPI_c::InitComm(COMM_InitParam_s *initParam)
     return;
 
   /* Get parameters */
-  if (initParam->comID == 0)
-    return;
+  if (initParam_ != nullptr)
+    delete initParam_;
 
   initParam_ = new COMM_SPI_InitParam_s;
   memcpy(initParam_, initParam, sizeof(COMM_SPI_InitParam_s));
 
-  auto param = (COMM_SPI_InitParam_s *)initParam_;
-
   /* Initialize */
+  auto param  = (COMM_SPI_InitParam_s *)initParam_;
   comID       = param->comID;
-
   hInterface_ = param->hInterface;
   useNssPin_  = param->useNssPin;
 
@@ -79,18 +77,6 @@ void COMM_SPI_c::InitComm(COMM_InitParam_s *initParam)
 
   /* Update state */
   comState = COMM_STOP;
-}
-
-
-
-/**
- * @brief  Get the handler object of SPI interface
- * 
- * @return Reference of the SPI interface handler
- */
-COMM_SPI_c *COMM_SPI_c::GetObjectHandler(void)
-{
-  return this;
 }
 
 

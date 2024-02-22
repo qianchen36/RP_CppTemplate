@@ -19,6 +19,7 @@ namespace rp {
 
 namespace comm {
 
+/* SPI comm NSS status */
 typedef enum
 {
   COMM_SPI_NSS_RESET,
@@ -26,6 +27,7 @@ typedef enum
 
 } COMM_SPI_NssStatus_e;
 
+/* SPI comm initialize param */
 typedef struct _COMM_SPI_InitParam : public COMM_InitParam_s
 {
   FUNC_STATE_e  useNssPin;
@@ -36,8 +38,7 @@ typedef struct _COMM_SPI_InitParam : public COMM_InitParam_s
 
 } COMM_SPI_InitParam_s;
 
-
-
+/* SPI comm */
 class COMM_SPI_c : public COMM_c
 {
 private:
@@ -47,12 +48,11 @@ public:
   COMM_SPI_c();
 
   void InitComm(COMM_InitParam_s *initParam) override;
-  COMM_SPI_c *GetObjectHandler(void) override;
+  COMM_SPI_c *GetObjectHandler(void) override { return this; }
   void Receive(int interfaceType, ...) override;
   void Transmit(int interfaceType, ...) override;
 
   void SetNssPin(COMM_SPI_NssStatus_e nssState);
-
 };
 
 } // namespace comm

@@ -11,7 +11,7 @@
 
 #include "comm_uart.hpp"
 
-#include <stdarg.h>
+#include <cstdarg>
 
 namespace rp {
 
@@ -72,11 +72,9 @@ void COMM_UART_c::InitComm(COMM_InitParam_s *initParam)
   initParam_ = new COMM_UART_InitParam_s;
   memcpy(initParam_, initParam, sizeof(COMM_UART_InitParam_s));
 
-  auto param = (COMM_UART_InitParam_s *)initParam_;
-
   /* Initialize */
+  auto param       = (COMM_UART_InitParam_s *)initParam_;
   comID            = param->comID;
-
   hInterface_      = param->hInterface;
   useAutoReceive_  = param->useAutoReceive;
   useAutoTransmit_ = param->useAutoTransmit;
@@ -104,16 +102,6 @@ void COMM_UART_c::InitComm(COMM_InitParam_s *initParam)
   /* Update state */
   comState = COMM_STOP;
 }
-
-
-
-/**
- * @brief  Get the object handler
- * 
- * @return (COMM_UART_c*) Pointer to the object handler
- */
-COMM_UART_c *COMM_UART_c::GetObjectHandler(void)
-{ return this; }
 
 
 

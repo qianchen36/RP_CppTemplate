@@ -23,6 +23,7 @@ namespace rp {
 
 namespace comm {
 
+/* UART comm initialize params */
 typedef struct _COMM_UART_InitParam : public _COMM_InitParam
 {
   FUNC_STATE_e useAutoReceive;
@@ -43,21 +44,22 @@ typedef struct
 
 } COMM_UART_Buffer_s;
 
+/* UART comm node */
 class COMM_UART_Node_c
 {
 friend class COMM_UART_c;
 
 protected:
   virtual void UartNode_ReceiveCallback(uint8_t *pData, uint16_t len) = 0;
-
 };
 
+/* UART comm */
 class COMM_UART_c : public COMM_c
 {
 private:
   std::list<COMM_UART_Node_c *>   uartNodeList_;
   std::list<COMM_UART_Buffer_s *> rxBuffer_, txBuffer_;
-  std::list<COMM_UART_Buffer_s *>::iterator rxBufferIt_ , txBufferIt_;  
+  std::list<COMM_UART_Buffer_s *>::iterator rxBufferIt_ , txBufferIt_;
 
   FUNC_STATE_e useAutoReceive_;
   FUNC_STATE_e useAutoTransmit_;
@@ -70,7 +72,7 @@ public:
   COMM_UART_c();
 
   void InitComm(COMM_InitParam_s *initParam) override;
-  COMM_UART_c *GetObjectHandler(void) override;
+  COMM_UART_c *GetObjectHandler(void) override { return this; }
   void Receive(int interfaceType, ...) override;
   void Transmit(int interfaceType, ...) override;
 

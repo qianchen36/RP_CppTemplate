@@ -11,7 +11,7 @@
 
 #include "comm_can.hpp"
 
-#include <stdarg.h>
+#include <cstdarg>
 
 namespace rp {
 
@@ -23,16 +23,16 @@ _COMM_CAN_InitParam::_COMM_CAN_InitParam()
   comType    = COMM_CAN;
   hInterface = nullptr;
 
-  FilterBank           = 0;
-  FilterMode           = CAN_FILTERMODE_IDMASK;
-  FilterScale          = CAN_FILTERSCALE_32BIT;
-  FilterIdHigh         = 0;
-  FilterIdLow          = 0;
-  FilterMaskIdHigh     = 0;
-  FilterMaskIdLow      = 0;
-  FilterFIFOAssignment = CAN_RX_FIFO0;
-  FilterActivation     = ENABLE;
-  SlaveStartFilterBank = 14;
+  filterConfig.FilterIdHigh         = 0;
+  filterConfig.FilterIdLow          = 0;
+  filterConfig.FilterMaskIdHigh     = 0;
+  filterConfig.FilterMaskIdLow      = 0;
+  filterConfig.FilterBank           = 0;
+  filterConfig.FilterMode           = CAN_FILTERMODE_IDMASK;
+  filterConfig.FilterScale          = CAN_FILTERSCALE_32BIT;
+  filterConfig.FilterFIFOAssignment = CAN_RX_FIFO0;
+  filterConfig.FilterActivation     = ENABLE;
+  filterConfig.SlaveStartFilterBank = 14;
 }
 
 /**
@@ -72,14 +72,12 @@ void COMM_CAN_c::InitComm(COMM_InitParam_s *initParam)
   initParam_ = new COMM_CAN_InitParam_s;
   memcpy(initParam_, initParam, sizeof(COMM_CAN_InitParam_s));
 
-  auto param = (COMM_CAN_InitParam_s *)initParam_;
-
   /* Initialize */
-  comID = param->comID;
-
+  auto param  = (COMM_CAN_InitParam_s *)initParam_;
+  comID       = param->comID;
   hInterface_ = param->hInterface;
 
-  ConfigFilter(param);
+  ConfigFilter(&(param->filterConfig));
 
   /* Regist */
   AddCommPort(this);
@@ -87,16 +85,6 @@ void COMM_CAN_c::InitComm(COMM_InitParam_s *initParam)
   /* Update state */
   comState = COMM_STOP;
 }
-
-
-
-/**
- * @brief  Get the handler object of CAN interface
- * 
- * @retval Pointer of the CAN interface handler
- */
-COMM_CAN_c *COMM_CAN_c::GetObjectHandler(void)
-{ return this; }
 
 
 
