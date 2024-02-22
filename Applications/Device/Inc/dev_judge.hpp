@@ -47,7 +47,7 @@ public:
   ~DEV_JUDGE_c();
 
   void InitDevice(DEV_InitParam_s *initParam) override;
-  void SendJudgeFrame(DEV_JUDGE_Frame_s *pFrame);
+  void SendJudgeCommFrame(DEV_JUDGE_Frame_s *pFrame);
 };
 
 } // namespace device

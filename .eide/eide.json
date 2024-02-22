@@ -93,6 +93,9 @@
             "name": "Device",
             "files": [
               {
+                "path": "Applications/Device/dev_board.cpp"
+              },
+              {
                 "path": "Applications/Device/dev_judge.cpp"
               },
               {

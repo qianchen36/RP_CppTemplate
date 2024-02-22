@@ -59,6 +59,11 @@ DEV_JUDGE_c::DEV_JUDGE_c()
  */
 DEV_JUDGE_c::~DEV_JUDGE_c()
 {
+  if (devID != NULL && hComm_ != nullptr)
+  {
+    DelDevice(this);
+    ((comm::COMM_UART_c *)hComm_)->DelUartNode(this);
+  }
 
 }
 
@@ -80,6 +85,9 @@ void DEV_JUDGE_c::InitDevice(DEV_InitParam_s *initParam)
     return;
 
   /* Copy parameters */
+  if (initParam_ != nullptr)
+    delete initParam_;
+
   initParam_ = new DEV_JUDGE_InitParam_s;
   memcpy(initParam_, initParam, sizeof(DEV_JUDGE_InitParam_s));
 
@@ -104,13 +112,13 @@ void DEV_JUDGE_c::InitDevice(DEV_InitParam_s *initParam)
  * @param  pFrame Pointer to the frame
  * @return None
  */
-void DEV_JUDGE_c::SendJudgeFrame(DEV_JUDGE_Frame_s *pFrame)
+void DEV_JUDGE_c::SendJudgeCommFrame(DEV_JUDGE_Frame_s *pFrame)
 {
   /* Check pointer */
   if (pFrame == nullptr)
     return;
 
-  /* Construct header */
+  /* Fill header */
   DEV_JUDGE_FrameHeader_s header;
   header.SOF   = 0xA5;
   header.LEN   = pFrame->data.size();
@@ -118,7 +126,7 @@ void DEV_JUDGE_c::SendJudgeFrame(DEV_JUDGE_Frame_s *pFrame)
   header.CMDID = pFrame->cmdID;
   algo::CRC8_Append((uint8_t *)&header, sizeof(DEV_JUDGE_FrameHeader_s) - 2);
 
-  /* Construct frame */
+  /* Fill frame */
   uint8_t frame[sizeof(DEV_JUDGE_FrameHeader_s) + pFrame->data.size() + 2];
   memcpy(frame, &header, sizeof(DEV_JUDGE_FrameHeader_s));                                    // Copy header
   memcpy(frame + sizeof(DEV_JUDGE_FrameHeader_s), pFrame->data.data(), pFrame->data.size());  // Copy data
