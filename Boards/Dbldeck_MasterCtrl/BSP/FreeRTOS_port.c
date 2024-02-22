@@ -15,7 +15,7 @@
 /* Preallocate ucHeap */
 #if (configAPPLICATION_ALLOCATED_HEAP == 1)
   /* Allocate the FreeRTOS Heap at CCM for performance optimization */
-  uint8_t *ucHeap = (uint8_t *)0x10000000;
+  uint8_t *ucHeap __attribute__((section(".bss.ARM.__at_0x10000000")));
 #endif
 
 
