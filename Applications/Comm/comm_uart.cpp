@@ -2,10 +2,10 @@
  * @file    comm_uart.cpp
  * @author  Morthine Xiang (xiang@morthine.com)
  * @brief 
- * @version 1.0
+ * @version 1.1
  * @date    2023-11-24
  * 
- * @copyright Copyright (c) 2023
+ * @copyright SZU-RobotPilots Copyright (c) 2023
  * 
  */
 
@@ -33,6 +33,8 @@ _COMM_UART_InitParam::_COMM_UART_InitParam()
   useAutoTransmit = DISABLE;
   txQueueLength   = 5;
 }
+
+
 
 /**
  * @brief Construct a new comm::COMM_UART_c object
@@ -78,23 +80,18 @@ void COMM_UART_c::InitComm(COMM_InitParam_s *initParam)
   hInterface_      = param->hInterface;
   useAutoReceive_  = param->useAutoReceive;
   useAutoTransmit_ = param->useAutoTransmit;
+  rxQueue_.clear();
+  txQueue_.clear();
 
   if (useAutoReceive_)  // Use DMA to receive data
-  {
-    for (uint16_t i = 0; i < param->rxBufferCount; i++)
-    {
-      auto pBuffer = CreateBuffer(param->rxBufferSize);
-      rxBuffer_.push_back(pBuffer);
-    }
-
-  }
+    rxQueue_.resize(param->rxBufferCount, std::vector<uint8_t>(param->rxBufferSize, 0));
 
   if (useAutoTransmit_) // Use DMA to transmit data
     txQueueLength_ = param->txQueueLength;
 
   /* Update iterator */
-  rxBufferIt_ = rxBuffer_.begin();
-  txBufferIt_ = txBuffer_.begin();
+  rxQueueIt_ = rxQueue_.begin();
+  txQueueIt_ = rxQueue_.begin();
 
   /* Regist */
   AddCommPort(this);
@@ -158,40 +155,27 @@ void COMM_UART_c::Transmit(int interfaceType, ...)
   /* Get args */
   va_list args;
   va_start(args, interfaceType);
-
   auto pData = va_arg(args, uint8_t *);
-  auto len = va_arg(args, int);
+  auto len   = va_arg(args, int);
+  va_end(args);
 
   if (useAutoTransmit_) // Use DMA to transmit data
   {
-    if (txBuffer_.size() >= txQueueLength_)
-    {
-      va_end(args);
+    if (txQueue_.size() >= txQueueLength_)
       return;
-    }
 
     /* Add datapack to transmit queue */
-    auto pBuffer = CreateBuffer(len);
-    memcpy(pBuffer->pData, pData, len);
-    txBuffer_.push_back(pBuffer);
+    txQueue_.push_back(std::vector<uint8_t>(pData, pData + len));
 
     /* Start DMA transmit */
-    if (txBuffer_.size() == 1)
-    {
-      txBufferIt_ = txBuffer_.begin();
-      HAL_UART_Transmit_DMA((UART_HandleTypeDef *)hInterface_, (*txBufferIt_)->pData, (*txBufferIt_)->len);
-    }
+    if (txQueue_.size() == 1)
+      HAL_UART_Transmit_DMA((UART_HandleTypeDef *)hInterface_, txQueue_.front().data(), txQueue_.front().size());
 
-    /* Clean up */
-    va_end(args);
     return;
   }
 
   /* Transmit data normally */
   HAL_UART_Transmit((UART_HandleTypeDef *)hInterface_, pData, len, 1000);
-
-  /* Clean up */
-  va_end(args);
 }
 
 
@@ -206,7 +190,7 @@ void COMM_UART_c::Start(void)
   if (comState != COMM_STOP || useAutoReceive_ != ENABLE)
     return;
 
-  HAL_UARTEx_ReceiveToIdle_DMA((UART_HandleTypeDef *)hInterface_, (*rxBufferIt_)->pData, (*rxBufferIt_)->len);
+  HAL_UARTEx_ReceiveToIdle_DMA((UART_HandleTypeDef *)hInterface_, (*rxQueueIt_).data(), (*rxQueueIt_).size());
   
   comState = COMM_RUN;
 }
@@ -227,15 +211,7 @@ void COMM_UART_c::Stop(void)
   HAL_UART_Abort((UART_HandleTypeDef *)hInterface_);
 
   /* Clear buffer */
-  for (auto it : rxBuffer_)
-    DeleteBuffer(it);
-
-  rxBuffer_.clear();
-
-  for (auto it : txBuffer_)
-    DeleteBuffer(it);
-
-  txBuffer_.clear();
+  txQueue_.clear();
 
   comState = COMM_STOP;
 }
@@ -254,11 +230,7 @@ void COMM_UART_c::AddUartNode(COMM_UART_Node_c *node)
     return;
 
   for (auto it : uartNodeList_)
-  {
-    if (it == node)
-      return;
-
-  }
+    if (it == node) return;
 
   uartNodeList_.push_back(node);
 }
@@ -303,19 +275,19 @@ void COMM_UART_c::UartAutoReceiveCallback(UART_HandleTypeDef *huart, uint16_t si
     return;
 
   /* Resum DMA receive */
-  auto pDataPack = *rxBufferIt_;
+  auto pDataPack = *rxQueueIt_;
 
-  if (++rxBufferIt_ == rxBuffer_.end())
-    rxBufferIt_ = rxBuffer_.begin();
+  if (++rxQueueIt_ == rxQueue_.end())
+    rxQueueIt_ = rxQueue_.begin();
 
-  HAL_UARTEx_ReceiveToIdle_DMA((UART_HandleTypeDef *)hInterface_, (*rxBufferIt_)->pData, (*rxBufferIt_)->len);
+  HAL_UARTEx_ReceiveToIdle_DMA((UART_HandleTypeDef *)hInterface_, (*rxQueueIt_).data(), (*rxQueueIt_).size());
 
   /* Notify all nodes */
   for (auto it : uartNodeList_)
-    it->UartNode_ReceiveCallback(pDataPack->pData, size);
+    it->UartNode_ReceiveCallback(pDataPack.data(), size);
 
   /* Clean up */
-  memset(pDataPack->pData, 0, pDataPack->len);
+  memset(pDataPack.data(), 0, pDataPack.size());
 }
 
 
@@ -332,49 +304,11 @@ void COMM_UART_c::UartAutoTransmitCallback(UART_HandleTypeDef *huart)
     return;
 
   /* Resum DMA transmit */
-  if (++txBufferIt_ != txBuffer_.end())
-    HAL_UART_Transmit_DMA((UART_HandleTypeDef *)hInterface_, (*txBufferIt_)->pData, (*txBufferIt_)->len);
+  if (++txQueueIt_ != txQueue_.end())
+    HAL_UART_Transmit_DMA((UART_HandleTypeDef *)hInterface_, (*txQueueIt_).data(), (*txQueueIt_).size());
 
   /* Clean up */
-  DeleteBuffer(txBuffer_.front());
-  txBuffer_.pop_front();
-
-}
-
-
-
-/**
- * @brief  Create a new buffer
- * 
- * @param  size (uint16_t) Size of the buffer
- * @return (COMM_UART_Buffer_s*) Pointer to the buffer
- */
-COMM_UART_Buffer_s *COMM_UART_c::CreateBuffer(uint16_t size)
-{
-  auto *pBuffer = new COMM_UART_Buffer_s;
-
-  pBuffer->len = size;
-  pBuffer->pData = new uint8_t[size];
-  memset(pBuffer->pData, 0, size);
-
-  return pBuffer;
-}
-
-
-
-/**
- * @brief  Delete a buffer
- * 
- * @param  pBuffer (COMM_UART_Buffer_s *) Pointer to the buffer
- * @return None
- */
-void COMM_UART_c::DeleteBuffer(COMM_UART_Buffer_s *pBuffer)
-{
-  if (pBuffer == nullptr)
-    return;
-
-  delete pBuffer->pData;
-  delete pBuffer;
+  txQueue_.pop_front();
 }
 
 } // namespace comm

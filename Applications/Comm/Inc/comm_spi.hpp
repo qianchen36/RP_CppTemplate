@@ -48,7 +48,6 @@ public:
   COMM_SPI_c();
 
   void InitComm(COMM_InitParam_s *initParam) override;
-  COMM_SPI_c *GetObjectHandler(void) override { return this; }
   void Receive(int interfaceType, ...) override;
   void Transmit(int interfaceType, ...) override;
 
