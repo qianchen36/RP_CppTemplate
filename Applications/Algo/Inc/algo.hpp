@@ -58,4 +58,6 @@ public:
 #include "controller.hpp"
 #include "filter.hpp"
 
+#include "algo_crc.hpp"
+
 #endif // __ALGO_HPP__
