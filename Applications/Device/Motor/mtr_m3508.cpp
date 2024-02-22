@@ -90,8 +90,8 @@ void MTR_M3508_c::InitDevice(DEV_InitParam_s *initParam)
   hComm_    = param->hComm;
   canStdID_ = param->canReceiveStdID;
 
-  mtrData.resize(MTR_DATA_ERRCODE + 1);
-  memset(mtrData.data(), 0, sizeof(int16_t) * (MTR_DATA_ERRCODE + 1));
+  mtrData.clear();
+  mtrData.resize(MTR_DATA_ERRCODE + 1, 0);
 
   /* Regist */
   AddMotor(this);
