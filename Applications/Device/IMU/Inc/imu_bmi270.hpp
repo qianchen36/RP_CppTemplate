@@ -40,9 +40,6 @@ public:
 
   void InitDevice(DEV_InitParam_s *initParam) override;
   void UpdateDevice(void) override;
-
-  IMU_BMI270_c *GetObjectHandler(void) override;
-
 };
 
 } // namespace imu

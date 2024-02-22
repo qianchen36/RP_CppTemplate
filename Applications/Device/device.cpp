@@ -40,7 +40,6 @@ DEVICE_c::DEVICE_c()
 {
   devID    = NULL;
   devType  = DEV_UNDEF;
-  devComm  = comm::COMM_UNDEF;
   devState = DEV_RESET;
 
   hComm_ = nullptr;
@@ -67,28 +66,6 @@ DEVICE_c::~DEVICE_c()
 
 
 /**
- * @brief 
- * 
- * @param  id Set the device ID
- * @param  hComm Set the communication interface
- * @param  pStruct Set the device specific parameters
- * @return None
- */
-void DEVICE_c::InitDevice(uint8_t id, comm::COMM_c *hComm, void *pStruct)
-{
-  devID = id;
-  devComm = hComm->comType;
-
-  hComm_ = hComm;
-
-  AddDevice(this);
-
-  devState = DEV_OFFLINE;
-}
-
-
-
-/**
  * @brief  Initialize the device
  * 
  * @param  initParam Pointer to device initialization parameter structure
@@ -104,9 +81,7 @@ void DEVICE_c::InitDevice(DEV_InitParam_s *initParam)
     return;
 
   /* Initialize */
-  devID   = initParam->devID;
-  devComm = initParam->hComm->comType;
-
+  devID  = initParam->devID;
   hComm_ = initParam->hComm;
 
   /* Regist */
@@ -143,18 +118,6 @@ void DEVICE_c::HeartbeatDevice(void)
 
   if (HAL_GetTick() - lastHartbeatTime_ > 50)   // 50ms
     devState = DEV_OFFLINE;
-}
-
-
-
-/**
- * @brief  Get the object handle of the device
- * 
- * @return DEVICE_c* Pointer to the device object
- */
-DEVICE_c *DEVICE_c::GetObjectHandler(void)
-{
-  return this;
 }
 
 

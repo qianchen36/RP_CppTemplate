@@ -40,7 +40,6 @@ MTR_GM6020_c::MTR_GM6020_c()
 {
   devType = DEV_MTR;
   mtrType = MTR_GM6020;
-  devComm = comm::COMM_CAN;
 }
 
 
@@ -101,16 +100,6 @@ void MTR_GM6020_c::InitDevice(DEV_InitParam_s *initParam)
   /* Update status */
   devState = DEV_OFFLINE;
 }
-
-
-
-/**
- * @brief  Get the object handle of the GM6020 motor
- * 
- * @return MTR_GM6020_c* Pointer to the motor object
- */
-MTR_GM6020_c *MTR_GM6020_c::GetObjectHandler(void)
-{ return this; }
 
 
 

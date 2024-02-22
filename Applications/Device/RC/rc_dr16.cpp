@@ -67,7 +67,6 @@ _RC_DR16_InitParam::_RC_DR16_InitParam()
  */
 RC_DR16_c::RC_DR16_c()
 {
-  devComm = comm::COMM_UART;
   rcType  = RC_DR16;
 }
 
@@ -132,16 +131,6 @@ void RC_DR16_c::InitDevice(DEV_InitParam_s *initParam)
   /* Update status */
   devState = DEV_OFFLINE;
 }
-
-
-
-/**
- * @brief  Get the handler of RC_DR16_c object
- * 
- * @return (RC_DR16_c *) Pointer of the RC_DR16_c object handler 
- */
-RC_DR16_c *RC_DR16_c::GetObjectHandler(void)
-{ return this; }
 
 
 

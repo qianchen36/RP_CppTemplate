@@ -63,7 +63,6 @@ public:
 
   // void InitDevice(DEV_InitParam_s *initParam) override;
   void HeartbeatDevice(void) override;
-  MOTOR_c *GetObjectHandler(void) override;
 
   virtual float32_t CalcMotorController(uint8_t id, float32_t set);
   virtual float32_t CalcMotorController(uint8_t id, float32_t get, float32_t set);

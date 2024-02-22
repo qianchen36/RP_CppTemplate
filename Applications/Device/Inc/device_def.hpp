@@ -27,7 +27,7 @@ typedef enum
 
   DEV_ERROR,
 
-} DEVICE_Status_e;
+} DEV_Status_e;
 
 typedef enum
 {
@@ -36,8 +36,9 @@ typedef enum
   DEV_RC,
   DEV_IMU,
   DEV_MTR,
+  DEV_OTHER,
 
-} DEVICE_Type_e;
+} DEV_Type_e;
 
 } // namespace device
 

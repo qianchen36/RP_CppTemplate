@@ -40,7 +40,6 @@ MTR_M2006_c::MTR_M2006_c()
 {
   devType = DEV_MTR;
   mtrType = MTR_M2006;
-  devComm = comm::COMM_CAN;
 }
 
 
@@ -101,16 +100,6 @@ void MTR_M2006_c::InitDevice(DEV_InitParam_s *initParam)
   /* Update status */
   devState = DEV_OFFLINE;
 }
-
-
-
-/**
- * @brief  Get the object handle of the M2006 motor
- * 
- * @return MTR_M2006_c* Pointer to the motor object
- */
-MTR_M2006_c *MTR_M2006_c::GetObjectHandler(void)
-{ return this; }
 
 
 

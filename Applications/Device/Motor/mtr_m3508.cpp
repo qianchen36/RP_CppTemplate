@@ -39,7 +39,6 @@ MTR_M3508_c::MTR_M3508_c()
 {
   devType = DEV_MTR;
   mtrType = MTR_M3508;
-  devComm = comm::COMM_CAN;
 }
 
 
@@ -100,16 +99,6 @@ void MTR_M3508_c::InitDevice(DEV_InitParam_s *initParam)
   /* Update status */
   devState = DEV_OFFLINE;
 }
-
-
-
-/**
- * @brief  Get the object handle of the M3508 motor
- * 
- * @return MTR_M3508_c* Pointer to the motor object
- */
-MTR_M3508_c *MTR_M3508_c::GetObjectHandler(void)
-{ return this; }
 
 
 

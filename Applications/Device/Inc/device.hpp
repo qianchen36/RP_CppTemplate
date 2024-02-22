@@ -25,15 +25,14 @@ namespace device {
 typedef struct _DEV_InitParam
 {
   uint8_t       devID;
-  DEVICE_Type_e devType;
+  DEV_Type_e    devType;
   comm::COMM_c *hComm;
 
   _DEV_InitParam(void);
 
 } DEV_InitParam_s;
 
-
-
+/* Device */
 class DEVICE_c
 {
 protected:
@@ -46,18 +45,15 @@ protected:
 
 public:
   uint8_t           devID;
-  DEVICE_Type_e     devType;
-  comm::COMM_Type_e devComm;
-  DEVICE_Status_e   devState;
+  DEV_Type_e        devType;
+  DEV_Status_e      devState;
 
   DEVICE_c();
   ~DEVICE_c();
 
-  virtual void InitDevice(uint8_t id, comm::COMM_c *hComm, void *pStruct);
   virtual void InitDevice(DEV_InitParam_s *initParam);
-  virtual void UpdateDevice(void);
+  virtual void UpdateDevice(void) = 0;
   virtual void HeartbeatDevice(void);
-  virtual DEVICE_c *GetObjectHandler(void);
 
 };
 

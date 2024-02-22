@@ -146,16 +146,6 @@ RC_c::~RC_c()
 
 }
 
-
-
-/**
- * @brief  Get the handler of RC_c object
- * 
- * @return (RC_c*) Pointer of the RC_c object handler
- */
-RC_c *RC_c::GetObjectHandler(void)
-{ return this; }
-
 } // namespace rc
 
 } // namespace device

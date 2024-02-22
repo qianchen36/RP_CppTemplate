@@ -40,9 +40,7 @@ public:
   ~MTR_GM6020_c();
 
   void InitDevice(DEV_InitParam_s *initParam) override;
-  MTR_GM6020_c *GetObjectHandler(void) override;
   void CanNode_ReceiveCallback(comm::COMM_CAN_DataPack_s *dataPack) override;
-
 };
 
 } // namespace motor

@@ -65,17 +65,12 @@ typedef enum
 
 class RC_DR16_c : public RC_c , public comm::COMM_UART_Node_c
 {
-private:
-
 public:
   RC_DR16_c();
   ~RC_DR16_c();
 
   void InitDevice(DEV_InitParam_s *initParam) override;
-  RC_DR16_c *GetObjectHandler(void) override;
-
   void UartNode_ReceiveCallback(uint8_t *pData, uint16_t len) override;
-
 };
 
 } // namespace rc

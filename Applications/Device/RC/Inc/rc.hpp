@@ -68,9 +68,8 @@ public:
   RC_c();
   ~RC_c();
 
+  // void initDevice(DEV_InitParam_s *initParam) override;
   // void HeartbeatDevice(void) override;
-  RC_c *GetObjectHandler(void) override;
-
 };
 
 } // namespace rc

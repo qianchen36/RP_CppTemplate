@@ -104,16 +104,6 @@ void MOTOR_c::HeartbeatDevice(void)
 
 
 /**
- * @brief  Get the object handle of the motor
- * 
- * @return MOTOR_c* Pointer to the motor object
- */
-MOTOR_c *MOTOR_c::GetObjectHandler(void)
-{ return this; }
-
-
-
-/**
  * @brief  Calculate the motor controller
  * 
  * @param  id Controller ID

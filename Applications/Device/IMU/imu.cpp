@@ -73,16 +73,6 @@ void IMU_c::HeartbeatDevice(void)
 
 }
 
-
-
-/**
- * @brief  Get the IMU handler
- * 
- * @return (IMU_c*) Pointer to the IMU handler
- */
-IMU_c *IMU_c::GetObjectHandler(void)
-{ return this; }
-
 } // namespace imu
 
 } // namespace device

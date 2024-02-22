@@ -53,8 +53,6 @@ public:
   ~IMU_c();
 
   void HeartbeatDevice(void) override;
-  IMU_c *GetObjectHandler(void) override;
-
 };
 
 } // namespace imu

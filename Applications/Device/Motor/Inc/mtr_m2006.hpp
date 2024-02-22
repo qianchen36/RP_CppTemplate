@@ -31,16 +31,12 @@ typedef struct _MTR_M2006_InitParam : _MTR_InitParam
 
 class MTR_M2006_c : public device::motor::MOTOR_c, public comm::COMM_CAN_Node_c
 {
-protected:
-
 public:  
   MTR_M2006_c();
   ~MTR_M2006_c();
 
   void InitDevice(DEV_InitParam_s *initParam) override;
-  MTR_M2006_c *GetObjectHandler(void) override;
   void CanNode_ReceiveCallback(comm::COMM_CAN_DataPack_s *dataPack) override;
-
 };
 
 } // namespace motor
