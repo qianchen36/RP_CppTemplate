@@ -129,9 +129,9 @@ void MTR_GM6020_c::CanNode_ReceiveCallback(comm::COMM_CAN_DataPack_s *dataPack)
   auto lastAngle = mtrData[MTR_DATA_ANGLE];
 
   /* Unpack datapack */
-  mtrData[MTR_DATA_ANGLE]   = (int16_t)((dataPack->data[0] << 8) | dataPack->data[1]);
-  mtrData[MTR_DATA_SPEED]   = (int16_t)((dataPack->data[2] << 8) | dataPack->data[3]);
-  mtrData[MTR_DATA_CURRENT] = (int16_t)((dataPack->data[4] << 8) | dataPack->data[5]);
+  mtrData[MTR_DATA_ANGLE]   = ((int16_t)((dataPack->data[0] << 8) | dataPack->data[1]));
+  mtrData[MTR_DATA_SPEED]   = ((int16_t)((dataPack->data[2] << 8) | dataPack->data[3]));
+  mtrData[MTR_DATA_CURRENT] = ((int16_t)((dataPack->data[4] << 8) | dataPack->data[5]));
   mtrData[MTR_DATA_POSIT]   =  Angle2Posit(mtrData[MTR_DATA_ANGLE], lastAngle);
   mtrData[MTR_DATA_TEMP]    =  dataPack->data[6];
   lastHartbeatTime_         =  dataPack->timeStamp;

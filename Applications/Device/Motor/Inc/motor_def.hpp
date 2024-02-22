@@ -67,20 +67,6 @@ typedef enum
 
 } MOTOR_ErrType_e;
 
-typedef struct
-{
-  int16_t angle;
-  int16_t speed;
-  int16_t voltage;
-  int16_t current;
-  int16_t torque;
-  int32_t posit;
-  int16_t temp;
-
-  MOTOR_ErrType_e errCode;
-
-} MOTOR_Data_s;
-
 } // namespace motor
 
 } // namespace device

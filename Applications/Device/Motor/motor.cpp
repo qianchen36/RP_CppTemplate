@@ -53,8 +53,6 @@ MOTOR_c::MOTOR_c()
 {
   devType = DEV_MTR;
   mtrType = MTR_UNDEF;
-
-  memset(&mtrData, 0, sizeof(MOTOR_Data_s));
 }
 
 
@@ -266,7 +264,8 @@ void MOTOR_c::StallDetect(void)
     return;
 
   /* Check stall */
-  if (mtrData[param->stallDataSource] > param->maxStallValue)
+  if (abs(mtrData[param->stallDataSource]) > param->maxStallValue
+      && abs(mtrData[MTR_DATA_SPEED]) < 10)
   {
     stallCnt_++;
 
