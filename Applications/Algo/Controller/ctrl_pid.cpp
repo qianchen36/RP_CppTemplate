@@ -230,12 +230,12 @@ float32_t CTRL_PID_c::PID_Calculate(float32_t get, float32_t set)
 
     /* Limit integral output */
     if ((param->maxIntegral != 0) && (abs(pidData_.integral) > param->maxIntegral))
-      pidData_.iOut = (pidData_.iOut > 0) ? param->maxIntegral : -param->maxIntegral;
+      pidData_.integral = (pidData_.integral > 0) ? param->maxIntegral : -param->maxIntegral;
 
     /* Calculate PID output */
-    pidData_.pOut  = param->Kp * pidData_.err[NOW];
-    pidData_.iOut += param->Ki * pidData_.integral;
-    pidData_.dOut  = param->Kd * pidData_.derivative;
+    pidData_.pOut = param->Kp * pidData_.err[NOW];
+    pidData_.iOut = param->Ki * pidData_.integral;
+    pidData_.dOut = param->Kd * pidData_.derivative;
 
     break;
 
@@ -278,12 +278,12 @@ float32_t CTRL_PID_c::PID_Calculate(float32_t get, float32_t set)
 
     /* Limit integral output */
     if ((param->maxIntegral != 0) && (abs(pidData_.integral) > param->maxIntegral))
-      pidData_.iOut = (pidData_.iOut > 0) ? param->maxIntegral : -param->maxIntegral;
+      pidData_.integral = (pidData_.integral > 0) ? param->maxIntegral : -param->maxIntegral;
 
     /* Calculate PID output */
-    pidData_.pOut  = param->Kp * pidData_.err[NOW];
-    pidData_.iOut += param->Ki * pidData_.integral;
-    pidData_.dOut  = param->Kd * pidData_.derivative;
+    pidData_.pOut = param->Kp * pidData_.err[NOW];
+    pidData_.iOut = param->Ki * pidData_.integral;
+    pidData_.dOut = param->Kd * pidData_.derivative;
 
     break;
 
@@ -306,9 +306,9 @@ float32_t CTRL_PID_c::PID_Calculate(float32_t get, float32_t set)
       pidData_.iOut = (pidData_.iOut > 0) ? param->maxIntegral : -param->maxIntegral;
 
     /* Calculate PID output */
-    pidData_.pOut  = param->Kp * pidData_.err[NOW];
-    pidData_.iOut += param->Ki * pidData_.integral;
-    pidData_.dOut  = param->Kd * pidData_.derivative;
+    pidData_.pOut = param->Kp * pidData_.err[NOW];
+    pidData_.iOut = param->Ki * pidData_.integral;
+    pidData_.dOut = param->Kd * pidData_.derivative;
     
     break;
 
