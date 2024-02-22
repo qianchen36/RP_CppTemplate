@@ -93,6 +93,9 @@
             "name": "Device",
             "files": [
               {
+                "path": "Applications/Device/dev_judge.cpp"
+              },
+              {
                 "path": "Applications/Device/device.cpp"
               }
             ],
@@ -144,9 +147,6 @@
           {
             "name": "Module",
             "files": [
-              {
-                "path": "Applications/Module/mod_chassis.cpp"
-              },
               {
                 "path": "Applications/Module/module.cpp"
               }
@@ -635,7 +635,8 @@
   "targets": {
     "debug": {
       "excludeList": [
-        "<virtual_root>/Board/Dbldeck_MasterCtrl/MDK-ARM/armlib_lock_glue.c"
+        "<virtual_root>/Board/Dbldeck_MasterCtrl/MDK-ARM/armlib_lock_glue.c",
+        "<virtual_root>/Application/Module/mod_chassis.cpp"
       ],
       "toolchain": "AC6",
       "compileConfig": {

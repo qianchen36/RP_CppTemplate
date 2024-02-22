@@ -143,7 +143,7 @@ void RC_DR16_c::InitDevice(DEV_InitParam_s *initParam)
 void RC_DR16_c::UartNode_ReceiveCallback(uint8_t *pData, uint16_t len)
 {
   /* Check data pointer & length */
-  if (pData == nullptr || len < 18)
+  if (pData == nullptr || len != 18)
     return;
 
   /* Decode datapack */
